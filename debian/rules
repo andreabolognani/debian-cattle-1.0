@@ -13,3 +13,4 @@ override_dh_install:
 			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
 			"debian/$${pkg}.install.in" > "debian/$${pkg}.install"; \
 	done
+	dh_install
