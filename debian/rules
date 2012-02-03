@@ -2,3 +2,9 @@
 
 %:
 	dh $@
+
+debian/%: debian/%.in
+	dh_testdir
+	sed \
+		-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
+		$@.in > $@

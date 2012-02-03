@@ -2,7 +2,7 @@ Source: cattle-1.0
 Section: libs
 Priority: optional
 Maintainer: Andrea Bolognani <eof@kiyuko.org>
-Build-Depends: debhelper (>= 9), dpkg-dev (>=1.16.1~), libglib2.0-dev
+Build-Depends: debhelper (>= 9), dpkg-dev (>=1.16.2), libglib2.0-dev
 Standards-Version: 3.9.2
 Homepage: http://kiyuko.org/software/cattle
 Vcs-Git: git://anonscm.debian.org/collab-maint/cattle-1.0.git
@@ -11,6 +11,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cattle-1.0.git;a=s
 Package: libcattle-1.0-0
 Section: libs
 Architecture: any
+Pre-Depends: ${misc:Pre-Depends}
 Depends: libglib2.0-0
 Description: TODO
 
