@@ -1,1 +1,1 @@
-debian/tmp/usr/lib/@DEB_HOST_MULTIARCH@/libcattle-1.0.so.* usr/lib/@DEB_HOST_MULTIARCH@
+usr/lib/@DEB_HOST_MULTIARCH@/libcattle-1.0.so.* usr/lib/@DEB_HOST_MULTIARCH@
