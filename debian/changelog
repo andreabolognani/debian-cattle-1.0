@@ -1,0 +1,5 @@
+cattle-1.0 (1.0.1-1) unstable; urgency=low
+
+  * Initial release. (Closes: #617304)
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Fri, 03 Feb 2012 18:42:02 +0100
