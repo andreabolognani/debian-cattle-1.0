@@ -3,8 +3,12 @@
 %:
 	dh $@
 
-debian/%: debian/%.in
-	dh_testdir
-	sed \
-		-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
-		$@.in > $@
+override_dh_install:
+	for pkg in \
+		libcattle-1.0-0 \
+		libcattle-1.0-dev \
+	do: \
+		sed \
+			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
+			"debian/${pkg}.install.in" > "debian/${pkg}.install"
+	done
