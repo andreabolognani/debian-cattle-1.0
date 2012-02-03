@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.3//EN"
+               "http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd"
+[
+	<!ENTITY % local.common.attrib "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2003/XInclude'">
+	<!ENTITY version SYSTEM "version.xml">
+]>
+<book id="index">
+
+	<bookinfo>
+		<title>Cattle Reference Manual</title>
+		<releaseinfo>
+			for Cattle &version;
+			Latest version available at
+			<ulink role="online-location" url="http://kiyuko.org/software/cattle/reference/index.html">http://kiyuko.org/software/cattle/reference/index.html</ulink>
+		</releaseinfo>
+	</bookinfo>
+
+	<xi:include href="overview.xml" />
+
+	<chapter>
+		<title>Core Features</title>
+		<xi:include href="xml/cattle-version.xml" />
+		<xi:include href="xml/cattle-error.xml" />
+	</chapter>
+
+	<chapter>
+		<title>Objects</title>
+		<xi:include href="xml/cattle-interpreter.xml" />
+		<xi:include href="xml/cattle-program.xml" />
+		<xi:include href="xml/cattle-tape.xml" />
+		<xi:include href="xml/cattle-configuration.xml" />
+		<xi:include href="xml/cattle-instruction.xml" />
+	</chapter>
+
+	<chapter>
+		<title>Miscellaneous Topics</title>
+		<xi:include href="io-handling.xml" />
+	</chapter>
+
+<!--
+	<chapter id="object-tree">
+		<title>Object Hierarchy</title>
+		<xi:include href="xml/tree_index.sgml" />
+	</chapter>
+-->
+
+	<index id="api-index-full">
+		<title>API Index</title>
+		<xi:include href="xml/api-index-full.xml" />
+	</index>
+
+	<xi:include href="xml/annotation-glossary.xml" />
+
+</book>

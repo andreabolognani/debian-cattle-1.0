@@ -1,0 +1,5 @@
+cattle_configuration_get_type
+cattle_instruction_get_type
+cattle_interpreter_get_type
+cattle_program_get_type
+cattle_tape_get_type

@@ -1,0 +1,493 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CattleTape</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Cattle Reference Manual">
+<link rel="up" href="ch03.html" title="Objects">
+<link rel="prev" href="CattleProgram.html" title="CattleProgram">
+<link rel="next" href="CattleConfiguration.html" title="CattleConfiguration">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="CattleProgram.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Cattle Reference Manual</th>
+<td><a accesskey="n" href="CattleConfiguration.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#CattleTape.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#CattleTape.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#CattleTape.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#CattleTape.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="CattleTape"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="CattleTape.top_of_page"></a>CattleTape</span></h2>
+<p>CattleTape — Infinite-length memory tape</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="CattleTape.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;cattle/cattle.h&gt;
+
+struct              <a class="link" href="CattleTape.html#CattleTape-struct" title="struct CattleTape">CattleTape</a>;
+<a class="link" href="CattleTape.html" title="CattleTape"><span class="returnvalue">CattleTape</span></a> *        <a class="link" href="CattleTape.html#cattle-tape-new" title="cattle_tape_new ()">cattle_tape_new</a>                     (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-set-current-value" title="cattle_tape_set_current_value ()">cattle_tape_set_current_value</a>       (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> value</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a>               <a class="link" href="CattleTape.html#cattle-tape-get-current-value" title="cattle_tape_get_current_value ()">cattle_tape_get_current_value</a>       (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-increase-current-value" title="cattle_tape_increase_current_value ()">cattle_tape_increase_current_value</a>  (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-increase-current-value-by" title="cattle_tape_increase_current_value_by ()">cattle_tape_increase_current_value_by</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-decrease-current-value" title="cattle_tape_decrease_current_value ()">cattle_tape_decrease_current_value</a>  (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-decrease-current-value-by" title="cattle_tape_decrease_current_value_by ()">cattle_tape_decrease_current_value_by</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-move-left" title="cattle_tape_move_left ()">cattle_tape_move_left</a>               (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-move-left-by" title="cattle_tape_move_left_by ()">cattle_tape_move_left_by</a>            (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> steps</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-move-right" title="cattle_tape_move_right ()">cattle_tape_move_right</a>              (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-move-right-by" title="cattle_tape_move_right_by ()">cattle_tape_move_right_by</a>           (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> steps</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleTape.html#cattle-tape-is-at-beginning" title="cattle_tape_is_at_beginning ()">cattle_tape_is_at_beginning</a>         (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleTape.html#cattle-tape-is-at-end" title="cattle_tape_is_at_end ()">cattle_tape_is_at_end</a>               (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="cattle_tape_push_bookmark ()">cattle_tape_push_bookmark</a>           (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleTape.html#cattle-tape-pop-bookmark" title="cattle_tape_pop_bookmark ()">cattle_tape_pop_bookmark</a>            (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleTape.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----CattleTape
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleTape.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="CattleTape.html#CattleTape--current-value" title='The "current-value" property'>current-value</a>"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>                 : Read / Write
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleTape.description"></a><h2>Description</h2>
+<p>
+A <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> represents an infinte-length memory tape, which is used
+by a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> to store its data. The tape contains a
+virtually infinte number of memory cells, each one able to store a
+single ASCII character.
+</p>
+<p>
+A tape supports three kinds of operations: reading the value of the
+current cell, updating the value of the current cell (either by
+increasing/decreasing it or by setting it to a certain value), and
+moving the current cell pointer (either to the left or to the right).
+</p>
+<p>
+The tape grows automatically as more cells are needed, the only limit
+being the amount of available memory. It is possible to check if the
+current cell is at the beginning or at the end of the tape using
+<a class="link" href="CattleTape.html#cattle-tape-is-at-beginning" title="cattle_tape_is_at_beginning ()"><code class="function">cattle_tape_is_at_beginning()</code></a> and <a class="link" href="CattleTape.html#cattle-tape-is-at-end" title="cattle_tape_is_at_end ()"><code class="function">cattle_tape_is_at_end()</code></a>.
+</p>
+</div>
+<div class="refsect1">
+<a name="CattleTape.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CattleTape-struct"></a><h3>struct CattleTape</h3>
+<pre class="programlisting">struct CattleTape;</pre>
+<p>
+Opaque data structure representing a memory tape. It should never
+be accessed directly; use the methods below instead.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-new"></a><h3>cattle_tape_new ()</h3>
+<pre class="programlisting"><a class="link" href="CattleTape.html" title="CattleTape"><span class="returnvalue">CattleTape</span></a> *        cattle_tape_new                     (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Create and initialize a new memory tape.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-set-current-value"></a><h3>cattle_tape_set_current_value ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_set_current_value       (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> value</code></em>);</pre>
+<p>
+Set the value of the current cell.
+</p>
+<p>
+Accepted values are ASCII values or EOF.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>the current cell's new value</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-get-current-value"></a><h3>cattle_tape_get_current_value ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a>               cattle_tape_get_current_value       (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Get the value of the current cell. See
+<a class="link" href="CattleTape.html#cattle-tape-set-current-value" title="cattle_tape_set_current_value ()"><code class="function">cattle_tape_set_current_value()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the value of the current cell</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-increase-current-value"></a><h3>cattle_tape_increase_current_value ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_increase_current_value  (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Increase the value in the current cell by one.
+</p>
+<p>
+If the value in the current cell has ASCII code 127, the new value
+will have ASCII code 0.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-increase-current-value-by"></a><h3>cattle_tape_increase_current_value_by ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_increase_current_value_by
+                                                        (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);</pre>
+<p>
+Increase the value in the current cell by <em class="parameter"><code>value</code></em>.
+</p>
+<p>
+The value is wrapped if needed to keep it in the ASCII code.
+</p>
+<p>
+Increasing the value this way is much faster than calling
+<a class="link" href="CattleTape.html#cattle-tape-increase-current-value" title="cattle_tape_increase_current_value ()"><code class="function">cattle_tape_increase_current_value()</code></a> multiple times.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>increase amount</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-decrease-current-value"></a><h3>cattle_tape_decrease_current_value ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_decrease_current_value  (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Decrease the value in the current cell by one.
+</p>
+<p>
+If the value in the current cell has ASCII value 0, the new value
+will have ASCII value 127.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-decrease-current-value-by"></a><h3>cattle_tape_decrease_current_value_by ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_decrease_current_value_by
+                                                        (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> value</code></em>);</pre>
+<p>
+Decrease the value in the current cell by <em class="parameter"><code>value</code></em>.
+</p>
+<p>
+The value is wrapped if needed to keep it in the ASCII code.
+</p>
+<p>
+Decreasing the value this way is much faster than calling
+<a class="link" href="CattleTape.html#cattle-tape-decrease-current-value" title="cattle_tape_decrease_current_value ()"><code class="function">cattle_tape_decrease_current_value()</code></a> multiple times.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td>decrease amount</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-move-left"></a><h3>cattle_tape_move_left ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_move_left               (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Move <em class="parameter"><code>tape</code></em> one cell to the left.
+</p>
+<p>
+If there are no memory cells on the left of the current one,
+one will be created on the fly.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-move-left-by"></a><h3>cattle_tape_move_left_by ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_move_left_by            (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> steps</code></em>);</pre>
+<p>
+Move <em class="parameter"><code>tape</code></em> <em class="parameter"><code>steps</code></em> cells to the left.
+</p>
+<p>
+Moving this way is much faster than calling
+<a class="link" href="CattleTape.html#cattle-tape-move-left" title="cattle_tape_move_left ()"><code class="function">cattle_tape_move_left()</code></a> multiple times.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>steps</code></em> :</span></p></td>
+<td>number of steps</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-move-right"></a><h3>cattle_tape_move_right ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_move_right              (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Move <em class="parameter"><code>tape</code></em> one cell to the right.
+</p>
+<p>
+If there are no memory cells on the right of the current one,
+one will be created on the fly.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-move-right-by"></a><h3>cattle_tape_move_right_by ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_move_right_by           (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint"><span class="type">gint</span></a> steps</code></em>);</pre>
+<p>
+Move <em class="parameter"><code>tape</code></em> <em class="parameter"><code>steps</code></em> cells to the right.
+</p>
+<p>
+Moving this way is much faster than calling
+<a class="link" href="CattleTape.html#cattle-tape-move-right" title="cattle_tape_move_right ()"><code class="function">cattle_tape_move_right()</code></a> multiple times.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>steps</code></em> :</span></p></td>
+<td>number of steps</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-is-at-beginning"></a><h3>cattle_tape_is_at_beginning ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_tape_is_at_beginning         (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Check if the current cell is the first one of <em class="parameter"><code>tape</code></em>.
+</p>
+<p>
+Since the tape grows automatically as more cells are needed, it is
+possible to move left from the first cell.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the current cell is the first one, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-is-at-end"></a><h3>cattle_tape_is_at_end ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_tape_is_at_end               (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Check if the current cell is the last one of <em class="parameter"><code>tape</code></em>.
+</p>
+<p>
+Since the tape grows automatically as more cells are needed, it is
+possible to move right from the last cell.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the current cell is the last one, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-push-bookmark"></a><h3>cattle_tape_push_bookmark ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_tape_push_bookmark           (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Create a bookmark to the current tape position and save it on the
+bookmark stack.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-tape-pop-bookmark"></a><h3>cattle_tape_pop_bookmark ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_tape_pop_bookmark            (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Restore the previously-saved tape position.
+See <a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="cattle_tape_push_bookmark ()"><code class="function">cattle_tape_push_bookmark()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the bookmarks stack is empty, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleTape.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="CattleTape--current-value"></a><h3>The <code class="literal">"current-value"</code> property</h3>
+<pre class="programlisting">  "current-value"            <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>                 : Read / Write</pre>
+<p>
+Value of the current cell.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+<p>Allowed values: &gt;= -1</p>
+<p>Default value: 0</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.17</div>
+</body>
+</html>

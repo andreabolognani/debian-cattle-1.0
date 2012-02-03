@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CattleInterpreter</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Cattle Reference Manual">
+<link rel="up" href="ch03.html" title="Objects">
+<link rel="prev" href="ch03.html" title="Objects">
+<link rel="next" href="CattleProgram.html" title="CattleProgram">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch03.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Cattle Reference Manual</th>
+<td><a accesskey="n" href="CattleProgram.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#CattleInterpreter.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#CattleInterpreter.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#CattleInterpreter.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#CattleInterpreter.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="CattleInterpreter"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="CattleInterpreter.top_of_page"></a>CattleInterpreter</span></h2>
+<p>CattleInterpreter — Brainfuck interpreter</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="CattleInterpreter.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;cattle/cattle.h&gt;
+
+struct              <a class="link" href="CattleInterpreter.html#CattleInterpreter-struct" title="struct CattleInterpreter">CattleInterpreter</a>;
+<a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="returnvalue">CattleInterpreter</span></a> *    <a class="link" href="CattleInterpreter.html#cattle-interpreter-new" title="cattle_interpreter_new ()">cattle_interpreter_new</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleInterpreter.html#cattle-interpreter-run" title="cattle_interpreter_run ()">cattle_interpreter_run</a>              (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-feed" title="cattle_interpreter_feed ()">cattle_interpreter_feed</a>             (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *input</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-configuration" title="cattle_interpreter_set_configuration ()">cattle_interpreter_set_configuration</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);
+<a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="returnvalue">CattleConfiguration</span></a> *  <a class="link" href="CattleInterpreter.html#cattle-interpreter-get-configuration" title="cattle_interpreter_get_configuration ()">cattle_interpreter_get_configuration</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-program" title="cattle_interpreter_set_program ()">cattle_interpreter_set_program</a>      (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);
+<a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *        <a class="link" href="CattleInterpreter.html#cattle-interpreter-get-program" title="cattle_interpreter_get_program ()">cattle_interpreter_get_program</a>   (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-tape" title="cattle_interpreter_set_tape ()">cattle_interpreter_set_tape</a>         (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);
+<a class="link" href="CattleTape.html" title="CattleTape"><span class="returnvalue">CattleTape</span></a> *           <a class="link" href="CattleInterpreter.html#cattle-interpreter-get-tape" title="cattle_interpreter_get_tape ()">cattle_interpreter_get_tape</a>      (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (<a class="link" href="CattleInterpreter.html#CattleInputHandler" title="CattleInputHandler ()">*CattleInputHandler</a>)               (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-input-handler" title="cattle_interpreter_set_input_handler ()">cattle_interpreter_set_input_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleInputHandler" title="CattleInputHandler ()"><span class="type">CattleInputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (<a class="link" href="CattleInterpreter.html#CattleOutputHandler" title="CattleOutputHandler ()">*CattleOutputHandler</a>)              (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> output</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-output-handler" title="cattle_interpreter_set_output_handler ()">cattle_interpreter_set_output_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleOutputHandler" title="CattleOutputHandler ()"><span class="type">CattleOutputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (<a class="link" href="CattleInterpreter.html#CattleDebugHandler" title="CattleDebugHandler ()">*CattleDebugHandler</a>)               (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-debug-handler" title="cattle_interpreter_set_debug_handler ()">cattle_interpreter_set_debug_handler</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleInputHandler" title="CattleInputHandler ()"><span class="type">CattleInputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleInterpreter.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----CattleInterpreter
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleInterpreter.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="CattleInterpreter.html#CattleInterpreter--configuration" title='The "configuration" property'>configuration</a>"            <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>*  : Read / Write
+  "<a class="link" href="CattleInterpreter.html#CattleInterpreter--program" title='The "program" property'>program</a>"                  <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>*        : Read / Write
+  "<a class="link" href="CattleInterpreter.html#CattleInterpreter--tape" title='The "tape" property'>tape</a>"                     <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>*           : Read / Write
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleInterpreter.description"></a><h2>Description</h2>
+<p>
+An instance of <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> represents a Brainfuck interpreter,
+that is, an object which is capable of executing a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>.
+</p>
+<p>
+<a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> handles all the aspects of execution, including
+input and output. It also hides all the details to the user, who
+only needs to initialize the interpreter and call
+<a class="link" href="CattleInterpreter.html#cattle-interpreter-run" title="cattle_interpreter_run ()"><code class="function">cattle_interpreter_run()</code></a> to execute a Brainfuck program.
+</p>
+<p>
+The behaviour of an interpreter can be modified by providing a
+suitable <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> object.
+</p>
+<p>
+Once initialized, a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> can run the assigned program
+as many times as needed; the memory tape, however, is not
+automatically cleared between executions.
+</p>
+</div>
+<div class="refsect1">
+<a name="CattleInterpreter.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CattleInterpreter-struct"></a><h3>struct CattleInterpreter</h3>
+<pre class="programlisting">struct CattleInterpreter;</pre>
+<p>
+Opaque data structure representing an interpreter. It should never be
+accessed directly; use the methods below instead.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-new"></a><h3>cattle_interpreter_new ()</h3>
+<pre class="programlisting"><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="returnvalue">CattleInterpreter</span></a> *    cattle_interpreter_new           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Create and initialize a new interpreter.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-run"></a><h3>cattle_interpreter_run ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_interpreter_run              (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Make the interpreter run the loaded program.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-feed"></a><h3>cattle_interpreter_feed ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_feed             (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *input</code></em>);</pre>
+<p>
+Feed <em class="parameter"><code>interpreter</code></em> with more input.
+</p>
+<p>
+This method is meant to be used inside an input handler assigned to
+<em class="parameter"><code>interpreter</code></em>; way is pointless, since the input is reset when
+<a class="link" href="CattleInterpreter.html#cattle-interpreter-run" title="cattle_interpreter_run ()"><code class="function">cattle_interpreter_run()</code></a> is called.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>input</code></em> :</span></p></td>
+<td>more input to be used by <em class="parameter"><code>interpreter</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-configuration"></a><h3>cattle_interpreter_set_configuration ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_configuration
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);</pre>
+<p>
+Set the configuration for <em class="parameter"><code>interpreter</code></em>.
+</p>
+<p>
+The same configuration can be used for several interpreters, but
+modifying it after it has been assigned to an interpreter may result
+in undefined behaviour, and as such is discouraged.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>configuration</code></em> :</span></p></td>
+<td>configuration for <em class="parameter"><code>interpreter</code></em>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-get-configuration"></a><h3>cattle_interpreter_get_configuration ()</h3>
+<pre class="programlisting"><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="returnvalue">CattleConfiguration</span></a> *  cattle_interpreter_get_configuration
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);</pre>
+<p>
+Get the configuration for <em class="parameter"><code>interpreter</code></em>.
+See <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-configuration" title="cattle_interpreter_set_configuration ()"><code class="function">cattle_interpreter_set_configuration()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>configuration for <em class="parameter"><code>interpreter</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-program"></a><h3>cattle_interpreter_set_program ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_program      (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);</pre>
+<p>
+Set the program to be executed by <em class="parameter"><code>interpreter</code></em>.
+</p>
+<p>
+A single program can be shared between multiple interpreters,
+as long as care is taken not to modify it after it has been
+assigned to any of them.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-get-program"></a><h3>cattle_interpreter_get_program ()</h3>
+<pre class="programlisting"><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *        cattle_interpreter_get_program   (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);</pre>
+<p>
+Get the program for <em class="parameter"><code>interpreter</code></em>.
+See <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-program" title="cattle_interpreter_set_program ()"><code class="function">cattle_interpreter_set_program()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the program for <em class="parameter"><code>interpreter</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-tape"></a><h3>cattle_interpreter_set_tape ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_tape         (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
+<p>
+Set the memory tape used by <em class="parameter"><code>interpreter</code></em>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tape</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-get-tape"></a><h3>cattle_interpreter_get_tape ()</h3>
+<pre class="programlisting"><a class="link" href="CattleTape.html" title="CattleTape"><span class="returnvalue">CattleTape</span></a> *           cattle_interpreter_get_tape      (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>);</pre>
+<p>
+Get the memory tape used by <em class="parameter"><code>interpreter</code></em>.
+See <a class="link" href="CattleInterpreter.html#cattle-interpreter-set-tape" title="cattle_interpreter_set_tape ()"><code class="function">cattle_interpreter_set_tape()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the memory tape for <em class="parameter"><code>interpreter</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleInputHandler"></a><h3>CattleInputHandler ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*CattleInputHandler)               (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Handler for an input operation.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>user data passed to the handler</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-input-handler"></a><h3>cattle_interpreter_set_input_handler ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_input_handler
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleInputHandler" title="CattleInputHandler ()"><span class="type">CattleInputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Set the input handler for <em class="parameter"><code>interpreter</code></em>.
+</p>
+<p>
+The handler will be invoked every time <em class="parameter"><code>interpreter</code></em> needs to perform
+an input action; if <em class="parameter"><code>handler</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the default input handler will
+be used.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>handler</code></em> :</span></p></td>
+<td>input handler, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="The callback is valid until the GDestroyNotify argument is called."><span class="acronym">scope notified</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data for <em class="parameter"><code>handler</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleOutputHandler"></a><h3>CattleOutputHandler ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*CattleOutputHandler)              (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> output</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Handler for an output operation.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>output</code></em> :</span></p></td>
+<td>a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> to output</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>user data passed to the handler</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-output-handler"></a><h3>cattle_interpreter_set_output_handler ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_output_handler
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleOutputHandler" title="CattleOutputHandler ()"><span class="type">CattleOutputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Set the output handler for <em class="parameter"><code>interpreter</code></em>.
+</p>
+<p>
+The handler will be invoked every time <em class="parameter"><code>interpreter</code></em> needs to perform
+an output action; if <em class="parameter"><code>handler</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the default output handler will
+be used.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>handler</code></em> :</span></p></td>
+<td>output handler, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="The callback is valid until the GDestroyNotify argument is called."><span class="acronym">scope notified</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data for <em class="parameter"><code>handler</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleDebugHandler"></a><h3>CattleDebugHandler ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            (*CattleDebugHandler)               (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> data</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>
+Handler for a debug operation.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>data</code></em> :</span></p></td>
+<td>user data passed to the handler</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-interpreter-set-debug-handler"></a><h3>cattle_interpreter_set_debug_handler ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_interpreter_set_debug_handler
+                                                        (<em class="parameter"><code><a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> *interpreter</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleInterpreter.html#CattleInputHandler" title="CattleInputHandler ()"><span class="type">CattleInputHandler</span></a> handler</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a> user_data</code></em>);</pre>
+<p>
+Set the debug handler for <em class="parameter"><code>interpreter</code></em>.
+</p>
+<p>
+The handler will be invoked every time <em class="parameter"><code>interpreter</code></em> needs to perform
+a debug action; if <em class="parameter"><code>handler</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the default debug handler will
+be used.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>interpreter</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>handler</code></em> :</span></p></td>
+<td>debug handler, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="The callback is valid until the GDestroyNotify argument is called."><span class="acronym">scope notified</span></acronym>][<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>user_data</code></em> :</span></p></td>
+<td>user data for <em class="parameter"><code>handler</code></em>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleInterpreter.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="CattleInterpreter--configuration"></a><h3>The <code class="literal">"configuration"</code> property</h3>
+<pre class="programlisting">  "configuration"            <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>*  : Read / Write</pre>
+<p>
+Configuration used by the interpreter.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleInterpreter--program"></a><h3>The <code class="literal">"program"</code> property</h3>
+<pre class="programlisting">  "program"                  <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>*        : Read / Write</pre>
+<p>
+Program executed by the interpreter.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleInterpreter--tape"></a><h3>The <code class="literal">"tape"</code> property</h3>
+<pre class="programlisting">  "tape"                     <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>*           : Read / Write</pre>
+<p>
+Tape used to store the data needed by the program.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.17</div>
+</body>
+</html>

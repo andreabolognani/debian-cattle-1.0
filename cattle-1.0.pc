@@ -1,0 +1,12 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Cattle
+Description: Brainfuck language toolkit
+URL: http://kiyuko.org/software/cattle
+Version: 1.0.1
+Requires: glib-2.0 gobject-2.0
+Libs: -L${libdir} -lcattle-1.0
+Cflags: -I${includedir}/cattle-1.0

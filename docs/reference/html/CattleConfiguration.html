@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CattleConfiguration</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Cattle Reference Manual">
+<link rel="up" href="ch03.html" title="Objects">
+<link rel="prev" href="CattleTape.html" title="CattleTape">
+<link rel="next" href="CattleInstruction.html" title="CattleInstruction">
+<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="CattleTape.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Cattle Reference Manual</th>
+<td><a accesskey="n" href="CattleInstruction.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#CattleConfiguration.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#CattleConfiguration.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#CattleConfiguration.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#CattleConfiguration.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry">
+<a name="CattleConfiguration"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="CattleConfiguration.top_of_page"></a>CattleConfiguration</span></h2>
+<p>CattleConfiguration — Configuration for an interpreter</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv">
+<a name="CattleConfiguration.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;cattle/cattle.h&gt;
+
+enum                <a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction">CattleOnEOFAction</a>;
+struct              <a class="link" href="CattleConfiguration.html#CattleConfiguration-struct" title="struct CattleConfiguration">CattleConfiguration</a>;
+<a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="returnvalue">CattleConfiguration</span></a> *  <a class="link" href="CattleConfiguration.html#cattle-configuration-new" title="cattle_configuration_new ()">cattle_configuration_new</a>         (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleConfiguration.html#cattle-configuration-set-on-eof-action" title="cattle_configuration_set_on_eof_action ()">cattle_configuration_set_on_eof_action</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="type">CattleOnEOFAction</span></a> action</code></em>);
+<a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="returnvalue">CattleOnEOFAction</span></a>   <a class="link" href="CattleConfiguration.html#cattle-configuration-get-on-eof-action" title="cattle_configuration_get_on_eof_action ()">cattle_configuration_get_on_eof_action</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="CattleConfiguration.html#cattle-configuration-set-debug-is-enabled" title="cattle_configuration_set_debug_is_enabled ()">cattle_configuration_set_debug_is_enabled</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enabled</code></em>);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleConfiguration.html#cattle-configuration-get-debug-is-enabled" title="cattle_configuration_get_debug_is_enabled ()">cattle_configuration_get_debug_is_enabled</a>
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleConfiguration.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----CattleConfiguration
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleConfiguration.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="CattleConfiguration.html#CattleConfiguration--debug-is-enabled" title='The "debug-is-enabled" property'>debug-is-enabled</a>"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write
+  "<a class="link" href="CattleConfiguration.html#CattleConfiguration--on-eof-action" title='The "on-eof-action" property'>on-eof-action</a>"            <a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="type">CattleOnEOFAction</span></a>     : Read / Write
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleConfiguration.description"></a><h2>Description</h2>
+<p>
+A <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> contains the configuration for a
+<a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a>.
+</p>
+</div>
+<div class="refsect1">
+<a name="CattleConfiguration.details"></a><h2>Details</h2>
+<div class="refsect2">
+<a name="CattleOnEOFAction"></a><h3>enum CattleOnEOFAction</h3>
+<pre class="programlisting">typedef enum
+{
+	CATTLE_ON_EOF_STORE_ZERO,
+	CATTLE_ON_EOF_STORE_EOF,
+	CATTLE_ON_EOF_DO_NOTHING
+} CattleOnEOFAction;
+</pre>
+<p>
+Possible actions to be performed by a <a class="link" href="CattleInterpreter.html" title="CattleInterpreter"><span class="type">CattleInterpreter</span></a> when an EOF
+character is encountered in the input.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><a name="CATTLE-ON-EOF-STORE-ZERO:CAPS"></a><span class="term"><code class="literal">CATTLE_ON_EOF_STORE_ZERO</code></span></p></td>
+<td>Store a zero in the current cell. This is
+the default behaviour
+</td>
+</tr>
+<tr>
+<td><p><a name="CATTLE-ON-EOF-STORE-EOF:CAPS"></a><span class="term"><code class="literal">CATTLE_ON_EOF_STORE_EOF</code></span></p></td>
+<td>Store an EOF character in the current cell
+</td>
+</tr>
+<tr>
+<td><p><a name="CATTLE-ON-EOF-DO-NOTHING:CAPS"></a><span class="term"><code class="literal">CATTLE_ON_EOF_DO_NOTHING</code></span></p></td>
+<td>Do nothing.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleConfiguration-struct"></a><h3>struct CattleConfiguration</h3>
+<pre class="programlisting">struct CattleConfiguration;</pre>
+<p>
+Opaque data structure representing a configuration. It should never
+be accessed directly; use the methods below instead.
+</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-configuration-new"></a><h3>cattle_configuration_new ()</h3>
+<pre class="programlisting"><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="returnvalue">CattleConfiguration</span></a> *  cattle_configuration_new         (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>
+Create and initialize a new configuration.
+</p>
+<p>
+A single configuration object can be shared between multiple
+interpreters, but modifying it while an interpreter is running can
+lead to unexpected and unpredictable results.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>a new <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-configuration-set-on-eof-action"></a><h3>cattle_configuration_set_on_eof_action ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_configuration_set_on_eof_action
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="type">CattleOnEOFAction</span></a> action</code></em>);</pre>
+<p>
+Set the action to be performed when an EOF character is encountered
+in the input.
+</p>
+<p>
+Accepted values are from the <a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="type">CattleOnEOFAction</span></a> enumeration.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>configuration</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>action</code></em> :</span></p></td>
+<td>the action to be performed</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-configuration-get-on-eof-action"></a><h3>cattle_configuration_get_on_eof_action ()</h3>
+<pre class="programlisting"><a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="returnvalue">CattleOnEOFAction</span></a>   cattle_configuration_get_on_eof_action
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);</pre>
+<p>
+Get the action to be performed when an EOF character is read from
+the input source. See <a class="link" href="CattleConfiguration.html#cattle-configuration-set-on-eof-action" title="cattle_configuration_set_on_eof_action ()"><code class="function">cattle_configuration_set_on_eof_action()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>configuration</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>the current action</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-configuration-set-debug-is-enabled"></a><h3>cattle_configuration_set_debug_is_enabled ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>                cattle_configuration_set_debug_is_enabled
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>,
+                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enabled</code></em>);</pre>
+<p>
+Set the status of the debugging support. It is disabled by default.
+</p>
+<p>
+If debugging is disabled, instructions whose value is
+<a class="link" href="CattleInstruction.html#CATTLE-INSTRUCTION-DEBUG:CAPS"><code class="literal">CATTLE_INSTRUCTION_DEBUG</code></a> will be ignored by the interpreter.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>configuration</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>enabled</code></em> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to enable debug, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-configuration-get-debug-is-enabled"></a><h3>cattle_configuration_get_debug_is_enabled ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_configuration_get_debug_is_enabled
+                                                        (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);</pre>
+<p>
+Get the current status of the debugging support.
+See <a class="link" href="CattleConfiguration.html#cattle-configuration-set-debug-is-enabled" title="cattle_configuration_set_debug_is_enabled ()"><code class="function">cattle_configuration_set_debug_is_enabled()</code></a>.
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>configuration</code></em> :</span></p></td>
+<td>a <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if debugging is enabled, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleConfiguration.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="CattleConfiguration--debug-is-enabled"></a><h3>The <code class="literal">"debug-is-enabled"</code> property</h3>
+<pre class="programlisting">  "debug-is-enabled"         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>              : Read / Write</pre>
+<p>
+If <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, instructions whose value is
+<a class="link" href="CattleInstruction.html#CATTLE-INSTRUCTION-DEBUG:CAPS"><code class="literal">CATTLE_INSTRUCTION_DEBUG</code></a> are not executed by the interpreter.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+<p>Default value: FALSE</p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="CattleConfiguration--on-eof-action"></a><h3>The <code class="literal">"on-eof-action"</code> property</h3>
+<pre class="programlisting">  "on-eof-action"            <a class="link" href="CattleConfiguration.html#CattleOnEOFAction" title="enum CattleOnEOFAction"><span class="type">CattleOnEOFAction</span></a>     : Read / Write</pre>
+<p>
+Action to be performed when an EOF character is encountered in
+the input.
+</p>
+<p>
+Changes to this property are not notified.
+</p>
+<p>Default value: CATTLE_ON_EOF_STORE_ZERO</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.17</div>
+</body>
+</html>
