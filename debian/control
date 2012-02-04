@@ -9,14 +9,25 @@ Vcs-Git: git://anonscm.debian.org/collab-maint/cattle-1.0.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cattle-1.0.git;a=summary
 
 Package: libcattle-1.0-0
-Section: libs
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
-Depends: libglib2.0-0
-Description: TODO
+Depends: ${shlib:Depends}, ${misc:Depends}
+Description: Brainfuck language toolkit
+ Cattle is a GObject-based library that allows one to inspect
+ Brainfuck programs in various ways, and to easily embed a
+ full-featured Brainfuck interpreter into any application.
+ .
+ This package contains the shared libraries needed to run
+ applications linked against Cattle.
 
 Package: libcattle-1.0-dev
 Section: libdevel
 Architecture: any
-Depends: libglib2.0-dev
-Description: TODO
+Depends: libglib2.0-dev, ${misc:Depends}
+Description: Brainfuck language toolkit (development files)
+ Cattle is a GObject-based library that allows one to inspect
+ Brainfuck programs in various ways, and to easily embed a
+ full-featured Brainfuck interpreter into any application.
+ .
+ This package contains the development files needed to link
+ applications against Cattle.
