@@ -1,0 +1,3 @@
+version=3
+http://kiyuko.org/software/cattle/releases \
+	^/software/cattle/releases/([\d\.]+)/source$
