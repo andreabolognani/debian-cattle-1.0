@@ -29,6 +29,7 @@ Section: libdevel
 Architecture: any
 Depends: libcattle-1.0-0 (= ${binary:Version}),
          libglib2.0-dev (>= 2.16.0),
+         pkg-config (>= 0.16.0),
          ${misc:Depends}
 Description: Brainfuck language toolkit (development files)
  Cattle is a GObject-based library that allows one to inspect
