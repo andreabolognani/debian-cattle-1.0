@@ -11,7 +11,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cattle-1.0.git;a=s
 Package: libcattle-1.0-0
 Architecture: any
 Pre-Depends: ${misc:Pre-Depends}
-Depends: ${shlib:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Brainfuck language toolkit
  Cattle is a GObject-based library that allows one to inspect
  Brainfuck programs in various ways, and to easily embed a
