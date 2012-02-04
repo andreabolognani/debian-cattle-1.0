@@ -1,16 +1,13 @@
 #!/usr/bin/make -f
 
-PACKAGES = \
-	libcattle-1.0-0 \
-	libcattle-1.0-dev
-
 %:
 	dh $@
 
 override_dh_install:
-	for pkg in ${PACKAGES}; do \
+	for input in $$(ls debian/*.in); do \
+		output="debian/$$(basename "$${input}" .in)"; \
 		sed \
 			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
-			"debian/$${pkg}.install.in" > "debian/$${pkg}.install"; \
+			"$${input}" > "$${output}"; \
 	done
 	dh_install
