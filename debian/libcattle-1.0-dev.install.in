@@ -1,3 +1,4 @@
 usr/include/cattle-1.0/cattle/*.h usr/include/cattle-1.0/cattle
+usr/share/gir-1.0/Cattle-1.0.gir usr/share/gir-1.0
 usr/lib/@DEB_HOST_MULTIARCH@/*.so usr/lib/@DEB_HOST_MULTIARCH@
 usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig/*.pc usr/lib/@DEB_HOST_MULTIARCH@/pkgconfig
