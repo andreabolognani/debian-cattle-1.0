@@ -46,7 +46,7 @@ Description: Brainfuck language toolkit (development files)
 Package: gir1.2-cattle-1.0
 Section: introspection
 Architecture: any
-Depends: ${gir:Depends},
+Depends: gir1.2-glib-2.0,
          ${misc:Depends}
 Description: Brainfuck language toolkit (introspection files)
  Cattle is a GObject-based library that allows one to inspect
