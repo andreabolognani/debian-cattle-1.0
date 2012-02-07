@@ -16,6 +16,7 @@ Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cattle-1.0.git;a=s
 
 Package: libcattle-1.0-0
 Architecture: any
+Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: libglib2.0-0 (>= 2.16.0),
          ${shlibs:Depends},
@@ -32,6 +33,7 @@ Package: libcattle-1.0-dev
 Section: libdevel
 Architecture: any
 Depends: libcattle-1.0-0 (= ${binary:Version}),
+         gir1.2-cattle-1.0 (= ${binary:Version}),
          libglib2.0-dev (>= 2.16.0),
          pkg-config (>= 0.16.0),
          ${misc:Depends}
