@@ -12,6 +12,12 @@ override_dh_auto_configure:
 			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
 			"$${input}" > "$${output}"; \
 	done
+	# Update build system
+	gtkdocize
+	autoreconf --force \
+	           --install \
+	           --symlink
+	# Run configure
 	dh_auto_configure -- \
 	                  --enable-introspection \
 	                  --enable-gtk-doc
