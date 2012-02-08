@@ -64,7 +64,8 @@ Description: Brainfuck language toolkit (introspection files)
 Package: libcattle-1.0-doc
 Section: doc
 Architecture: all
-Depends: libglib2.0-doc (>= 2.16.0)
+Depends: libglib2.0-doc (>= 2.16.0),
+         ${misc:Depends}
 Suggests: devhelp
 Description: Brainfuck language toolkit (API reference)
  Cattle is a GObject-based library that allows one to inspect
