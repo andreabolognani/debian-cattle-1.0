@@ -33,8 +33,8 @@ libcattle-1.0.so.0 libcattle-1.0-0 #MINVER#
  cattle_interpreter_set_program@Base 1.0.1
  cattle_interpreter_set_tape@Base 1.0.1
  cattle_major_version@Base 1.0.1
- cattle_marshal_BOOLEAN__CHAR_POINTER@Base 1.0.1
- cattle_marshal_BOOLEAN__POINTER@Base 1.0.1
+ (optional)cattle_marshal_BOOLEAN__CHAR_POINTER@Base 1.0.1
+ (optional)cattle_marshal_BOOLEAN__POINTER@Base 1.0.1
  cattle_micro_version@Base 1.0.1
  cattle_minor_version@Base 1.0.1
  cattle_on_eof_action_get_type@Base 1.0.1
