@@ -10,9 +10,9 @@ Build-Depends: debhelper (>= 9),
                pkg-config (>= 0.16.0),
                gobject-introspection (>= 0.6.7),
                libgirepository1.0-dev (>= 0.6.7),
-               libglib2.0-dev (>= 2.16.0),
+               libglib2.0-dev (>= 2.18.0),
                gir1.2-glib-2.0
-Build-Depends-Indep: libglib2.0-doc (>= 2.16.0)
+Build-Depends-Indep: libglib2.0-doc (>= 2.18.0)
 Standards-Version: 3.9.2
 Homepage: http://kiyuko.org/software/cattle
 Vcs-Git: git://anonscm.debian.org/collab-maint/cattle-1.0.git
@@ -22,7 +22,7 @@ Package: libcattle-1.0-0
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
-Depends: libglib2.0-0 (>= 2.16.0),
+Depends: libglib2.0-0 (>= 2.18.0),
          ${shlibs:Depends},
          ${misc:Depends}
 Description: Brainfuck language toolkit
@@ -38,7 +38,7 @@ Section: libdevel
 Architecture: any
 Depends: libcattle-1.0-0 (= ${binary:Version}),
          gir1.2-cattle-1.0 (= ${binary:Version}),
-         libglib2.0-dev (>= 2.16.0),
+         libglib2.0-dev (>= 2.18.0),
          pkg-config (>= 0.16.0),
          ${misc:Depends}
 Description: Brainfuck language toolkit (development files)
@@ -66,7 +66,7 @@ Description: Brainfuck language toolkit (introspection files)
 Package: libcattle-1.0-doc
 Section: doc
 Architecture: all
-Depends: libglib2.0-doc (>= 2.16.0),
+Depends: libglib2.0-doc (>= 2.18.0),
          ${misc:Depends}
 Suggests: devhelp
 Description: Brainfuck language toolkit (API reference)
