@@ -13,7 +13,7 @@ override_dh_auto_configure:
 			"$${input}" > "$${output}"; \
 	done
 	# Update build system
-	gtkdocize
+	gtkdocize --flavour no-tmpl
 	autoreconf --force \
 	           --install \
 	           --symlink
