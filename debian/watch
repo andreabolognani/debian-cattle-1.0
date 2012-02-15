@@ -1,3 +1,4 @@
 version=3
+opts=filenamemangle=s/^\/software\/cattle\/releases\/([\d\.]+)\/source$/cattle-$1\.tar\.gz/ \
 http://kiyuko.org/software/cattle/releases \
 	^/software/cattle/releases/([\d\.]+)/source$
