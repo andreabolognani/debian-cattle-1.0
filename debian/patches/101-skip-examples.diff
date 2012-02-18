@@ -1,0 +1,31 @@
+Description: Skip examples when building
+ Example programs are useless as far as Debian packages go; since we're
+ refreshing the build system anyway, might as well shave a couple of calls
+ to GCC in order to speed up compilation a little.
+Forwarded: not-needed
+Author: Andrea Bolognani <eof@kiyuko.org>
+Last-Update: 2012-02-18
+Index: cattle-1.0.git/Makefile.am
+===================================================================
+--- cattle-1.0.git.orig/Makefile.am	2012-02-18 09:45:35.948933036 +0100
++++ cattle-1.0.git/Makefile.am	2012-02-18 09:45:37.468869214 +0100
+@@ -2,7 +2,6 @@
+ 
+ SUBDIRS = \
+ 	cattle \
+-	examples \
+ 	tests \
+ 	docs \
+ 	$(NULL)
+Index: cattle-1.0.git/configure.ac
+===================================================================
+--- cattle-1.0.git.orig/configure.ac	2012-02-08 19:28:47.334323244 +0100
++++ cattle-1.0.git/configure.ac	2012-02-18 09:45:54.228179126 +0100
+@@ -92,7 +92,6 @@
+                  docs/Makefile
+                  docs/reference/Makefile
+                  docs/reference/version.xml
+-                 examples/Makefile
+                  tests/Makefile])
+ 
+ AC_OUTPUT
