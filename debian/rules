@@ -6,8 +6,10 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 	dh $@
 
 override_dh_auto_configure:
-	for input in $$(ls debian/*.in); do \
-		output="debian/$$(basename "$${input}" .in)"; \
+	# Do variable substitution in template files
+	for input in debian/*.in; do \
+		test -f "$${input}" || continue; \
+		output="$${input%.in}"; \
 		sed \
 			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
 			"$${input}" > "$${output}"; \
