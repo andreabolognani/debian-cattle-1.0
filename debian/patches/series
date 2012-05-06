@@ -1,2 +1,2 @@
 # To rebuild this file, use `debian/rules rebuild-series'
-D01-skip-examples.diff
+D01-tweak-build-system.diff
