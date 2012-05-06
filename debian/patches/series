@@ -1,1 +1,2 @@
-101-skip-examples.diff
+# To rebuild this file, use `debian/rules rebuild-series'
+D01-skip-examples.diff

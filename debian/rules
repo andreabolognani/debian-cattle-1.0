@@ -5,21 +5,49 @@ DEB_HOST_MULTIARCH ?= $(shell dpkg-architecture -qDEB_HOST_MULTIARCH)
 %:
 	dh $@
 
+# Refresh the build system.
+#
+# Some installation paths are influenced by the architecture, so the actual
+# packaging files are created by applying variable substitution to templates.
+#
+# The build system is completely regenerated to ensure the tools used to
+# build the binary package are the ones shipped with Debian.
 override_dh_auto_configure:
-	# Do variable substitution in template files
-	for input in debian/*.in; do \
-		test -f "$${input}" || continue; \
-		output="$${input%.in}"; \
-		sed \
-			-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
-			"$${input}" > "$${output}"; \
-	done
-	# Update build system
-	gtkdocize --flavour no-tmpl
-	autoreconf --force \
-	           --install \
-	           --symlink
-	# Run configure
-	dh_auto_configure -- \
-	                  --enable-introspection \
-	                  --enable-gtk-doc
+	@( \
+		for input in debian/*.in; \
+		do \
+			test -f "$${input}" || continue; \
+			output=$$(basename $${input} .in); \
+			sed \
+				-e "s/@DEB_HOST_MULTIARCH@/$(DEB_HOST_MULTIARCH)/g" \
+			$${input} \
+				> $${output}; \
+		done; \
+		gtkdocize --flavour no-tmpl; \
+		autoreconf --force \
+		           --install \
+		           --symlink; \
+		dh_auto_configure -- \
+		                  --enable-introspection \
+		                  --enable-gtk-doc; \
+	)
+
+# Rebuild the series file by looking at the contents of the patches directory.
+#
+# Patches with names starting with D (Debian-specific) should be applied
+# after those with names starting with U (to be forwarded upstream).
+rebuild-series:
+	@( \
+		SERIES=debian/patches/series; \
+		echo "# To rebuild this file, use \`debian/rules $@'" \
+			> $${SERIES}; \
+		for patch in debian/patches/U*.diff debian/patches/D*.diff; \
+		do \
+			test -f "$${patch}" || continue; \
+			patch=$$(basename $${patch}); \
+			echo $${patch} \
+				>> $${SERIES}; \
+		done; \
+	)
+
+.PHONY: rebuild-series
