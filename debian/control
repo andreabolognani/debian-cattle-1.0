@@ -14,7 +14,7 @@ Build-Depends: debhelper (>= 9),
                libglib2.0-dev (>= 2.18.0),
                gir1.2-glib-2.0
 Build-Depends-Indep: libglib2.0-doc (>= 2.18.0)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3
 Homepage: http://kiyuko.org/software/cattle
 Vcs-Git: git://anonscm.debian.org/collab-maint/cattle-1.0.git
 Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/cattle-1.0.git;a=summary
