@@ -1,7 +1,7 @@
-cattle-1.0 (1.0.1-1) unstable; urgency=low
+cattle-1.0 (1.0.1-1) experimental; urgency=low
 
   * Initial release. (Closes: #617304)
   * D01-tweak-build-system.diff:
     - avoid building example programs to speed up compilation.
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sun, 06 May 2012 19:44:09 +0200
+ -- Andrea Bolognani <eof@kiyuko.org>  Sat, 11 Aug 2012 01:52:52 +0200
