@@ -28,6 +28,7 @@ override_dh_auto_configure:
 		           --install \
 		           --symlink; \
 		dh_auto_configure -- \
+		                  --disable-silent-rules \
 		                  --enable-introspection \
 		                  --enable-gtk-doc; \
 	)
