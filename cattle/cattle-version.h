@@ -1,5 +1,5 @@
-/* Cattle -- Brainfuck language toolkit
- * Copyright (C) 2008-2011  Andrea Bolognani <eof@kiyuko.org>
+/* Cattle - Brainfuck language toolkit
+ * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@
 G_BEGIN_DECLS
 
 #define CATTLE_MAJOR_VERSION (1)
-#define CATTLE_MINOR_VERSION (0)
-#define CATTLE_MICRO_VERSION (1)
+#define CATTLE_MINOR_VERSION (2)
+#define CATTLE_MICRO_VERSION (0)
 
 #define CATTLE_CHECK_VERSION(major,minor,micro) \
   (CATTLE_MAJOR_VERSION > (major) || \

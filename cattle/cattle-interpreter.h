@@ -1,5 +1,5 @@
-/* Cattle -- Brainfuck language toolkit
- * Copyright (C) 2008-2011  Andrea Bolognani <eof@kiyuko.org>
+/* Cattle - Brainfuck language toolkit
+ * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,6 +29,7 @@
 #include <cattle/cattle-configuration.h>
 #include <cattle/cattle-program.h>
 #include <cattle/cattle-tape.h>
+#include <cattle/cattle-buffer.h>
 
 G_BEGIN_DECLS
 
@@ -58,7 +59,7 @@ typedef gboolean (*CattleInputHandler)  (CattleInterpreter  *interpreter,
                                          gpointer            data,
                                          GError            **error);
 typedef gboolean (*CattleOutputHandler) (CattleInterpreter  *interpreter,
-                                         gchar               output,
+                                         gint8               output,
                                          gpointer            data,
                                          GError            **error);
 typedef gboolean (*CattleDebugHandler)  (CattleInterpreter  *interpreter,
@@ -69,7 +70,7 @@ CattleInterpreter*   cattle_interpreter_new                (void);
 gboolean             cattle_interpreter_run                (CattleInterpreter    *interpreter,
                                                             GError              **error);
 void                 cattle_interpreter_feed               (CattleInterpreter    *interpreter,
-                                                            const gchar          *input);
+                                                            CattleBuffer         *input);
 void                 cattle_interpreter_set_configuration  (CattleInterpreter    *interpreter,
                                                             CattleConfiguration  *configuration);
 CattleConfiguration* cattle_interpreter_get_configuration  (CattleInterpreter    *interpreter);

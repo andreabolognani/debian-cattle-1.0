@@ -1,4 +1,4 @@
-AC_INIT([Cattle], [1.0.1], [eof@kiyuko.org], [cattle])
+AC_INIT([Cattle], [1.2.0], [eof@kiyuko.org], [cattle])
 AM_CONFIG_HEADER([config.h])
 AM_MAINTAINER_MODE
 AM_INIT_AUTOMAKE
@@ -10,8 +10,8 @@ dnl *** Release version ***
 dnl ***********************
 
 CATTLE_MAJOR_VERSION=1
-CATTLE_MINOR_VERSION=0
-CATTLE_MICRO_VERSION=1
+CATTLE_MINOR_VERSION=2
+CATTLE_MICRO_VERSION=0
 CATTLE_VERSION=$CATTLE_MAJOR_VERSION.$CATTLE_MINOR_VERSION.$CATTLE_MICRO_VERSION
 
 AC_SUBST(CATTLE_MAJOR_VERSION)
@@ -27,7 +27,7 @@ dnl Increment on interface add, remove, or change.
 CATTLE_CURRENT=0
 
 dnl Increment on source change. Reset when CURRENT changes.
-CATTLE_REVISION=1
+CATTLE_REVISION=2
 
 dnl Increment on interface addition. Reset on removal.
 CATTLE_AGE=0
@@ -57,7 +57,7 @@ dnl ***************************************
 dnl *** Check for required GLib modules ***
 dnl ***************************************
 
-GLIB_REQUIRED_VERSION=2.16.0
+GLIB_REQUIRED_VERSION=2.32.0
 GLIB_REQUIRED_MODULES="gobject"
 
 AM_PATH_GLIB_2_0($GLIB_REQUIRED_VERSION,,
@@ -73,13 +73,13 @@ dnl ***************************************
 dnl *** Check for GObject Introspection ***
 dnl ***************************************
 
-GOBJECT_INTROSPECTION_CHECK([0.6.7])
+GOBJECT_INTROSPECTION_CHECK([1.32.0])
 
 dnl *************************
 dnl *** Check for GTK-Doc ***
 dnl *************************
 
-GTK_DOC_CHECK([1.15])
+GTK_DOC_CHECK([1.18])
 
 dnl *******************************
 dnl *** Create the output files ***

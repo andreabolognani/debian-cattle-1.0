@@ -1,5 +1,9 @@
+cattle_buffer_get_type
 cattle_configuration_get_type
+cattle_end_of_input_action_get_type
+cattle_error_get_type
 cattle_instruction_get_type
+cattle_instruction_value_get_type
 cattle_interpreter_get_type
 cattle_program_get_type
 cattle_tape_get_type

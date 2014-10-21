@@ -13,13 +13,13 @@ pkgconfig_DATA = \
 	$(NULL)
 
 doc_DATA = \
-	AUTHORS \
+	AUTHORS.md \
 	ChangeLog.pre-0.9.2 \
 	ChangeLog \
 	COPYING \
-	NEWS \
-	README \
-	TODO \
+	NEWS.md \
+	README.md \
+	TODO.md \
 	$(NULL)
 
 EXTRA_DIST = \
@@ -32,7 +32,7 @@ CLEANFILES = \
 	$(NULL)
 
 DISTCHECK_CONFIGURE_FLAGS = \
-	--enable-instrospection \
+	--enable-introspection=yes \
 	--enable-gtk-doc \
 	$(NULL)
 

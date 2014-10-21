@@ -1,5 +1,5 @@
-/* Cattle -- Brainfuck language toolkit
- * Copyright (C) 2008-2011  Andrea Bolognani <eof@kiyuko.org>
+/* Cattle - Brainfuck language toolkit
+ * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,9 +19,10 @@
  */
 
 #include "cattle-enums.h"
-#include "cattle-marshal.h"
 #include "cattle-error.h"
+#include "cattle-constants.h"
 #include "cattle-interpreter.h"
+#include <unistd.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
@@ -75,8 +76,8 @@ struct _CattleInterpreterPrivate
 	GSList              *stack; /* Instruction stack */
 
 	gboolean             had_input;
-	gchar               *input;
-	gchar               *input_cursor;
+	CattleBuffer        *input;
+	gint                 input_offset;
 	gboolean             end_of_input_reached;
 };
 
@@ -90,18 +91,18 @@ enum
 };
 
 /* Internal functions */
-static gboolean run                        (CattleInterpreter      *interpreter,
-                                            GError                **error);
-static gboolean default_input_handler      (CattleInterpreter      *interpreter,
-                                            gpointer                data,
-                                            GError                **error);
-static gboolean default_output_handler     (CattleInterpreter      *interpreter,
-                                            gchar                   output,
-                                            gpointer                data,
-                                            GError                **error);
-static gboolean default_debug_handler      (CattleInterpreter      *interpreter,
-                                            gpointer                data,
-                                            GError                **error);
+static gboolean run                    (CattleInterpreter  *interpreter,
+                                        GError            **error);
+static gboolean default_input_handler  (CattleInterpreter  *interpreter,
+                                        gpointer            data,
+                                        GError            **error);
+static gboolean default_output_handler (CattleInterpreter  *interpreter,
+                                        gint8               output,
+                                        gpointer            data,
+                                        GError            **error);
+static gboolean default_debug_handler  (CattleInterpreter  *interpreter,
+                                        gpointer            data,
+                                        GError            **error);
 
 static void
 cattle_interpreter_init (CattleInterpreter *self)
@@ -123,7 +124,7 @@ cattle_interpreter_init (CattleInterpreter *self)
 
 	self->priv->had_input = FALSE;
 	self->priv->input = NULL;
-	self->priv->input_cursor = NULL;
+	self->priv->input_offset = 0;
 	self->priv->end_of_input_reached = FALSE;
 
 	self->priv->disposed = FALSE;
@@ -153,14 +154,6 @@ cattle_interpreter_dispose (GObject *object)
 static void
 cattle_interpreter_finalize (GObject *object)
 {
-	CattleInterpreter *self;
-
-	self = CATTLE_INTERPRETER (object);
-
-	if (self->priv->input != NULL) {
-		g_free (self->priv->input);
-	}
-
 	G_OBJECT_CLASS (cattle_interpreter_parent_class)->finalize (object);
 }
 
@@ -168,73 +161,85 @@ static gboolean
 run (CattleInterpreter  *self,
      GError            **error)
 {
-	CattleConfiguration *configuration;
-	CattleProgram *program;
-	CattleTape *tape;
-	CattleInstruction *current;
-	CattleInstruction *next;
-	CattleInstructionValue value;
-	CattleInputHandler input_handler;
-	CattleOutputHandler output_handler;
-	CattleDebugHandler debug_handler;
-	GSList *stack;
-	GError *inner_error;
-	gboolean success;
-	gunichar temp;
-	gint quantity;
-	gint i;
+	CattleInterpreterPrivate *priv;
+	CattleConfiguration      *configuration;
+	CattleProgram            *program;
+	CattleTape               *tape;
+	CattleInstruction        *first;
+	CattleInstruction        *current;
+	CattleInstruction        *next;
+	CattleInstructionValue    value;
+	CattleInputHandler        input_handler;
+	CattleOutputHandler       output_handler;
+	CattleDebugHandler        debug_handler;
+	GSList                   *stack;
+	GError                   *inner_error;
+	gboolean                  success;
+	gint8                     temp;
+	gulong                    quantity;
+	gulong                    size;
+	gulong                    i;
 
-	configuration = self->priv->configuration;
-	program = self->priv->program;
-	tape = self->priv->tape;
+	priv = self->priv;
 
-	input_handler = self->priv->input_handler;
-	if (input_handler == NULL) {
+	configuration = priv->configuration;
+	program = priv->program;
+	tape = priv->tape;
+
+	input_handler = priv->input_handler;
+	if (input_handler == NULL)
+	{
 		input_handler = default_input_handler;
 	}
-	output_handler = self->priv->output_handler;
-	if (output_handler == NULL) {
+	output_handler = priv->output_handler;
+	if (output_handler == NULL)
+	{
 		output_handler = default_output_handler;
 	}
-	debug_handler = self->priv->debug_handler;
-	if (debug_handler == NULL) {
+	debug_handler = priv->debug_handler;
+	if (debug_handler == NULL)
+	{
 		debug_handler = default_debug_handler;
 	}
 
-	stack = self->priv->stack;
+	stack = priv->stack;
 	success = TRUE;
 
-	current = cattle_program_get_instructions (program);
+	first = cattle_program_get_instructions (program);
+	g_object_ref (first);
 
-	while (current != NULL) {
+	current = first;
 
+	while (current != NULL)
+	{
 		value = cattle_instruction_get_value (current);
 
-		switch (value) {
-
+		switch (value)
+		{
 			case CATTLE_INSTRUCTION_LOOP_BEGIN:
 
 				next = cattle_instruction_get_loop (current);
 
 				/* Enter the loop only if the value stored in the
 				 * current cell is not zero */
-				if (cattle_tape_get_current_value (tape) != 0) {
-
+				if (cattle_tape_get_current_value (tape) != 0)
+				{
 					/* Push the current instruction on the stack */
 					stack = g_slist_prepend (stack, current);
-					self->priv->stack = stack;
+					priv->stack = stack;
 					current = next;
 
 					continue;
 				}
+
 				break;
 
 			case CATTLE_INSTRUCTION_LOOP_END:
 
 				/* If the instruction stack is empty, we're not running
 				 * a loop, so trying to exit it is an error */
-				if (G_UNLIKELY (stack == NULL)) {
-
+				if (G_UNLIKELY (stack == NULL))
+				{
 					g_set_error_literal (error,
 					                     CATTLE_ERROR,
 					                     CATTLE_ERROR_UNBALANCED_BRACKETS,
@@ -249,7 +254,7 @@ run (CattleInterpreter  *self,
 				g_object_unref (current);
 				current = CATTLE_INSTRUCTION (stack->data);
 				stack = g_slist_delete_link (stack, stack);
-				self->priv->stack = stack;
+				priv->stack = stack;
 
 				continue;
 
@@ -257,203 +262,158 @@ run (CattleInterpreter  *self,
 
 				quantity = cattle_instruction_get_quantity (current);
 				cattle_tape_move_left_by (tape, quantity);
+
 				break;
 
 			case CATTLE_INSTRUCTION_MOVE_RIGHT:
 
 				quantity = cattle_instruction_get_quantity (current);
 				cattle_tape_move_right_by (tape, quantity);
+
 				break;
 
 			case CATTLE_INSTRUCTION_INCREASE:
 
 				quantity = cattle_instruction_get_quantity (current);
 				cattle_tape_increase_current_value_by (tape, quantity);
+
 				break;
 
 			case CATTLE_INSTRUCTION_DECREASE:
 
 				quantity = cattle_instruction_get_quantity (current);
 				cattle_tape_decrease_current_value_by (tape, quantity);
+
 				break;
 
 			case CATTLE_INSTRUCTION_READ:
 
 				quantity = cattle_instruction_get_quantity (current);
 
-				for (i = 0; i < quantity; i++) {
+				for (i = 0; i < quantity; i++)
+				{
+					/* Read and normalize a value */
 
-					/* The following code is quite complicated because
-					 * it needs to handle different situations.
-					 * The execution of a read instruction is divided
-					 * into three steps:
-					 *
-					 *   1) Fetch more input if needed: the
-					 *      "input-request" signal is emitted, and the
-					 *      signal handler is responsible for fetching
-					 *      more input from the source. This step is
-					 *      obviously skipped if some input was
-					 *      included in the program.
-					 *
-					 *   2) Get the char and normalize it: this step
-					 *      allows us to handle all the input
-					 *      consistently in the last step, regardless
-					 *      of its source.
-					 *
-					 *   3) Perform the actual operation: the easy
-					 *      part ;)
-					 *
-					 * TODO
-					 * This step can probably be semplified.
-					 */
+					if (priv->end_of_input_reached)
+					{
+						/* End of input reached.
+						 * The value will be CATTLE_EOF both for embedded and
+						 * runtime input */
+						temp = CATTLE_EOF;
+					}
+					else
+					{
+						size = cattle_buffer_get_size (priv->input);
 
-					/* STEP 1: Fetch more input if needed */
+						if (priv->input_offset < size)
+						{
+							/* Current input buffer not consumed.
+							 * Get a value from the buffer and move forward */
+							temp = cattle_buffer_get_value (priv->input,
+											priv->input_offset);
+							priv->input_offset++;
+						}
+						else
+						{
+							/* Current input buffer consumed */
 
-					/* We don't even try to fetch more input if the
-					 * input was included in the program or if the end
-					 * of input has alredy been reached */
-					if (self->priv->had_input == FALSE && !self->priv->end_of_input_reached) {
+							if (priv->had_input)
+							{
+								/* Embedded input consumed.
+								 * No more input can be retrieved */
+								temp = CATTLE_EOF;
+								priv->end_of_input_reached = TRUE;
+							}
+							else
+							{
+								/* Runtime input buffer consumed.
+								 * Call the input handler to obtain a new
+								 * input buffer */
+								inner_error = NULL;
+								success = (*input_handler) (self,
+											    priv->input_handler_data,
+											    &inner_error);
+								success &= (inner_error == NULL);
 
-						/* We are at the end of the current line of
-						 * input, or we haven't fetched any input yet.
-						 * We need to emit the "input-request" signal
-						 * to get more input */
-						if (self->priv->input_cursor == NULL || g_utf8_get_char (self->priv->input_cursor) == 0) {
+								/* Handle input errors */
+								if (G_UNLIKELY (success == FALSE))
+								{
+									/* If the signal handler has set the
+									 * error, as it's required to,
+									 * propagate that error; if it hasn't,
+									 * raise a generic I/O error */
+									if (inner_error == NULL)
+									{
+										g_set_error_literal (error,
+												     CATTLE_ERROR,
+												     CATTLE_ERROR_IO,
+												     "Unknown I/O error");
+									}
+									else
+									{
+										g_propagate_error (error,
+												   inner_error);
+									}
 
-							inner_error = NULL;
-							success = (*input_handler) (self,
-							                            self->priv->input_handler_data,
-							                            &inner_error);
-							success &= (inner_error == NULL);
+									g_object_unref (current);
 
-							/* The operation failed: we abort
-							 * immediately */
-							if (G_UNLIKELY (success == FALSE)) {
-
-								/* If the signal handler has set the
-								 * error, as it's required to,
-								 * propagate that error; if it hasn't,
-								 * raise a generic I/O error */
-								if (inner_error == NULL) {
-									g_set_error_literal (error,
-									                     CATTLE_ERROR,
-									                     CATTLE_ERROR_IO,
-									                     "Unknown I/O error");
+									return FALSE;
 								}
-								else {
-									g_propagate_error (error,
-									                   inner_error);
+
+								/* Update size of the input buffer */
+								size = cattle_buffer_get_size (priv->input);
+
+								if (priv->input_offset < size)
+								{
+									/* Some input was retrieved */
+									temp = cattle_buffer_get_value (priv->input,
+													priv->input_offset);
+									priv->input_offset++;
 								}
-
-								g_object_unref (current);
-
-								return FALSE;
+								else
+								{
+									/* No more available input */
+									temp = CATTLE_EOF;
+									priv->end_of_input_reached = TRUE;
+								}
 							}
 						}
-					}
-
-					/* Safety measure against misbehaving input handlers: if
-					 * no input has been fed to the interpreter so far, it
-					 * means there is no input to be processed */
-					if (self->priv->input == NULL) {
-
-						self->priv->end_of_input_reached = TRUE;
-					}
-					else {
-
-						/* Make sure the input is valid UTF-8 */
-						if (!g_utf8_validate (self->priv->input, -1, NULL)) {
-
-							g_set_error_literal (error,
-							                     CATTLE_ERROR,
-							                     CATTLE_ERROR_BAD_UTF8,
-							                     "Invalid UTF-8 input");
-
-							g_object_unref (current);
-
-							return FALSE;
-						}
-					}
-
-					/* STEP 2: Get the char and normalize it */
-
-					/* If we have already reached the end of input,
-					 * the current char is obviously an EOF */
-					if (self->priv->end_of_input_reached) {
-						temp = (gunichar) EOF;
-					}
-
-					else {
-						temp = g_utf8_get_char (self->priv->input_cursor);
-
-						/* The end of the saved input is converted into
-						 * an EOF character for consistency. We don't
-						 * need to move the cursor forward if we are
-						 * already at the end of the input */
-						if (temp == 0) {
-
-							if (self->priv->had_input == FALSE) {
-								temp = (gunichar) EOF;
-								self->priv->end_of_input_reached = TRUE;
-							}
-						}
-
-						/* There is some more input: we have to move
-						 * the cursor one position forward */
-						else {
-							self->priv->input_cursor = g_utf8_next_char (self->priv->input_cursor);
-						}
-					}
-
-					/* Make sure the char is in the supported range */
-					if (!((temp >= 0 && temp <= 127) || temp == EOF)) {
-
-						g_set_error_literal (error,
-						                     CATTLE_ERROR,
-						                     CATTLE_ERROR_INPUT_OUT_OF_RANGE,
-						                     "Non-ASCII input is not supported");
-
-						g_object_unref (current);
-
-						return FALSE;
 					}
 				}
 
-				/* STEP 3: Perform the actual operation */
+				/* Save the value. Executed only once even when multiple subsequent
+				 * read instruction are present in the program */
 
-				/* XXX If there are multiple read instructions in a row,
-				 *     only the last one is actually performed, because
-				 *     it would overwrite the results of all the previous
-				 *     ones anyway.
-				 */
+				if (temp == CATTLE_EOF)
+				{
+					/* End of input.
+					 * The new value depends on the configuration */
+					switch (cattle_configuration_get_end_of_input_action (configuration))
+					{
+						case CATTLE_END_OF_INPUT_ACTION_STORE_EOF:
 
-				/* We are at the end of the input: we have to check
-				 * the configuration to know which action we should
-				 * perform */
-				if (temp == (gchar) EOF) {
-
-					switch (cattle_configuration_get_on_eof_action (configuration)) {
-
-						case CATTLE_ON_EOF_STORE_ZERO:
-							cattle_tape_set_current_value (tape, (gchar) 0);
-							break;
-
-						case CATTLE_ON_EOF_STORE_EOF:
 							cattle_tape_set_current_value (tape, temp);
 							break;
 
-						case CATTLE_ON_EOF_DO_NOTHING:
-						default:
+						case CATTLE_END_OF_INPUT_ACTION_DO_NOTHING:
+
 							/* Do nothing */
+							break;
+
+						case CATTLE_END_OF_INPUT_ACTION_STORE_ZERO:
+						default:
+
+							cattle_tape_set_current_value (tape, 0);
 							break;
 					}
 				}
-
-				/* We are not at the end of the input: just save the
-				 * input into the current cell of the tape */
-				else {
+				else
+				{
+					/* Not end of input.
+					 * Save the new value */
 					cattle_tape_set_current_value (tape, temp);
 				}
+
 				break;
 
 			case CATTLE_INSTRUCTION_PRINT:
@@ -462,30 +422,32 @@ run (CattleInterpreter  *self,
 
 				/* Write the value in the current cell to standard
 				 * output */
-				for (i = 0; i < quantity; i++) {
-
+				for (i = 0; i < quantity; i++)
+				{
 					inner_error = NULL;
 					success = (*output_handler) (self,
 					                             cattle_tape_get_current_value (tape),
-					                             self->priv->output_handler_data,
+					                             priv->output_handler_data,
 					                             &inner_error);
 					success &= (inner_error == NULL);
 
 					/* Stop at the first error, even if we should
 					 * output the content of the current cell more
 					 * than once */
-					if (G_UNLIKELY (success == FALSE)) {
-
+					if (G_UNLIKELY (success == FALSE))
+					{
 						/* If the signal handler has set the error,
 						 * propagate it; otherwise, raise a generic
 						 * I/O error */
-						if (inner_error == NULL) {
+						if (inner_error == NULL)
+						{
 							g_set_error_literal (error,
 							                     CATTLE_ERROR,
 							                     CATTLE_ERROR_IO,
 							                     "Unknown I/O error");
 						}
-						else {
+						else
+						{
 							g_propagate_error (error,
 							                   inner_error);
 						}
@@ -495,35 +457,38 @@ run (CattleInterpreter  *self,
 						return FALSE;
 					}
 				}
+
 				break;
 
 			case CATTLE_INSTRUCTION_DEBUG:
 
 				/* Dump the tape only if debugging is enabled in the
 				 * configuration */
-				if (cattle_configuration_get_debug_is_enabled (configuration)) {
-
+				if (cattle_configuration_get_debug_is_enabled (configuration))
+				{
 					quantity = cattle_instruction_get_quantity (current);
 
-					for (i = 0; i < quantity; i++) {
-
+					for (i = 0; i < quantity; i++)
+					{
 						inner_error = NULL;
 						success = (*debug_handler) (self,
-						                            self->priv->debug_handler_data,
+						                            priv->debug_handler_data,
 						                            &inner_error);
 						success &= (inner_error == NULL);
 
-						if (G_UNLIKELY (success == FALSE)) {
-
+						if (G_UNLIKELY (success == FALSE))
+						{
 							/* If the debug handler hasn't set the
 							 * error, raise a generic I/O error */
-							if (inner_error == NULL) {
+							if (inner_error == NULL)
+							{
 								g_set_error_literal (error,
 								                     CATTLE_ERROR,
 								                     CATTLE_ERROR_IO,
 								                     "Unknown I/O error");
 							}
-							else {
+							else
+							{
 								g_propagate_error (error,
 								                   inner_error);
 							}
@@ -534,11 +499,13 @@ run (CattleInterpreter  *self,
 						}
 					}
 				}
+
 				break;
 
 			case CATTLE_INSTRUCTION_NONE:
 
 				/* Do nothing */
+
 				break;
 		}
 
@@ -547,10 +514,12 @@ run (CattleInterpreter  *self,
 		current = next;
 	}
 
+	g_object_unref (first);
+
 	/* There are some instructions left on the stack: the brackets
 	 * are not balanced */
-	if (stack != NULL) {
-
+	if (stack != NULL)
+	{
 		g_set_error_literal (error,
 		                     CATTLE_ERROR,
 		                     CATTLE_ERROR_UNBALANCED_BRACKETS,
@@ -588,41 +557,48 @@ gboolean
 cattle_interpreter_run (CattleInterpreter  *self,
                         GError            **error)
 {
-	CattleProgram *program;
-	CattleInstruction *instruction;
-	gboolean success = FALSE;
+	CattleInterpreterPrivate *priv;
+	CattleProgram            *program;
+	CattleInstruction        *instruction;
+	gboolean                  success;
 
 	g_return_val_if_fail (CATTLE_IS_INTERPRETER (self), FALSE);
 	g_return_val_if_fail (error == NULL || *error == NULL, FALSE);
-	g_return_val_if_fail (!self->priv->disposed, FALSE);
 
-	self->priv->stack = NULL;
-	self->priv->had_input = FALSE;
+	priv = self->priv;
+	g_return_val_if_fail (!priv->disposed, FALSE);
 
-	program = self->priv->program;
-	instruction = cattle_program_get_instructions (program);
-	self->priv->input = cattle_program_get_input (program);
+	/* Setup program */
+	program = priv->program;
 
-	if (self->priv->input != NULL) {
-		self->priv->had_input = TRUE;
+	/* Setup input */
+	priv->input = cattle_program_get_input (program);
+
+	if (cattle_buffer_get_size (priv->input) > 0)
+	{
+		priv->had_input = TRUE;
 	}
-	self->priv->input_cursor = self->priv->input;
+	else
+	{
+		priv->had_input = FALSE;
+	}
+	priv->input_offset = 0;
+	priv->end_of_input_reached = FALSE;
 
+	/* Setup stack */
+	priv->stack = NULL;
+
+	/* Run program */
 	success = run (self, error);
 
-	if (self->priv->had_input == TRUE) {
-		g_free (self->priv->input);
-		self->priv->input = NULL;
-		self->priv->input_cursor = NULL;
+	/* Cleanup stack */
+	if (priv->stack != NULL)
+	{
+		g_slist_free (priv->stack);
 	}
-	self->priv->had_input = FALSE;
 
-	if (self->priv->stack != NULL) {
-		g_slist_free (self->priv->stack);
-	}
-	self->priv->stack = NULL;
-
-	g_object_unref (instruction);
+	/* Cleanup input */
+	g_object_unref (priv->input);
 
 	return success;
 }
@@ -630,43 +606,41 @@ cattle_interpreter_run (CattleInterpreter  *self,
 /**
  * cattle_interpreter_feed:
  * @interpreter: a #CattleInterpreter
- * @input: (allow-none): more input to be used by @interpreter, or %NULL
+ * @input: (transfer full): more input to be used by @interpreter
  *
  * Feed @interpreter with more input.
  *
  * This method is meant to be used inside an input handler assigned to
- * @interpreter; way is pointless, since the input is reset when
- * cattle_interpreter_run() is called.
+ * @interpreter; calling it in any other context is pointless, since the
+ * input is reset each time cattle_interpreter_run() is called.
  */
 void
 cattle_interpreter_feed (CattleInterpreter *self,
-                         const gchar       *input)
+                         CattleBuffer      *input)
 {
-	/* A return value of NULL from the signal
-	 * handler means the end of input was
-	 * reached. We set the appropriate flag */
-	if (input == NULL) {
+	CattleInterpreterPrivate *priv;
 
-		self->priv->input = NULL;
-		self->priv->input_cursor = NULL;
-		self->priv->end_of_input_reached = TRUE;
+	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
+	g_return_if_fail (CATTLE_IS_BUFFER (input));
 
-		return;
-	}
+	priv = self->priv;
 
-	if (self->priv->input != NULL) {
+	g_return_if_fail (!priv->disposed);
 
-		g_free (self->priv->input);
-	}
+	/* Release the previous input buffer */
+	g_object_unref (priv->input);
 
-	self->priv->input = g_strdup (input);
-	self->priv->input_cursor = self->priv->input;
+	priv->input = input;
+	g_object_ref (priv->input);
+
+	priv->input_offset = 0;
+	priv->end_of_input_reached = FALSE;
 }
 
 /**
  * cattle_interpreter_set_configuration:
  * @interpreter: a #CattleInterpreter
- * @configuration: configuration for @interpreter
+ * @configuration: (transfer full): configuration for @interpreter
  *
  * Set the configuration for @interpreter.
  *
@@ -678,16 +652,21 @@ void
 cattle_interpreter_set_configuration (CattleInterpreter   *self,
                                       CattleConfiguration *configuration)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
 	g_return_if_fail (CATTLE_IS_CONFIGURATION (configuration));
-	g_return_if_fail (!self->priv->disposed);
+
+	priv = self->priv;
+
+	g_return_if_fail (!priv->disposed);
 
 	/* Release the reference held on the previous
 	 * configuration */
-	g_object_unref (self->priv->configuration);
+	g_object_unref (priv->configuration);
 
-	self->priv->configuration = configuration;
-	g_object_ref (self->priv->configuration);
+	priv->configuration = configuration;
+	g_object_ref (priv->configuration);
 }
 
 /**
@@ -702,18 +681,23 @@ cattle_interpreter_set_configuration (CattleInterpreter   *self,
 CattleConfiguration*
 cattle_interpreter_get_configuration (CattleInterpreter *self)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_val_if_fail (CATTLE_IS_INTERPRETER (self), NULL);
-	g_return_val_if_fail (!self->priv->disposed, NULL);
 
-	g_object_ref (self->priv->configuration);
+	priv = self->priv;
 
-	return self->priv->configuration;
+	g_return_val_if_fail (!priv->disposed, NULL);
+
+	g_object_ref (priv->configuration);
+
+	return priv->configuration;
 }
 
 /**
  * cattle_interpreter_set_program:
  * @interpreter: a #CattleInterpreter
- * @program: a #CattleProgram
+ * @program: (transfer full): a #CattleProgram
  *
  * Set the program to be executed by @interpreter.
  *
@@ -725,16 +709,20 @@ void
 cattle_interpreter_set_program (CattleInterpreter *self,
                                 CattleProgram     *program)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
 	g_return_if_fail (CATTLE_IS_PROGRAM (program));
-	g_return_if_fail (!self->priv->disposed);
 
-	/* Release the reference held to the previous
-	 * program, if any */
-	g_object_unref (self->priv->program);
+	priv = self->priv;
 
-	self->priv->program = program;
-	g_object_ref (self->priv->program);
+	g_return_if_fail (!priv->disposed);
+
+	/* Release the reference held to the previous program */
+	g_object_unref (priv->program);
+
+	priv->program = program;
+	g_object_ref (priv->program);
 }
 
 /**
@@ -749,18 +737,23 @@ cattle_interpreter_set_program (CattleInterpreter *self,
 CattleProgram*
 cattle_interpreter_get_program (CattleInterpreter *self)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_val_if_fail (CATTLE_IS_INTERPRETER (self), NULL);
-	g_return_val_if_fail (!self->priv->disposed, NULL);
 
-	g_object_ref (self->priv->program);
+	priv = self->priv;
 
-	return self->priv->program;
+	g_return_val_if_fail (!priv->disposed, NULL);
+
+	g_object_ref (priv->program);
+
+	return priv->program;
 }
 
 /**
  * cattle_interpreter_set_tape:
  * @interpreter: a #CattleInterpreter
- * @tape: a #CattleTape
+ * @tape: (transfer full): a #CattleTape
  *
  * Set the memory tape used by @interpreter.
  */
@@ -768,15 +761,20 @@ void
 cattle_interpreter_set_tape (CattleInterpreter *self,
                              CattleTape        *tape)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
 	g_return_if_fail (CATTLE_IS_TAPE (tape));
-	g_return_if_fail (!self->priv->disposed);
+
+	priv = self->priv;
+
+	g_return_if_fail (!priv->disposed);
 
 	/* Release the reference held to the previous tape */
-	g_object_unref (self->priv->tape);
+	g_object_unref (priv->tape);
 
-	self->priv->tape = tape;
-	g_object_ref (self->priv->tape);
+	priv->tape = tape;
+	g_object_ref (priv->tape);
 }
 
 /**
@@ -791,12 +789,17 @@ cattle_interpreter_set_tape (CattleInterpreter *self,
 CattleTape*
 cattle_interpreter_get_tape (CattleInterpreter *self)
 {
+	CattleInterpreterPrivate *priv;
+
 	g_return_val_if_fail (CATTLE_IS_INTERPRETER (self), NULL);
-	g_return_val_if_fail (!self->priv->disposed, NULL);
 
-	g_object_ref (self->priv->tape);
+	priv = self->priv;
 
-	return self->priv->tape;
+	g_return_val_if_fail (!priv->disposed, NULL);
+
+	g_object_ref (priv->tape);
+
+	return priv->tape;
 }
 
 /**
@@ -827,11 +830,16 @@ cattle_interpreter_set_input_handler (CattleInterpreter  *self,
                                       CattleInputHandler  handler,
                                       gpointer            user_data)
 {
-	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
-	g_return_if_fail (!self->priv->disposed);
+	CattleInterpreterPrivate *priv;
 
-	self->priv->input_handler = handler;
-	self->priv->input_handler_data = user_data;
+	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
+
+	priv = self->priv;
+
+	g_return_if_fail (!priv->disposed);
+
+	priv->input_handler = handler;
+	priv->input_handler_data = user_data;
 }
 
 /**
@@ -863,11 +871,16 @@ cattle_interpreter_set_output_handler (CattleInterpreter   *self,
                                        CattleOutputHandler  handler,
                                        gpointer             user_data)
 {
-	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
-	g_return_if_fail (!self->priv->disposed);
+	CattleInterpreterPrivate *priv;
 
-	self->priv->output_handler = handler;
-	self->priv->output_handler_data = user_data;
+	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
+
+	priv = self->priv;
+
+	g_return_if_fail (!priv->disposed);
+
+	priv->output_handler = handler;
+	priv->output_handler_data = user_data;
 }
 
 /**
@@ -898,11 +911,16 @@ cattle_interpreter_set_debug_handler (CattleInterpreter  *self,
                                       CattleDebugHandler  handler,
                                       gpointer            user_data)
 {
-	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
-	g_return_if_fail (!self->priv->disposed);
+	CattleInterpreterPrivate *priv;
 
-	self->priv->debug_handler = handler;
-	self->priv->debug_handler_data = user_data;
+	g_return_if_fail (CATTLE_IS_INTERPRETER (self));
+
+	priv = self->priv;
+
+	g_return_if_fail (!priv->disposed);
+
+	priv->debug_handler = handler;
+	priv->debug_handler_data = user_data;
 }
 
 static gboolean
@@ -910,49 +928,46 @@ default_input_handler (CattleInterpreter  *self,
                        gpointer            data,
                        GError            **error)
 {
-	gchar *buffer;
+	CattleBuffer *input;
+	gint8         buffer[256];
+	gulong        size;
 
-	/* The buffer size is not really important: if the input cannot
-	 * fit a single buffer, the signal will be emitted again */
-	buffer = g_new0 (gchar, 256);
+	size = read (0, buffer, 256);
 
-	if (fgets (buffer, 256, stdin) == NULL) {
+	if (size < 0)
+	{
+		g_set_error_literal (error,
+				     CATTLE_ERROR,
+				     CATTLE_ERROR_IO,
+				     strerror (errno));
 
-		/* A NULL return value from fgets could either mean a read
-		 * error has occurred or the end of input has been reached.
-		 * In the latter case, we have to notify the interpreter */
-		if (G_LIKELY (feof (stdin))) {
-
-			cattle_interpreter_feed (self,
-			                         NULL);
-
-			return TRUE;
-		}
-		else {
-
-			g_set_error_literal (error,
-			                     CATTLE_ERROR,
-			                     CATTLE_ERROR_IO,
-			                     strerror (errno));
-			return FALSE;
-		}
+		return FALSE;
 	}
 
-	cattle_interpreter_feed (self,
-	                         buffer);
-	g_free (buffer);
+	/* Copy the contents to a buffer */
+	input = cattle_buffer_new (size);
+	cattle_buffer_set_contents (input, (gint8 *) buffer);
+
+	/* Feed the buffer to the interpreter */
+	cattle_interpreter_feed (self, input);
+
+	g_object_unref (input);
 
 	return TRUE;
 }
 
 static gboolean
 default_output_handler (CattleInterpreter  *self,
-                        gchar               output,
+                        gint8               output,
                         gpointer            data,
                         GError            **error)
 {
-	if (G_UNLIKELY (fputc (output, stdout) == EOF)) {
+	gint8 buffer[1];
 
+	buffer[0] = output;
+
+	if (G_UNLIKELY (write (1, buffer, 1) < 0))
+	{
 		g_set_error_literal (error,
 		                     CATTLE_ERROR,
 		                     CATTLE_ERROR_IO,
@@ -969,8 +984,10 @@ default_debug_handler (CattleInterpreter  *self,
                        GError            **error)
 {
 	CattleTape *tape;
-	gchar value;
-	gint steps;
+	gint8       buffer[4];
+	gint8       value;
+	gulong      size;
+	gulong      steps;
 
 	tape = cattle_interpreter_get_tape (self);
 
@@ -981,9 +998,10 @@ default_debug_handler (CattleInterpreter  *self,
 	 * it takes to get there. This value will be used later to mark
 	 * the current position */
 	steps = 0;
-	while (TRUE) {
-
-		if (cattle_tape_is_at_beginning (tape)) {
+	while (TRUE)
+	{
+		if (cattle_tape_is_at_beginning (tape))
+		{
 			break;
 		}
 
@@ -991,27 +1009,36 @@ default_debug_handler (CattleInterpreter  *self,
 		steps++;
 	}
 
-	if (G_UNLIKELY (fputc ('[', stderr) == EOF)) {
+	buffer[0] = '[';
+	if (G_UNLIKELY (write (2, buffer, 1) < 0))
+	{
 		g_set_error_literal (error,
 		                     CATTLE_ERROR,
 		                     CATTLE_ERROR_IO,
 		                     strerror (errno));
+
 		cattle_tape_pop_bookmark (tape);
 		g_object_unref (tape);
+
 		return FALSE;
 	}
 
-	while (TRUE) {
-
+	while (TRUE)
+	{
 		/* Mark the current position */
-		if (steps == 0) {
-			if (G_UNLIKELY (fputc ('<', stderr) == EOF)) {
+		if (steps == 0)
+		{
+			buffer[0] = '<';
+			if (G_UNLIKELY (write (2, buffer, 1) < 0))
+			{
 				g_set_error_literal (error,
 				                     CATTLE_ERROR,
 				                     CATTLE_ERROR_IO,
 				                     strerror (errno));
+
 				cattle_tape_pop_bookmark (tape);
 				g_object_unref (tape);
+
 				return FALSE;
 			}
 		}
@@ -1020,77 +1047,105 @@ default_debug_handler (CattleInterpreter  *self,
 
 		/* Print the value of the current cell if it is a graphical char;
 		 * otherwise, print its hexadecimal value */
-		if (g_ascii_isgraph (value)) {
-			if (G_UNLIKELY (fputc (value, stderr) == EOF)) {
+		if (g_ascii_isgraph ((gchar) value))
+		{
+			buffer[0] = value;
+			if (G_UNLIKELY (write (2, buffer, 1) < 0))
+			{
 				g_set_error_literal (error,
 				                     CATTLE_ERROR,
 				                     CATTLE_ERROR_IO,
 				                     strerror (errno));
+
 				cattle_tape_pop_bookmark (tape);
 				g_object_unref (tape);
+
 				return FALSE;
 			}
 		}
 		else {
-			if (G_UNLIKELY (fprintf (stderr, "0x%X", (gint) value) < 0)) {
+			size = snprintf ((gchar *) buffer, 4, "0x%X", value);
+
+			if (G_UNLIKELY (write (2, buffer, size) < 0)) {
 				g_set_error_literal (error,
 				                     CATTLE_ERROR,
 				                     CATTLE_ERROR_IO,
 				                     strerror (errno));
+
 				cattle_tape_pop_bookmark (tape);
 				g_object_unref (tape);
+
 				return FALSE;
 			}
 		}
 
 		/* Mark the current position */
-		if (steps == 0) {
-			if (G_UNLIKELY (fputc ('>', stderr) == EOF)) {
+		if (steps == 0)
+		{
+			buffer[0] = '>';
+			if (G_UNLIKELY (write (2, buffer, 1) < 0))
+			{
 				g_set_error_literal (error,
 				                     CATTLE_ERROR,
 				                     CATTLE_ERROR_IO,
 				                     strerror (errno));
+
 				cattle_tape_pop_bookmark (tape);
 				g_object_unref (tape);
+
 				return FALSE;
 			}
 		}
 
 		/* Exit after printing the last value */
-		if (cattle_tape_is_at_end (tape)) {
+		if (cattle_tape_is_at_end (tape))
+		{
 			break;
 		}
 
 		/* Print a space and move forward */
-		if (G_UNLIKELY (fputc (' ', stderr) == EOF)) {
+		buffer[0] = ' ';
+		if (G_UNLIKELY (write (2, buffer, 1) < 0))
+		{
 			g_set_error_literal (error,
 			                     CATTLE_ERROR,
 			                     CATTLE_ERROR_IO,
 			                     strerror (errno));
+
 			cattle_tape_pop_bookmark (tape);
 			g_object_unref (tape);
+
 			return FALSE;
 		}
 		cattle_tape_move_right (tape);
 		steps--;
 	}
 
-	if (G_UNLIKELY (fputc (']', stderr) == EOF)) {
+	buffer[0] = ']';
+	if (G_UNLIKELY (write (2, buffer, 1) < 0))
+	{
 		g_set_error_literal (error,
 		                     CATTLE_ERROR,
 		                     CATTLE_ERROR_IO,
 		                     strerror (errno));
+
 		cattle_tape_pop_bookmark (tape);
 		g_object_unref (tape);
+
 		return FALSE;
 	}
-	if (G_UNLIKELY (fputc ('\n', stderr) == EOF)) {
+
+	buffer[0] = '\n';
+	if (G_UNLIKELY (write (2, buffer, 1) < 0))
+	{
 		g_set_error_literal (error,
 		                     CATTLE_ERROR,
 		                     CATTLE_ERROR_IO,
 		                     strerror (errno));
+
 		cattle_tape_pop_bookmark (tape);
 		g_object_unref (tape);
+
 		return FALSE;
 	}
 
@@ -1098,6 +1153,7 @@ default_debug_handler (CattleInterpreter  *self,
 	cattle_tape_pop_bookmark (tape);
 
 	g_object_unref (tape);
+
 	return TRUE;
 }
 
@@ -1107,39 +1163,50 @@ cattle_interpreter_set_property (GObject      *object,
                                  const GValue *value,
                                  GParamSpec   *pspec)
 {
-	CattleInterpreter *self = CATTLE_INTERPRETER (object);
-	CattleConfiguration *t_conf;
-	CattleProgram *t_prog;
-	CattleTape *t_tape;
+	CattleInterpreter        *self;
+	CattleInterpreterPrivate *priv;
+	CattleConfiguration      *v_conf;
+	CattleProgram            *v_prog;
+	CattleTape               *v_tape;
 
-	if (G_LIKELY (!self->priv->disposed)) {
+	self = CATTLE_INTERPRETER (object);
+	priv = self->priv;
 
-		switch (property_id) {
+	g_return_if_fail (!priv->disposed);
 
-			case PROP_CONFIGURATION:
-				t_conf = g_value_get_object (value);
-				cattle_interpreter_set_configuration (self,
-				                                      t_conf);
-				break;
+	switch (property_id)
+	{
+		case PROP_CONFIGURATION:
 
-			case PROP_PROGRAM:
-				t_prog = g_value_get_object (value);
-				cattle_interpreter_set_program (self,
-				                                t_prog);
-				break;
+			v_conf = g_value_get_object (value);
+			cattle_interpreter_set_configuration (self,
+							      v_conf);
 
-			case PROP_TAPE:
-				t_tape = g_value_get_object (value);
-				cattle_interpreter_set_tape (self,
-				                             t_tape);
-				break;
+			break;
 
-			default:
-				G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-				                                   property_id,
-				                                   pspec);
-				break;
-		}
+		case PROP_PROGRAM:
+
+			v_prog = g_value_get_object (value);
+			cattle_interpreter_set_program (self,
+							v_prog);
+
+			break;
+
+		case PROP_TAPE:
+
+			v_tape = g_value_get_object (value);
+			cattle_interpreter_set_tape (self,
+						     v_tape);
+
+			break;
+
+		default:
+
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+							   property_id,
+							   pspec);
+
+			break;
 	}
 }
 
@@ -1149,42 +1216,55 @@ cattle_interpreter_get_property (GObject    *object,
                                  GValue     *value,
                                  GParamSpec *pspec)
 {
-	CattleInterpreter *self = CATTLE_INTERPRETER (object);
-	CattleConfiguration *t_conf;
-	CattleProgram *t_prog;
-	CattleTape *t_tape;
+	CattleInterpreter        *self;
+	CattleInterpreterPrivate *priv;
+	CattleConfiguration      *v_conf;
+	CattleProgram            *v_prog;
+	CattleTape               *v_tape;
 
-	if (G_LIKELY (!self->priv->disposed)) {
+	self = CATTLE_INTERPRETER (object);
+	priv = self->priv;
 
-		switch (property_id) {
+	g_return_if_fail (!priv->disposed);
 
-			case PROP_CONFIGURATION:
-				t_conf = cattle_interpreter_get_configuration (self);
-				g_value_set_object (value, t_conf);
-				break;
+	switch (property_id)
+	{
+		case PROP_CONFIGURATION:
 
-			case PROP_PROGRAM:
-				t_prog = cattle_interpreter_get_program (self);
-				g_value_set_object (value, t_prog);
-				break;
+			v_conf = cattle_interpreter_get_configuration (self);
+			g_value_set_object (value, v_conf);
 
-			case PROP_TAPE:
-				t_tape = cattle_interpreter_get_tape (self);
-				g_value_set_object (value, t_tape);
-				break;
+			break;
 
-			default:
-				G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
-				break;
-		}
+		case PROP_PROGRAM:
+
+			v_prog = cattle_interpreter_get_program (self);
+			g_value_set_object (value, v_prog);
+
+			break;
+
+		case PROP_TAPE:
+
+			v_tape = cattle_interpreter_get_tape (self);
+			g_value_set_object (value, v_tape);
+
+			break;
+
+		default:
+
+			G_OBJECT_WARN_INVALID_PROPERTY_ID (object, property_id, pspec);
+
+			break;
 	}
 }
 
 static void
 cattle_interpreter_class_init (CattleInterpreterClass *self)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (self);
-	GParamSpec *pspec;
+	GObjectClass *object_class;
+	GParamSpec   *pspec;
+
+	object_class = G_OBJECT_CLASS (self);
 
 	object_class->set_property = cattle_interpreter_set_property;
 	object_class->get_property = cattle_interpreter_get_property;
