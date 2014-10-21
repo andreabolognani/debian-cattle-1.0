@@ -8,11 +8,11 @@ Description: Tweak build system
  shipped in the tarball.
 Forwarded: not-needed
 Author: Andrea Bolognani <eof@kiyuko.org>
-Last-Update: 2012-05-06
+Last-Update: 2014-10-21
 Index: cattle-1.0.git/Makefile.am
 ===================================================================
---- cattle-1.0.git.orig/Makefile.am	2012-05-06 18:49:02.243098936 +0200
-+++ cattle-1.0.git/Makefile.am	2012-05-06 18:50:16.251103111 +0200
+--- cattle-1.0.git.orig/Makefile.am	2014-10-21 22:43:45.000000000 +0200
++++ cattle-1.0.git/Makefile.am	2014-10-21 22:46:19.447741291 +0200
 @@ -2,7 +2,6 @@
  
  SUBDIRS = \
@@ -29,7 +29,7 @@ Index: cattle-1.0.git/Makefile.am
  	$(NULL)
  
  DISTCHECK_CONFIGURE_FLAGS = \
- 	--enable-instrospection \
+ 	--enable-introspection=yes \
  	--enable-gtk-doc \
  	$(NULL)
 -
@@ -57,8 +57,8 @@ Index: cattle-1.0.git/Makefile.am
 -.PHONY: ChangeLog
 Index: cattle-1.0.git/configure.ac
 ===================================================================
---- cattle-1.0.git.orig/configure.ac	2012-05-06 18:49:02.247098937 +0200
-+++ cattle-1.0.git/configure.ac	2012-05-06 18:49:56.183101976 +0200
+--- cattle-1.0.git.orig/configure.ac	2014-10-21 22:43:45.000000000 +0200
++++ cattle-1.0.git/configure.ac	2014-10-21 22:45:45.027742863 +0200
 @@ -92,7 +92,6 @@
                   docs/Makefile
                   docs/reference/Makefile
