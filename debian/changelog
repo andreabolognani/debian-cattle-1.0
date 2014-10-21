@@ -1,3 +1,9 @@
+cattle-1.0 (1.2.0-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Tue, 21 Oct 2014 22:49:34 +0200
+
 cattle-1.0 (1.0.1-1) experimental; urgency=low
 
   * Initial release. (Closes: #617304)
