@@ -10,12 +10,14 @@
 override_dh_auto_configure:
 	@( \
 		gtkdocize --flavour no-tmpl; \
-		autoreconf --force \
-		           --install \
-		           --symlink; \
+		libtoolize -f; \
+		aclocal; \
+		autoheader -f; \
+		autoconf -f; \
+		automake -f -a --foreign; \
 		dh_auto_configure -- \
 		                  --disable-silent-rules \
-		                  --enable-introspection \
+		                  --enable-introspection=yes \
 		                  --enable-gtk-doc; \
 	)
 
