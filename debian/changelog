@@ -1,8 +1,10 @@
 cattle-1.0 (1.2.0-1) unstable; urgency=low
 
   * New upstream release.
+  * Versioned Depends are no longer needed.
+    - Closes: #734478 (please drop versioned Depends on pkg-config)
 
- -- Andrea Bolognani <eof@kiyuko.org>  Tue, 21 Oct 2014 22:49:34 +0200
+ -- Andrea Bolognani <eof@kiyuko.org>  Tue, 21 Oct 2014 23:24:59 +0200
 
 cattle-1.0 (1.0.1-1) experimental; urgency=low
 
