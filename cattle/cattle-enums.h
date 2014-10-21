@@ -18,8 +18,8 @@ GType cattle_instruction_value_get_type (void) G_GNUC_CONST;
 #define CATTLE_TYPE_INSTRUCTION_VALUE (cattle_instruction_value_get_type())
 
 /* enumerations from "cattle-configuration.h" */
-GType cattle_on_eof_action_get_type (void) G_GNUC_CONST;
-#define CATTLE_TYPE_ON_EOF_ACTION (cattle_on_eof_action_get_type())
+GType cattle_end_of_input_action_get_type (void) G_GNUC_CONST;
+#define CATTLE_TYPE_END_OF_INPUT_ACTION (cattle_end_of_input_action_get_type())
 
 G_END_DECLS
 

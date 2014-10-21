@@ -1,5 +1,5 @@
-/* Cattle -- Brainfuck language toolkit
- * Copyright (C) 2008-2011  Andrea Bolognani <eof@kiyuko.org>
+/* Cattle - Brainfuck language toolkit
+ * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,6 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-	CATTLE_ERROR_BAD_UTF8,
 	CATTLE_ERROR_IO,
 	CATTLE_ERROR_UNBALANCED_BRACKETS,
 	CATTLE_ERROR_INPUT_OUT_OF_RANGE

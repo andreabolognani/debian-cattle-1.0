@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Cattle Reference Manual: CattleBuffer</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<link rel="home" href="index.html" title="Cattle Reference Manual">
+<link rel="up" href="ch03.html" title="Objects">
+<link rel="prev" href="ch03.html" title="Objects">
+<link rel="next" href="CattleTape.html" title="CattleTape">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#CattleBuffer.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#CattleBuffer.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#CattleBuffer.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="ch03.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="CattleTape.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="CattleBuffer"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="CattleBuffer.top_of_page"></a>CattleBuffer</span></h2>
+<p>CattleBuffer — Memory buffer</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="CattleBuffer.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="returnvalue">CattleBuffer</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-new" title="cattle_buffer_new ()">cattle_buffer_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-set-contents" title="cattle_buffer_set_contents ()">cattle_buffer_set_contents</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-set-contents-full" title="cattle_buffer_set_contents_full ()">cattle_buffer_set_contents_full</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-set-value" title="cattle_buffer_set_value ()">cattle_buffer_set_value</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">gint8</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-get-value" title="cattle_buffer_get_value ()">cattle_buffer_get_value</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="returnvalue">gulong</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="CattleBuffer.html#cattle-buffer-get-size" title="cattle_buffer_get_size ()">cattle_buffer_get_size</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody><tr>
+<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a></td>
+<td class="property_name"><a class="link" href="CattleBuffer.html#CattleBuffer--size" title="The “size” property">size</a></td>
+<td class="property_flags">Read / Write / Construct Only</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="CattleBuffer.html#CattleBuffer-struct" title="struct CattleBuffer">CattleBuffer</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">╰──</span> CattleBuffer
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;cattle/cattle.h&gt;
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.description"></a><h2>Description</h2>
+<p>A <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> represents a memory buffer.</p>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="cattle-buffer-new"></a><h3>cattle_buffer_new ()</h3>
+<pre class="programlisting"><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="returnvalue">CattleBuffer</span></a> *
+cattle_buffer_new (<em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> size</code></em>);</pre>
+<p>Create and initialize a new memory buffer.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.2.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>size</p></td>
+<td class="parameter_description"><p>size of the buffer</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.2.9.2.6"></a><h4>Returns</h4>
+<p> a new <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-buffer-set-contents"></a><h3>cattle_buffer_set_contents ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+cattle_buffer_set_contents (<em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>,
+                            <em class="parameter"><code><span class="type">gint8</span> *contents</code></em>);</pre>
+<p>Set the contents of a memory buffer.</p>
+<p>The size of <em class="parameter"><code>contents</code></em>
+ is assumed to be the same as the size of <em class="parameter"><code>buffer</code></em>
+.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.3.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>contents</p></td>
+<td class="parameter_description"><p> data to copy inside the memory buffer. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-buffer-set-contents-full"></a><h3>cattle_buffer_set_contents_full ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+cattle_buffer_set_contents_full (<em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>,
+                                 <em class="parameter"><code><span class="type">gint8</span> *contents</code></em>,
+                                 <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> size</code></em>);</pre>
+<p>Set the contents of the memory buffer.</p>
+<p>This method exists mainly for bindings; <a class="link" href="CattleBuffer.html#cattle-buffer-set-contents" title="cattle_buffer_set_contents ()"><code class="function">cattle_buffer_set_contents()</code></a> is
+more convenient when writing C code.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.4.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>contents</p></td>
+<td class="parameter_description"><p> data to copy inside the memory buffer. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>][<acronym title="Parameter points to an array of items."><span class="acronym">array</span></acronym> length=size]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>size</p></td>
+<td class="parameter_description"><p>size of <em class="parameter"><code>contents</code></em>
+</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-buffer-set-value"></a><h3>cattle_buffer_set_value ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+cattle_buffer_set_value (<em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>,
+                         <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> position</code></em>,
+                         <em class="parameter"><code><span class="type">gint8</span> value</code></em>);</pre>
+<p>Set the value of a specific byte inside the memory buffer.</p>
+<p>The value of <em class="parameter"><code>position</code></em>
+ must be smaller than the size of the
+memory buffer, as returned by <a class="link" href="CattleBuffer.html#cattle-buffer-get-size" title="cattle_buffer_get_size ()"><code class="function">cattle_buffer_get_size()</code></a>.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.5.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>position</p></td>
+<td class="parameter_description"><p>offset inside the memory buffer</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>value</p></td>
+<td class="parameter_description"><p>new value</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-buffer-get-value"></a><h3>cattle_buffer_get_value ()</h3>
+<pre class="programlisting"><span class="returnvalue">gint8</span>
+cattle_buffer_get_value (<em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>,
+                         <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a> position</code></em>);</pre>
+<p>Get the value of a specific byte inside the memory buffer.</p>
+<p>The value of <em class="parameter"><code>position</code></em>
+ must be smaller than the size of the
+memory buffer, as returned by <a class="link" href="CattleBuffer.html#cattle-buffer-get-size" title="cattle_buffer_get_size ()"><code class="function">cattle_buffer_get_size()</code></a>.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.6.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>position</p></td>
+<td class="parameter_description"><p>offset inside the memory buffer</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.2.9.6.7"></a><h4>Returns</h4>
+<p> the value of the selected byte.</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-buffer-get-size"></a><h3>cattle_buffer_get_size ()</h3>
+<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="returnvalue">gulong</span></a>
+cattle_buffer_get_size (<em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>);</pre>
+<p>Get the size of the memory buffer.</p>
+<div class="refsect3">
+<a name="id-1.4.2.9.7.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.2.9.7.6"></a><h4>Returns</h4>
+<p> the size of the memory buffer</p>
+<p></p>
+</div>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="CattleBuffer-struct"></a><h3>struct CattleBuffer</h3>
+<pre class="programlisting">struct CattleBuffer;</pre>
+<p>Opaque data structure representing a memory buffer. It should never
+be accessed directly; use the methods below instead.</p>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleBuffer.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="CattleBuffer--size"></a><h3>The <code class="literal">“size”</code> property</h3>
+<pre class="programlisting">  “size”                     <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gulong"><span class="type">gulong</span></a></pre>
+<p>Size of the memory buffer.</p>
+<p>Flags: Read / Write / Construct Only</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.21</div>
+</body>
+</html>

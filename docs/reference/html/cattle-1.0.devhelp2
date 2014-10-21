@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Cattle Reference Manual" link="index.html" author="" name="cattle-1.0" version="2" language="c">
+  <chapters>
+    <sub name="Overview" link="ch01.html"/>
+    <sub name="Core Features" link="ch02.html">
+      <sub name="Version Information" link="cattle-1.0-Version-Information.html"/>
+      <sub name="Constants" link="cattle-1.0-Constants.html"/>
+      <sub name="Error Types" link="cattle-1.0-Error-Types.html"/>
+    </sub>
+    <sub name="Objects" link="ch03.html">
+      <sub name="CattleBuffer" link="CattleBuffer.html"/>
+      <sub name="CattleTape" link="CattleTape.html"/>
+      <sub name="CattleInstruction" link="CattleInstruction.html"/>
+      <sub name="CattleProgram" link="CattleProgram.html"/>
+      <sub name="CattleConfiguration" link="CattleConfiguration.html"/>
+      <sub name="CattleInterpreter" link="CattleInterpreter.html"/>
+    </sub>
+    <sub name="Miscellaneous Topics" link="ch04.html">
+      <sub name="I/O Handling" link="io-handling.html"/>
+    </sub>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <keyword type="macro" name="CATTLE_MAJOR_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MAJOR-VERSION:CAPS"/>
+    <keyword type="macro" name="CATTLE_MINOR_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MINOR-VERSION:CAPS"/>
+    <keyword type="macro" name="CATTLE_MICRO_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MICRO-VERSION:CAPS"/>
+    <keyword type="macro" name="CATTLE_CHECK_VERSION()" link="cattle-1.0-Version-Information.html#CATTLE-CHECK-VERSION:CAPS"/>
+    <keyword type="function" name="cattle_check_version ()" link="cattle-1.0-Version-Information.html#cattle-check-version"/>
+    <keyword type="variable" name="cattle_major_version" link="cattle-1.0-Version-Information.html#cattle-major-version"/>
+    <keyword type="variable" name="cattle_minor_version" link="cattle-1.0-Version-Information.html#cattle-minor-version"/>
+    <keyword type="variable" name="cattle_micro_version" link="cattle-1.0-Version-Information.html#cattle-micro-version"/>
+    <keyword type="variable" name="CATTLE_EOF" link="cattle-1.0-Constants.html#CATTLE-EOF:CAPS"/>
+    <keyword type="enum" name="enum CattleError" link="cattle-1.0-Error-Types.html#CattleError"/>
+    <keyword type="macro" name="CATTLE_ERROR" link="cattle-1.0-Error-Types.html#CATTLE-ERROR:CAPS"/>
+    <keyword type="function" name="cattle_buffer_new ()" link="CattleBuffer.html#cattle-buffer-new"/>
+    <keyword type="function" name="cattle_buffer_set_contents ()" link="CattleBuffer.html#cattle-buffer-set-contents"/>
+    <keyword type="function" name="cattle_buffer_set_contents_full ()" link="CattleBuffer.html#cattle-buffer-set-contents-full"/>
+    <keyword type="function" name="cattle_buffer_set_value ()" link="CattleBuffer.html#cattle-buffer-set-value"/>
+    <keyword type="function" name="cattle_buffer_get_value ()" link="CattleBuffer.html#cattle-buffer-get-value"/>
+    <keyword type="function" name="cattle_buffer_get_size ()" link="CattleBuffer.html#cattle-buffer-get-size"/>
+    <keyword type="struct" name="struct CattleBuffer" link="CattleBuffer.html#CattleBuffer-struct"/>
+    <keyword type="property" name="The “size” property" link="CattleBuffer.html#CattleBuffer--size"/>
+    <keyword type="function" name="cattle_tape_new ()" link="CattleTape.html#cattle-tape-new"/>
+    <keyword type="function" name="cattle_tape_set_current_value ()" link="CattleTape.html#cattle-tape-set-current-value"/>
+    <keyword type="function" name="cattle_tape_get_current_value ()" link="CattleTape.html#cattle-tape-get-current-value"/>
+    <keyword type="function" name="cattle_tape_increase_current_value ()" link="CattleTape.html#cattle-tape-increase-current-value"/>
+    <keyword type="function" name="cattle_tape_increase_current_value_by ()" link="CattleTape.html#cattle-tape-increase-current-value-by"/>
+    <keyword type="function" name="cattle_tape_decrease_current_value ()" link="CattleTape.html#cattle-tape-decrease-current-value"/>
+    <keyword type="function" name="cattle_tape_decrease_current_value_by ()" link="CattleTape.html#cattle-tape-decrease-current-value-by"/>
+    <keyword type="function" name="cattle_tape_move_left ()" link="CattleTape.html#cattle-tape-move-left"/>
+    <keyword type="function" name="cattle_tape_move_left_by ()" link="CattleTape.html#cattle-tape-move-left-by"/>
+    <keyword type="function" name="cattle_tape_move_right ()" link="CattleTape.html#cattle-tape-move-right"/>
+    <keyword type="function" name="cattle_tape_move_right_by ()" link="CattleTape.html#cattle-tape-move-right-by"/>
+    <keyword type="function" name="cattle_tape_is_at_beginning ()" link="CattleTape.html#cattle-tape-is-at-beginning"/>
+    <keyword type="function" name="cattle_tape_is_at_end ()" link="CattleTape.html#cattle-tape-is-at-end"/>
+    <keyword type="function" name="cattle_tape_push_bookmark ()" link="CattleTape.html#cattle-tape-push-bookmark"/>
+    <keyword type="function" name="cattle_tape_pop_bookmark ()" link="CattleTape.html#cattle-tape-pop-bookmark"/>
+    <keyword type="struct" name="struct CattleTape" link="CattleTape.html#CattleTape-struct"/>
+    <keyword type="property" name="The “current-value” property" link="CattleTape.html#CattleTape--current-value"/>
+    <keyword type="function" name="cattle_instruction_new ()" link="CattleInstruction.html#cattle-instruction-new"/>
+    <keyword type="function" name="cattle_instruction_set_value ()" link="CattleInstruction.html#cattle-instruction-set-value"/>
+    <keyword type="function" name="cattle_instruction_get_value ()" link="CattleInstruction.html#cattle-instruction-get-value"/>
+    <keyword type="function" name="cattle_instruction_set_quantity ()" link="CattleInstruction.html#cattle-instruction-set-quantity"/>
+    <keyword type="function" name="cattle_instruction_get_quantity ()" link="CattleInstruction.html#cattle-instruction-get-quantity"/>
+    <keyword type="function" name="cattle_instruction_set_next ()" link="CattleInstruction.html#cattle-instruction-set-next"/>
+    <keyword type="function" name="cattle_instruction_get_next ()" link="CattleInstruction.html#cattle-instruction-get-next"/>
+    <keyword type="function" name="cattle_instruction_set_loop ()" link="CattleInstruction.html#cattle-instruction-set-loop"/>
+    <keyword type="function" name="cattle_instruction_get_loop ()" link="CattleInstruction.html#cattle-instruction-get-loop"/>
+    <keyword type="enum" name="enum CattleInstructionValue" link="CattleInstruction.html#CattleInstructionValue"/>
+    <keyword type="struct" name="struct CattleInstruction" link="CattleInstruction.html#CattleInstruction-struct"/>
+    <keyword type="property" name="The “loop” property" link="CattleInstruction.html#CattleInstruction--loop"/>
+    <keyword type="property" name="The “next” property" link="CattleInstruction.html#CattleInstruction--next"/>
+    <keyword type="property" name="The “quantity” property" link="CattleInstruction.html#CattleInstruction--quantity"/>
+    <keyword type="property" name="The “value” property" link="CattleInstruction.html#CattleInstruction--value"/>
+    <keyword type="function" name="cattle_program_new ()" link="CattleProgram.html#cattle-program-new"/>
+    <keyword type="function" name="cattle_program_load ()" link="CattleProgram.html#cattle-program-load"/>
+    <keyword type="function" name="cattle_program_set_instructions ()" link="CattleProgram.html#cattle-program-set-instructions"/>
+    <keyword type="function" name="cattle_program_get_instructions ()" link="CattleProgram.html#cattle-program-get-instructions"/>
+    <keyword type="function" name="cattle_program_set_input ()" link="CattleProgram.html#cattle-program-set-input"/>
+    <keyword type="function" name="cattle_program_get_input ()" link="CattleProgram.html#cattle-program-get-input"/>
+    <keyword type="struct" name="struct CattleProgram" link="CattleProgram.html#CattleProgram-struct"/>
+    <keyword type="property" name="The “input” property" link="CattleProgram.html#CattleProgram--input"/>
+    <keyword type="property" name="The “instructions” property" link="CattleProgram.html#CattleProgram--instructions"/>
+    <keyword type="function" name="cattle_configuration_new ()" link="CattleConfiguration.html#cattle-configuration-new"/>
+    <keyword type="function" name="cattle_configuration_set_end_of_input_action ()" link="CattleConfiguration.html#cattle-configuration-set-end-of-input-action"/>
+    <keyword type="function" name="cattle_configuration_get_end_of_input_action ()" link="CattleConfiguration.html#cattle-configuration-get-end-of-input-action"/>
+    <keyword type="function" name="cattle_configuration_set_debug_is_enabled ()" link="CattleConfiguration.html#cattle-configuration-set-debug-is-enabled"/>
+    <keyword type="function" name="cattle_configuration_get_debug_is_enabled ()" link="CattleConfiguration.html#cattle-configuration-get-debug-is-enabled"/>
+    <keyword type="enum" name="enum CattleEndOfInputAction" link="CattleConfiguration.html#CattleEndOfInputAction"/>
+    <keyword type="struct" name="struct CattleConfiguration" link="CattleConfiguration.html#CattleConfiguration-struct"/>
+    <keyword type="property" name="The “debug-is-enabled” property" link="CattleConfiguration.html#CattleConfiguration--debug-is-enabled"/>
+    <keyword type="property" name="The “end-of-input-action” property" link="CattleConfiguration.html#CattleConfiguration--end-of-input-action"/>
+    <keyword type="function" name="cattle_interpreter_new ()" link="CattleInterpreter.html#cattle-interpreter-new"/>
+    <keyword type="function" name="cattle_interpreter_run ()" link="CattleInterpreter.html#cattle-interpreter-run"/>
+    <keyword type="function" name="cattle_interpreter_feed ()" link="CattleInterpreter.html#cattle-interpreter-feed"/>
+    <keyword type="function" name="cattle_interpreter_set_configuration ()" link="CattleInterpreter.html#cattle-interpreter-set-configuration"/>
+    <keyword type="function" name="cattle_interpreter_get_configuration ()" link="CattleInterpreter.html#cattle-interpreter-get-configuration"/>
+    <keyword type="function" name="cattle_interpreter_set_program ()" link="CattleInterpreter.html#cattle-interpreter-set-program"/>
+    <keyword type="function" name="cattle_interpreter_get_program ()" link="CattleInterpreter.html#cattle-interpreter-get-program"/>
+    <keyword type="function" name="cattle_interpreter_set_tape ()" link="CattleInterpreter.html#cattle-interpreter-set-tape"/>
+    <keyword type="function" name="cattle_interpreter_get_tape ()" link="CattleInterpreter.html#cattle-interpreter-get-tape"/>
+    <keyword type="function" name="CattleInputHandler ()" link="CattleInterpreter.html#CattleInputHandler"/>
+    <keyword type="function" name="cattle_interpreter_set_input_handler ()" link="CattleInterpreter.html#cattle-interpreter-set-input-handler"/>
+    <keyword type="function" name="CattleOutputHandler ()" link="CattleInterpreter.html#CattleOutputHandler"/>
+    <keyword type="function" name="cattle_interpreter_set_output_handler ()" link="CattleInterpreter.html#cattle-interpreter-set-output-handler"/>
+    <keyword type="function" name="CattleDebugHandler ()" link="CattleInterpreter.html#CattleDebugHandler"/>
+    <keyword type="function" name="cattle_interpreter_set_debug_handler ()" link="CattleInterpreter.html#cattle-interpreter-set-debug-handler"/>
+    <keyword type="struct" name="struct CattleInterpreter" link="CattleInterpreter.html#CattleInterpreter-struct"/>
+    <keyword type="property" name="The “configuration” property" link="CattleInterpreter.html#CattleInterpreter--configuration"/>
+    <keyword type="property" name="The “program” property" link="CattleInterpreter.html#CattleInterpreter--program"/>
+    <keyword type="property" name="The “tape” property" link="CattleInterpreter.html#CattleInterpreter--tape"/>
+    <keyword type="" name="I/O Basics" link="io-handling.html#id-1.5.2.3"/>
+    <keyword type="" name="Error reporting" link="io-handling.html#id-1.5.2.4"/>
+    <keyword type="" name="Output handler" link="io-handling.html#id-1.5.2.5"/>
+    <keyword type="" name="Input handler" link="io-handling.html#id-1.5.2.6"/>
+    <keyword type="" name="Debug" link="io-handling.html#id-1.5.2.7"/>
+  </functions>
+</book>

@@ -1,5 +1,5 @@
 /* common -- Useful, general purpose routines
- * Copyright (C) 2008-2011  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -23,11 +23,12 @@
 #define __COMMON_H__
 
 #include <glib.h>
+#include <cattle/cattle.h>
 
 G_BEGIN_DECLS
 
-gchar* read_file_contents (const gchar  *path,
-                           GError      **error);
+CattleBuffer* read_file_contents (const gchar  *path,
+                                  GError      **error);
 
 G_END_DECLS
 

@@ -2,34 +2,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>CattleProgram</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<title>Cattle Reference Manual: CattleProgram</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
 <link rel="home" href="index.html" title="Cattle Reference Manual">
 <link rel="up" href="ch03.html" title="Objects">
-<link rel="prev" href="CattleInterpreter.html" title="CattleInterpreter">
-<link rel="next" href="CattleTape.html" title="CattleTape">
-<meta name="generator" content="GTK-Doc V1.17 (XML mode)">
+<link rel="prev" href="CattleInstruction.html" title="CattleInstruction">
+<link rel="next" href="CattleConfiguration.html" title="CattleConfiguration">
+<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
-<tr valign="middle">
-<td><a accesskey="p" href="CattleInterpreter.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
-<td><a accesskey="u" href="ch03.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
-<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
-<th width="100%" align="center">Cattle Reference Manual</th>
-<td><a accesskey="n" href="CattleTape.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
-</tr>
-<tr><td colspan="5" class="shortcuts">
-<a href="#CattleProgram.synopsis" class="shortcut">Top</a>
-                   | 
-                  <a href="#CattleProgram.description" class="shortcut">Description</a>
-                   | 
-                  <a href="#CattleProgram.object-hierarchy" class="shortcut">Object Hierarchy</a>
-                   | 
-                  <a href="#CattleProgram.properties" class="shortcut">Properties</a>
-</td></tr>
-</table>
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#CattleProgram.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#CattleProgram.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#CattleProgram.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="ch03.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="CattleInstruction.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="CattleConfiguration.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
 <div class="refentry">
 <a name="CattleProgram"></a><div class="titlepage"></div>
 <div class="refnamediv"><table width="100%"><tr>
@@ -37,284 +31,367 @@
 <h2><span class="refentrytitle"><a name="CattleProgram.top_of_page"></a>CattleProgram</span></h2>
 <p>CattleProgram — Brainfuck program (and possibly its input)</p>
 </td>
-<td valign="top" align="right"></td>
+<td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
-<div class="refsynopsisdiv">
-<a name="CattleProgram.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">
-#include &lt;cattle/cattle.h&gt;
-
-struct              <a class="link" href="CattleProgram.html#CattleProgram-struct" title="struct CattleProgram">CattleProgram</a>;
-<a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *      <a class="link" href="CattleProgram.html#cattle-program-new" title="cattle_program_new ()">cattle_program_new</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()">cattle_program_load</a>                 (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *string</code></em>,
-                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="CattleProgram.html#cattle-program-set-instructions" title="cattle_program_set_instructions ()">cattle_program_set_instructions</a>     (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a> *instructions</code></em>);
-<a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="returnvalue">CattleInstruction</span></a> *  <a class="link" href="CattleProgram.html#cattle-program-get-instructions" title="cattle_program_get_instructions ()">cattle_program_get_instructions</a>    (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);
-<span class="returnvalue">void</span>                <a class="link" href="CattleProgram.html#cattle-program-set-input" title="cattle_program_set_input ()">cattle_program_set_input</a>            (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *input</code></em>);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *              <a class="link" href="CattleProgram.html#cattle-program-get-input" title="cattle_program_get_input ()">cattle_program_get_input</a>           (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);
-</pre>
-</div>
 <div class="refsect1">
-<a name="CattleProgram.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="synopsis">
-  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
-   +----CattleProgram
-</pre>
+<a name="CattleProgram.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-new" title="cattle_program_new ()">cattle_program_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()">cattle_program_load</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-set-instructions" title="cattle_program_set_instructions ()">cattle_program_set_instructions</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="returnvalue">CattleInstruction</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-get-instructions" title="cattle_program_get_instructions ()">cattle_program_get_instructions</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-set-input" title="cattle_program_set_input ()">cattle_program_set_input</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="returnvalue">CattleBuffer</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="CattleProgram.html#cattle-program-get-input" title="cattle_program_get_input ()">cattle_program_get_input</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
 </div>
 <div class="refsect1">
 <a name="CattleProgram.properties"></a><h2>Properties</h2>
-<pre class="synopsis">
-  "<a class="link" href="CattleProgram.html#CattleProgram--input" title='The "input" property'>input</a>"                    <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write
-  "<a class="link" href="CattleProgram.html#CattleProgram--instructions" title='The "instructions" property'>instructions</a>"             <a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a>*    : Read / Write
+<div class="informaltable"><table border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="property_type">
+<a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *</td>
+<td class="property_name"><a class="link" href="CattleProgram.html#CattleProgram--input" title="The “input” property">input</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a> *</td>
+<td class="property_name"><a class="link" href="CattleProgram.html#CattleProgram--instructions" title="The “instructions” property">instructions</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="CattleProgram.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody><tr>
+<td class="datatype_keyword">struct</td>
+<td class="function_name"><a class="link" href="CattleProgram.html#CattleProgram-struct" title="struct CattleProgram">CattleProgram</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="CattleProgram.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+    <span class="lineart">╰──</span> CattleProgram
+</pre>
+</div>
+<div class="refsect1">
+<a name="CattleProgram.includes"></a><h2>Includes</h2>
+<pre class="synopsis">#include &lt;cattle/cattle.h&gt;
 </pre>
 </div>
 <div class="refsect1">
 <a name="CattleProgram.description"></a><h2>Description</h2>
-<p>
-A <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> represents a complete Brainfuck program, that is,
-the instructions to be executed and possibly its input.
-</p>
-<p>
-The input for a program can optionally be specified in the source
+<p>A <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> represents a complete Brainfuck program, that is,
+the instructions to be executed and possibly its input.</p>
+<p>The input for a program can optionally be specified in the source
 file, and it's separated from the program code by a bang (!)
-symbol. For example, given the following input:
-</p>
-<p>
-</p>
+symbol. For example, given the following input:</p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
       <tr>
         <td class="listing_lines" align="right"><pre>1</pre></td>
-        <td class="listing_code"><pre class="programlisting"><span class="symbol">,+.!</span>sometext</pre></td>
+        <td class="listing_code"><pre class="programlisting"><span class="gtkdoc opt">,+.!</span>sometext</pre></td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<p>
-</p>
-<p>
-the program's code is ",+." while the program's input is
-"sometext".
-</p>
-<p>
-Any Brainfuck instruction after the bang symbol is considered part
+<p></p>
+<p>the program's code is ",+." while the program's input is
+"sometext".</p>
+<p>Any Brainfuck instruction after the bang symbol is considered part
 of the input, and as such is not executed. Subsequent bang symbols
-are also considered part of the input.
-</p>
+are also considered part of the input.</p>
 </div>
 <div class="refsect1">
-<a name="CattleProgram.details"></a><h2>Details</h2>
+<a name="CattleProgram.functions_details"></a><h2>Functions</h2>
 <div class="refsect2">
-<a name="CattleProgram-struct"></a><h3>struct CattleProgram</h3>
-<pre class="programlisting">struct CattleProgram;</pre>
-<p>
-Opaque data structure representing a program. It should never be
-accessed directly; use the methods below instead.
-</p>
+<a name="cattle-program-new"></a><h3>cattle_program_new ()</h3>
+<pre class="programlisting"><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *
+cattle_program_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<p>Create a new <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>.</p>
+<p>A single instance of a program can be shared between multiple
+interpreters, as long as the object is not modified after it
+has been initialized.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.2.6"></a><h4>Returns</h4>
+<p> a new <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
 </div>
 <hr>
 <div class="refsect2">
-<a name="cattle-program-new"></a><h3>cattle_program_new ()</h3>
-<pre class="programlisting"><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="returnvalue">CattleProgram</span></a> *      cattle_program_new                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
-<p>
-Create a new <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>.
-</p>
-<p>
-A single instance of a program can be shared between multiple
-interpreters, as long as the object is not modified after it
-has been initialized.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
+<a name="cattle-program-load"></a><h3>cattle_program_load ()</h3>
+<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+cattle_program_load (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
+                     <em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *buffer</code></em>,
+                     <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>Load <em class="parameter"><code>program</code></em>
+ from <em class="parameter"><code>buffer</code></em>
+.</p>
+<p>The buffer can optionally contain also the input for the program:
+in that case, the input must be separated from the code by a bang
+(!) character.</p>
+<p>In case of failure, <em class="parameter"><code>error</code></em>
+ is filled with detailed information.
+The error domain is <a class="link" href="cattle-1.0-Error-Types.html#CATTLE-ERROR:CAPS" title="CATTLE_ERROR"><code class="literal">CATTLE_ERROR</code></a>, and the error code is from the
+<a class="link" href="cattle-1.0-Error-Types.html#CattleError" title="enum CattleError"><span class="type">CattleError</span></a> enumeration.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.3.7"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>program</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>buffer</p></td>
+<td class="parameter_description"><p> a <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> containing the code. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></td>
+</tr>
+<tr>
+<td class="parameter_name"><p>error</p></td>
+<td class="parameter_description"><p> return location for a <a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="NULL is OK, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="id-1.4.5.9.3.8"></a><h4>Returns</h4>
+<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
+<p></p>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-program-set-instructions"></a><h3>cattle_program_set_instructions ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+cattle_program_set_instructions (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
+                                 <em class="parameter"><code><a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a> *instructions</code></em>);</pre>
+<p>Set the instructions for <em class="parameter"><code>program</code></em>
+.</p>
+<p>You shouldn't usually need to use this: see <a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()"><code class="function">cattle_program_load()</code></a>
+for the standard way to load a program.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.4.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>program</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>instructions</p></td>
+<td class="parameter_description"><p> instructions for <em class="parameter"><code>program</code></em>
+. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+<hr>
+<div class="refsect2">
+<a name="cattle-program-get-instructions"></a><h3>cattle_program_get_instructions ()</h3>
+<pre class="programlisting"><a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="returnvalue">CattleInstruction</span></a> *
+cattle_program_get_instructions (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);</pre>
+<p>Get the instructions for <em class="parameter"><code>program</code></em>
+.
+See <a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()"><code class="function">cattle_program_load()</code></a> and <a class="link" href="CattleProgram.html#cattle-program-set-instructions" title="cattle_program_set_instructions ()"><code class="function">cattle_program_set_instructions()</code></a>.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.5.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
 <tbody><tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>a new <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
+<td class="parameter_name"><p>program</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a></p></td>
+<td class="parameter_annotations"> </td>
 </tr></tbody>
 </table></div>
 </div>
+<div class="refsect3">
+<a name="id-1.4.5.9.5.6"></a><h4>Returns</h4>
+<p> the first instruction in <em class="parameter"><code>program</code></em>
+. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
+</div>
+</div>
 <hr>
 <div class="refsect2">
-<a name="cattle-program-load"></a><h3>cattle_program_load ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            cattle_program_load                 (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *string</code></em>,
-                                                         <em class="parameter"><code><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
-<p>
-Load <em class="parameter"><code>program</code></em> from <em class="parameter"><code>string</code></em>.
-</p>
-<p>
-The string can optionally contain also the input for the program:
-in that case, the input must be separated from the code by a bang
-(!) character.
-</p>
-<p>
-In case of failure, <em class="parameter"><code>error</code></em> is filled with detailed information.
-The error domain is <a class="link" href="cattle-Error-Types.html#CATTLE-ERROR:CAPS" title="CATTLE_ERROR"><code class="literal">CATTLE_ERROR</code></a>, and the error code is from the
-<a class="link" href="cattle-Error-Types.html#CattleError" title="enum CattleError"><span class="type">CattleError</span></a> enumeration.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
+<a name="cattle-program-set-input"></a><h3>cattle_program_set_input ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+cattle_program_set_input (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
+                          <em class="parameter"><code><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *input</code></em>);</pre>
+<p>Set the input for <em class="parameter"><code>program</code></em>
+.</p>
+<p>If the size of <em class="parameter"><code>input</code></em>
+ is zero, the program's input will be retrieved
+at runtime.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.6.6"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
 <tbody>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
-</td>
+<td class="parameter_name"><p>program</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a></p></td>
+<td class="parameter_annotations"> </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
-<td>the source code of the program</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td>return location for a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> on success, <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</td>
+<td class="parameter_name"><p>input</p></td>
+<td class="parameter_description"><p> input for <em class="parameter"><code>program</code></em>
+. </p></td>
+<td class="parameter_annotations"><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="cattle-program-set-instructions"></a><h3>cattle_program_set_instructions ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                cattle_program_set_instructions     (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code><a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a> *instructions</code></em>);</pre>
-<p>
-Set the instructions for <em class="parameter"><code>program</code></em>.
-</p>
-<p>
-You shouldn't usually need to use this: see <a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()"><code class="function">cattle_program_load()</code></a>
-for the standard way to load a program.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>instructions</code></em> :</span></p></td>
-<td>instructions for <em class="parameter"><code>program</code></em>
-</td>
-</tr>
-</tbody>
-</table></div>
 </div>
 <hr>
 <div class="refsect2">
-<a name="cattle-program-get-instructions"></a><h3>cattle_program_get_instructions ()</h3>
-<pre class="programlisting"><a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="returnvalue">CattleInstruction</span></a> *  cattle_program_get_instructions    (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);</pre>
-<p>
-Get the instructions for <em class="parameter"><code>program</code></em>.
-See <a class="link" href="CattleProgram.html#cattle-program-load" title="cattle_program_load ()"><code class="function">cattle_program_load()</code></a> and <a class="link" href="CattleProgram.html#cattle-program-set-instructions" title="cattle_program_set_instructions ()"><code class="function">cattle_program_set_instructions()</code></a>.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>the first instruction in <em class="parameter"><code>program</code></em>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
+<a name="cattle-program-get-input"></a><h3>cattle_program_get_input ()</h3>
+<pre class="programlisting"><a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="returnvalue">CattleBuffer</span></a> *
+cattle_program_get_input (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);</pre>
+<p>Get the input for <em class="parameter"><code>program</code></em>
+.
+See <a class="link" href="CattleProgram.html#cattle-program-set-input" title="cattle_program_set_input ()"><code class="function">cattle_program_set_input()</code></a>.</p>
+<div class="refsect3">
+<a name="id-1.4.5.9.7.5"></a><h4>Parameters</h4>
+<div class="informaltable"><table width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>program</p></td>
+<td class="parameter_description"><p>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
 </table></div>
 </div>
-<hr>
-<div class="refsect2">
-<a name="cattle-program-set-input"></a><h3>cattle_program_set_input ()</h3>
-<pre class="programlisting"><span class="returnvalue">void</span>                cattle_program_set_input            (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>,
-                                                         <em class="parameter"><code>const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *input</code></em>);</pre>
-<p>
-Set the input for <em class="parameter"><code>program</code></em>.
-</p>
-<p>
-If <em class="parameter"><code>input</code></em> is <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>, the input will be retrieved at runtime.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>input</code></em> :</span></p></td>
-<td>input for <em class="parameter"><code>program</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
+<div class="refsect3">
+<a name="id-1.4.5.9.7.6"></a><h4>Returns</h4>
+<p> input for <em class="parameter"><code>program</code></em>
+. </p>
+<p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
-<hr>
+</div>
+</div>
+<div class="refsect1">
+<a name="CattleProgram.other_details"></a><h2>Types and Values</h2>
 <div class="refsect2">
-<a name="cattle-program-get-input"></a><h3>cattle_program_get_input ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *              cattle_program_get_input           (<em class="parameter"><code><a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a> *program</code></em>);</pre>
-<p>
-Get the input for <em class="parameter"><code>program</code></em>.
-See <a class="link" href="CattleProgram.html#cattle-program-set-input" title="cattle_program_set_input ()"><code class="function">cattle_program_set_input()</code></a>.
-</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody>
-<tr>
-<td><p><span class="term"><em class="parameter"><code>program</code></em> :</span></p></td>
-<td>a <a class="link" href="CattleProgram.html" title="CattleProgram"><span class="type">CattleProgram</span></a>
-</td>
-</tr>
-<tr>
-<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td>input for <em class="parameter"><code>program</code></em>, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span>
-</td>
-</tr>
-</tbody>
-</table></div>
+<a name="CattleProgram-struct"></a><h3>struct CattleProgram</h3>
+<pre class="programlisting">struct CattleProgram;</pre>
+<p>Opaque data structure representing a program. It should never be
+accessed directly; use the methods below instead.</p>
 </div>
 </div>
 <div class="refsect1">
 <a name="CattleProgram.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
-<a name="CattleProgram--input"></a><h3>The <code class="literal">"input"</code> property</h3>
-<pre class="programlisting">  "input"                    <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>*                : Read / Write</pre>
-<p>
-Input for the program, or <a href="http://library.gnome.org/devel/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no input was available
-at the time of loading.
-</p>
-<p>
-Changes to this property are not notified.
-</p>
-<p>Default value: NULL</p>
+<a name="CattleProgram--input"></a><h3>The <code class="literal">“input”</code> property</h3>
+<pre class="programlisting">  “input”                    <a class="link" href="CattleBuffer.html" title="CattleBuffer"><span class="type">CattleBuffer</span></a> *</pre>
+<p>Input for the program, or <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if no input was available
+at the time of loading.</p>
+<p>Changes to this property are not notified.</p>
+<p>Flags: Read / Write</p>
 </div>
 <hr>
 <div class="refsect2">
-<a name="CattleProgram--instructions"></a><h3>The <code class="literal">"instructions"</code> property</h3>
-<pre class="programlisting">  "instructions"             <a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a>*    : Read / Write</pre>
-<p>
-Instructions for the program.
-</p>
-<p>
-Changes to this property are not notified.
-</p>
+<a name="CattleProgram--instructions"></a><h3>The <code class="literal">“instructions”</code> property</h3>
+<pre class="programlisting">  “instructions”             <a class="link" href="CattleInstruction.html" title="CattleInstruction"><span class="type">CattleInstruction</span></a> *</pre>
+<p>Instructions for the program.</p>
+<p>Changes to this property are not notified.</p>
+<p>Flags: Read / Write</p>
 </div>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.17</div>
+          Generated by GTK-Doc V1.21</div>
 </body>
 </html>

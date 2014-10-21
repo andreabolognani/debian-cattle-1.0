@@ -2,7 +2,7 @@ NULL =
 
 INCLUDES = \
 	-I$(top_srcdir) \
-    -I$(top_builddir) \
+	-I$(top_builddir) \
 	$(NULL)
 
 AM_CPPFLAGS = \
@@ -18,10 +18,15 @@ LDADD = \
 	$(NULL)
 
 noinst_PROGRAMS = \
+	buffer \
 	tape \
 	program \
 	interpreter \
 	references \
+	$(NULL)
+
+buffer_SOURCES = \
+	buffer.c \
 	$(NULL)
 
 tape_SOURCES = \

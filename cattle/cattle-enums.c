@@ -11,7 +11,6 @@ cattle_error_get_type (void)
     static GType etype = 0;
     if (etype == 0) {
         static const GEnumValue values[] = {
-            { CATTLE_ERROR_BAD_UTF8, "CATTLE_ERROR_BAD_UTF8", "bad-utf8" },
             { CATTLE_ERROR_IO, "CATTLE_ERROR_IO", "io" },
             { CATTLE_ERROR_UNBALANCED_BRACKETS, "CATTLE_ERROR_UNBALANCED_BRACKETS", "unbalanced-brackets" },
             { CATTLE_ERROR_INPUT_OUT_OF_RANGE, "CATTLE_ERROR_INPUT_OUT_OF_RANGE", "input-out-of-range" },
@@ -52,17 +51,17 @@ cattle_instruction_value_get_type (void)
 #include "cattle-configuration.h"
 
 GType
-cattle_on_eof_action_get_type (void)
+cattle_end_of_input_action_get_type (void)
 {
     static GType etype = 0;
     if (etype == 0) {
         static const GEnumValue values[] = {
-            { CATTLE_ON_EOF_STORE_ZERO, "CATTLE_ON_EOF_STORE_ZERO", "store-zero" },
-            { CATTLE_ON_EOF_STORE_EOF, "CATTLE_ON_EOF_STORE_EOF", "store-eof" },
-            { CATTLE_ON_EOF_DO_NOTHING, "CATTLE_ON_EOF_DO_NOTHING", "do-nothing" },
+            { CATTLE_END_OF_INPUT_ACTION_STORE_ZERO, "CATTLE_END_OF_INPUT_ACTION_STORE_ZERO", "store-zero" },
+            { CATTLE_END_OF_INPUT_ACTION_STORE_EOF, "CATTLE_END_OF_INPUT_ACTION_STORE_EOF", "store-eof" },
+            { CATTLE_END_OF_INPUT_ACTION_DO_NOTHING, "CATTLE_END_OF_INPUT_ACTION_DO_NOTHING", "do-nothing" },
             { 0, NULL, NULL }
         };
-        etype = g_enum_register_static ("CattleOnEOFAction", values);
+        etype = g_enum_register_static ("CattleEndOfInputAction", values);
     }
     return etype;
 }
