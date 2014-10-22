@@ -23,8 +23,7 @@ Package: libcattle-1.0-0
 Architecture: any
 Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
-Depends: libglib2.0-0,
-         ${shlibs:Depends},
+Depends: ${shlibs:Depends},
          ${misc:Depends}
 Description: Brainfuck language toolkit
  Cattle is a GObject-based library that allows one to inspect
