@@ -25,6 +25,7 @@ Multi-Arch: same
 Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends},
          ${misc:Depends}
+Breaks: beef (<< 1.0.1-1~)
 Description: Brainfuck language toolkit
  Cattle is a GObject-based library that allows one to inspect
  Brainfuck programs in various ways, and to easily embed a
