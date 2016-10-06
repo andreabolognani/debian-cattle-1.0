@@ -8,58 +8,48 @@ Description: Tweak build system
  shipped in the tarball.
 Forwarded: not-needed
 Author: Andrea Bolognani <eof@kiyuko.org>
-Last-Update: 2014-10-21
+Last-Update: 2016-10-06
 Index: cattle-1.0.git/Makefile.am
 ===================================================================
---- cattle-1.0.git.orig/Makefile.am	2014-10-21 22:43:45.000000000 +0200
-+++ cattle-1.0.git/Makefile.am	2014-10-21 22:46:19.447741291 +0200
-@@ -2,7 +2,6 @@
- 
+--- cattle-1.0.git.orig/Makefile.am
++++ cattle-1.0.git/Makefile.am
+@@ -3,7 +3,6 @@ NULL =
  SUBDIRS = \
  	cattle \
+ 	docs \
 -	examples \
  	tests \
- 	docs \
  	$(NULL)
-@@ -28,33 +27,9 @@
+ 
+@@ -24,23 +23,8 @@ dist_doc_DATA = \
  	$(NULL)
  
  CLEANFILES = \
--	$(srcdir)/ChangeLog \
+-	ChangeLog \
  	$(NULL)
  
- DISTCHECK_CONFIGURE_FLAGS = \
- 	--enable-introspection=yes \
- 	--enable-gtk-doc \
- 	$(NULL)
--
--distclean-local:
--	if test "$(srcdir)" = "."; then \
--	  :; \
--	else \
--	  rm -f ChangeLog; \
--	fi
--
 -ChangeLog:
--	@echo Creating $@
--	@if test -d "$(srcdir)/.git"; then \
--	  (GIT_DIR=$(top_srcdir)/.git $(top_srcdir)/missing --run git log --stat) > $@.tmp \
+-	$(AM_V_GEN) \
+-	if test -d "$(top_srcdir)/.git"; \
+-	then \
+-	  GIT_DIR="$(top_srcdir)/.git" \
+-	  $(top_srcdir)/missing \
+-	    --run git log --color=never --stat \
+-	  >$@.tmp \
 -	  && mv -f $@.tmp $@ \
--	  || ($(RM) $@.tmp; \
--	  echo Failed to generate ChangeLog, your ChangeLog may be outdated >&2; \
--	  (test -f $@ || echo git-log is required to generate this file >> $@)); \
--	else \
--	  test -f $@ || \
--	  (echo A git checkout and git-log is required to generate ChangeLog >&2 && \
--	  echo A git checkout and git-log is required to generate this file >> $@); \
+-	  || ( $(RM) -f $@.tmp; false ) \
 -	fi
 -
 -.PHONY: ChangeLog
+-
+ DISTCHECK_CONFIGURE_FLAGS = \
+ 	--enable-introspection=yes \
+ 	--enable-gtk-doc \
 Index: cattle-1.0.git/configure.ac
 ===================================================================
---- cattle-1.0.git.orig/configure.ac	2014-10-21 22:43:45.000000000 +0200
-+++ cattle-1.0.git/configure.ac	2014-10-21 22:45:45.027742863 +0200
-@@ -92,7 +92,6 @@
+--- cattle-1.0.git.orig/configure.ac
++++ cattle-1.0.git/configure.ac
+@@ -91,7 +91,6 @@ AC_CONFIG_FILES([Makefile
                   docs/Makefile
                   docs/reference/Makefile
                   docs/reference/version.xml
