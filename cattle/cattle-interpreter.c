@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -930,7 +930,7 @@ default_input_handler (CattleInterpreter  *self,
 {
 	CattleBuffer *input;
 	gint8         buffer[256];
-	gulong        size;
+	gssize        size;
 
 	size = read (0, buffer, 256);
 
@@ -945,7 +945,7 @@ default_input_handler (CattleInterpreter  *self,
 	}
 
 	/* Copy the contents to a buffer */
-	input = cattle_buffer_new (size);
+	input = cattle_buffer_new ((gulong) size);
 	cattle_buffer_set_contents (input, (gint8 *) buffer);
 
 	/* Feed the buffer to the interpreter */

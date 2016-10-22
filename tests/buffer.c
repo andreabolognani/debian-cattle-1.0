@@ -1,5 +1,5 @@
-/* buffer -- Tests for CattleBuffer
- * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
+/* buffer - Tests for CattleBuffer
+ * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -119,7 +119,7 @@ test_buffer_set_contents_string (void)
 	buffer = cattle_buffer_new (3);
 	g_assert (cattle_buffer_get_size (buffer) == 3);
 
-	cattle_buffer_set_contents (buffer, "abcd");
+	cattle_buffer_set_contents (buffer, (gint8 *) "abcd");
 
 	g_assert (cattle_buffer_get_value (buffer, 0) == 'a');
 	g_assert (cattle_buffer_get_value (buffer, 1) == 'b');
