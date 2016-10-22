@@ -2,13 +2,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cattle Reference Manual: CattleTape</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<title>CattleTape: Cattle Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.79.1">
 <link rel="home" href="index.html" title="Cattle Reference Manual">
 <link rel="up" href="ch03.html" title="Objects">
 <link rel="prev" href="CattleBuffer.html" title="CattleBuffer">
 <link rel="next" href="CattleInstruction.html" title="CattleInstruction">
-<meta name="generator" content="GTK-Doc V1.21 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -35,7 +35,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="CattleTape.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -59,7 +59,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<span class="returnvalue">gint8</span>
+<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint8"><span class="returnvalue">gint8</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="CattleTape.html#cattle-tape-get-current-value" title="cattle_tape_get_current_value ()">cattle_tape_get_current_value</a> <span class="c_punctuation">()</span>
@@ -166,7 +166,7 @@
 </div>
 <div class="refsect1">
 <a name="CattleTape.properties"></a><h2>Properties</h2>
-<div class="informaltable"><table border="0">
+<div class="informaltable"><table class="informaltable" border="0">
 <colgroup>
 <col width="150px" class="properties_type">
 <col width="300px" class="properties_name">
@@ -181,7 +181,7 @@
 </div>
 <div class="refsect1">
 <a name="CattleTape.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -194,7 +194,7 @@
 </div>
 <div class="refsect1">
 <a name="CattleTape.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
     <span class="lineart">╰──</span> CattleTape
 </pre>
 </div>
@@ -226,7 +226,7 @@ current cell is at the beginning or at the end of the tape using
 cattle_tape_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Create and initialize a new memory tape.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.2.5"></a><h4>Returns</h4>
+<a name="cattle-tape-new.returns"></a><h4>Returns</h4>
 <p> a new <a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
@@ -236,12 +236,12 @@ cattle_tape_new (<em class="parameter"><code><span class="type">void</span></cod
 <a name="cattle-tape-set-current-value"></a><h3>cattle_tape_set_current_value ()</h3>
 <pre class="programlisting"><span class="returnvalue">void</span>
 cattle_tape_set_current_value (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>,
-                               <em class="parameter"><code><span class="type">gint8</span> value</code></em>);</pre>
+                               <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint8"><span class="type">gint8</span></a> value</code></em>);</pre>
 <p>Set the value of the current cell.</p>
 <p>Accepted values range from <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#G-MININT8:CAPS"><code class="literal">G_MININT8</code></a> to <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#G-MAXINT8:CAPS"><code class="literal">G_MAXINT8</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.3.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-set-current-value.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -265,13 +265,13 @@ cattle_tape_set_current_value (<em class="parameter"><code><a class="link" href=
 <hr>
 <div class="refsect2">
 <a name="cattle-tape-get-current-value"></a><h3>cattle_tape_get_current_value ()</h3>
-<pre class="programlisting"><span class="returnvalue">gint8</span>
+<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint8"><span class="returnvalue">gint8</span></a>
 cattle_tape_get_current_value (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
 <p>Get the value of the current cell. See
 <a class="link" href="CattleTape.html#cattle-tape-set-current-value" title="cattle_tape_set_current_value ()"><code class="function">cattle_tape_set_current_value()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-get-current-value.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -285,9 +285,8 @@ cattle_tape_get_current_value (<em class="parameter"><code><a class="link" href=
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.4.3.9.4.6"></a><h4>Returns</h4>
+<a name="cattle-tape-get-current-value.returns"></a><h4>Returns</h4>
 <p> the value of the current cell</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -297,8 +296,8 @@ cattle_tape_get_current_value (<em class="parameter"><code><a class="link" href=
 cattle_tape_increase_current_value (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
 <p>Increase the value in the current cell by one.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-increase-current-value.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -323,8 +322,8 @@ cattle_tape_increase_current_value_by (<em class="parameter"><code><a class="lin
 <p>Increasing the value this way is much faster than calling
 <a class="link" href="CattleTape.html#cattle-tape-increase-current-value" title="cattle_tape_increase_current_value ()"><code class="function">cattle_tape_increase_current_value()</code></a> multiple times.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.6.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-increase-current-value-by.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -352,8 +351,8 @@ cattle_tape_increase_current_value_by (<em class="parameter"><code><a class="lin
 cattle_tape_decrease_current_value (<em class="parameter"><code><a class="link" href="CattleTape.html" title="CattleTape"><span class="type">CattleTape</span></a> *tape</code></em>);</pre>
 <p>Decrease the value in the current cell by one.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-decrease-current-value.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -378,8 +377,8 @@ cattle_tape_decrease_current_value_by (<em class="parameter"><code><a class="lin
 <p>Decreasing the value this way is much faster than calling
 <a class="link" href="CattleTape.html#cattle-tape-decrease-current-value" title="cattle_tape_decrease_current_value ()"><code class="function">cattle_tape_decrease_current_value()</code></a> multiple times.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.8.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-decrease-current-value-by.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -410,8 +409,8 @@ cattle_tape_move_left (<em class="parameter"><code><a class="link" href="CattleT
 <p>If there are no memory cells on the left of the current one,
 one will be created on the fly.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.9.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-move-left.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -437,8 +436,8 @@ cattle_tape_move_left_by (<em class="parameter"><code><a class="link" href="Catt
 <p>Moving this way is much faster than calling
 <a class="link" href="CattleTape.html#cattle-tape-move-left" title="cattle_tape_move_left ()"><code class="function">cattle_tape_move_left()</code></a> multiple times.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.10.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-move-left-by.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -469,8 +468,8 @@ cattle_tape_move_right (<em class="parameter"><code><a class="link" href="Cattle
 <p>If there are no memory cells on the right of the current one,
 one will be created on the fly.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.11.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-move-right.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -496,8 +495,8 @@ cattle_tape_move_right_by (<em class="parameter"><code><a class="link" href="Cat
 <p>Moving this way is much faster than calling
 <a class="link" href="CattleTape.html#cattle-tape-move-right" title="cattle_tape_move_right ()"><code class="function">cattle_tape_move_right()</code></a> multiple times.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.12.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-move-right-by.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -528,8 +527,8 @@ cattle_tape_is_at_beginning (<em class="parameter"><code><a class="link" href="C
 <p>Since the tape grows automatically as more cells are needed, it is
 possible to move left from the first cell.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.13.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-is-at-beginning.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -543,9 +542,8 @@ possible to move left from the first cell.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.4.3.9.13.7"></a><h4>Returns</h4>
+<a name="cattle-tape-is-at-beginning.returns"></a><h4>Returns</h4>
 <p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the current cell is the first one, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -558,8 +556,8 @@ cattle_tape_is_at_end (<em class="parameter"><code><a class="link" href="CattleT
 <p>Since the tape grows automatically as more cells are needed, it is
 possible to move right from the last cell.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.14.6"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-is-at-end.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -573,9 +571,8 @@ possible to move right from the last cell.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.4.3.9.14.7"></a><h4>Returns</h4>
+<a name="cattle-tape-is-at-end.returns"></a><h4>Returns</h4>
 <p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the current cell is the last one, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -586,8 +583,8 @@ cattle_tape_push_bookmark (<em class="parameter"><code><a class="link" href="Cat
 <p>Create a bookmark to the current tape position and save it on the
 bookmark stack.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.15.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-push-bookmark.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -609,8 +606,8 @@ cattle_tape_pop_bookmark (<em class="parameter"><code><a class="link" href="Catt
 <p>Restore the previously-saved tape position.
 See <a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="cattle_tape_push_bookmark ()"><code class="function">cattle_tape_push_bookmark()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.4.3.9.16.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="cattle-tape-pop-bookmark.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -624,9 +621,8 @@ See <a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="catt
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.4.3.9.16.6"></a><h4>Returns</h4>
+<a name="cattle-tape-pop-bookmark.returns"></a><h4>Returns</h4>
 <p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> if the bookmarks stack is empty, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> otherwise</p>
-<p></p>
 </div>
 </div>
 </div>
@@ -652,7 +648,6 @@ be accessed directly; use the methods below instead.</p>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

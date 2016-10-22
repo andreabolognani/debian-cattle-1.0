@@ -1,3 +1,365 @@
+commit 338a34f7abc35334afd378f305c6e1fb0d0abd7d
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 11 21:55:46 2016 +0200
+
+    === Cattle 1.2.1 ===
+
+commit 064636ba743f38fa6fdcabea002f53ae57c5c0fc
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 11 21:49:20 2016 +0200
+
+    Bump version number
+
+ configure.ac | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 0bf7fbbf36359132793340e287e3fe6dec792364
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 11 21:48:39 2016 +0200
+
+    Update NEWS.markdown
+
+ NEWS.markdown | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 82e15ddf9fbbf0949bc70c1c3c4f2fdd009d5c8c
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 11 22:45:38 2016 +0200
+
+    Install docs in $(datarootdir)/doc/cattle-1.0
+    
+    This ensures that future major versions will be installable
+    side by side without conflicts.
+
+ Makefile.am | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 0d4f3e8791a8bf413a6ac7aae4439a2cc268cdf8
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Fri Sep 9 00:13:46 2016 +0200
+
+    Remove /references/program-owns-instructions test
+    
+    Calling G_IS_OBJECT() on an instance that has already been
+    finalized is clearly wrong; surprisingly, it doesn't seem to
+    cause failures anywhere except for Fedora rawhide.
+    
+    Since that final G_IS_OBJECT() call was the whole point of
+    the test, remove it altogether.
+
+ tests/references.c | 37 -------------------------------------
+ 1 file changed, 37 deletions(-)
+
+commit 9b0a666e31eea5eb1c214a932a5aed88d6b9b31e
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Thu Sep 8 23:11:05 2016 +0200
+
+    Use @basename@ in cattle-enums.h
+    
+    Replace uses of @filename@ to avoid leaking build directory
+    information and to look a bit nicer.
+
+ cattle/cattle-enums.h.tmpl | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 72143958dc8b1513d9711338a3502107de5454ca
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Thu Sep 8 23:10:13 2016 +0200
+
+    Add direct include guard to cattle-enums.h
+    
+    As with other headers, we want to avoid it being included
+    directly. Applications should include <cattle/cattle.h> only.
+
+ cattle/cattle-enums.h.tmpl | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit b12f17c0f37e088c53a9ffe11ecfb46ae72df9d0
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Thu Sep 8 23:06:36 2016 +0200
+
+    Include cattle-enums.h from cattle.h
+
+ cattle/cattle.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 2ab42f652703717468f5903b338ad3c05f8b0c36
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Sep 7 00:34:36 2016 +0200
+
+    Update copyright years
+
+ cattle/cattle-buffer.c        | 2 +-
+ cattle/cattle-buffer.h        | 2 +-
+ cattle/cattle-configuration.c | 2 +-
+ cattle/cattle-configuration.h | 2 +-
+ cattle/cattle-constants.c     | 2 +-
+ cattle/cattle-constants.h     | 2 +-
+ cattle/cattle-error.c         | 2 +-
+ cattle/cattle-error.h         | 2 +-
+ cattle/cattle-instruction.c   | 2 +-
+ cattle/cattle-instruction.h   | 2 +-
+ cattle/cattle-interpreter.c   | 2 +-
+ cattle/cattle-interpreter.h   | 2 +-
+ cattle/cattle-program.c       | 2 +-
+ cattle/cattle-program.h       | 2 +-
+ cattle/cattle-tape.c          | 2 +-
+ cattle/cattle-tape.h          | 2 +-
+ cattle/cattle-version.c       | 2 +-
+ cattle/cattle-version.h.in    | 2 +-
+ cattle/cattle.h               | 2 +-
+ examples/common.c             | 2 +-
+ examples/common.h             | 2 +-
+ examples/indent.c             | 2 +-
+ examples/minimize.c           | 2 +-
+ examples/run.c                | 2 +-
+ tests/buffer.c                | 2 +-
+ tests/interpreter.c           | 2 +-
+ tests/program.c               | 2 +-
+ tests/references.c            | 2 +-
+ tests/tape.c                  | 2 +-
+ 29 files changed, 29 insertions(+), 29 deletions(-)
+
+commit 0a11d31c1e93ea731324db4c8b98adbaea791dc9
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Sep 7 00:36:59 2016 +0200
+
+    Get rid of remaining double dashes
+
+ examples/common.c   | 2 +-
+ examples/common.h   | 2 +-
+ examples/indent.c   | 2 +-
+ examples/minimize.c | 2 +-
+ examples/run.c      | 2 +-
+ tests/buffer.c      | 2 +-
+ tests/interpreter.c | 2 +-
+ tests/program.c     | 2 +-
+ tests/references.c  | 2 +-
+ tests/tape.c        | 2 +-
+ 10 files changed, 10 insertions(+), 10 deletions(-)
+
+commit 2a0aa221c7e2370a26ea001bb562876b45be47ba
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Sep 7 00:25:43 2016 +0200
+
+    Remove the useless 'test' rule
+    
+    We can override check-local directly instead.
+
+ tests/Makefile.am | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+commit 729d5daee56806c85e8859f02d6c2243c54f34b6
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Sep 7 00:22:31 2016 +0200
+
+    Shuffle rules around
+    
+    Try to follow consistent patterns where possible
+
+ Makefile.am          | 10 +++----
+ cattle/Makefile.am   | 84 ++++++++++++++++++++++++++--------------------------
+ examples/Makefile.am |  4 +--
+ tests/Makefile.am    |  2 +-
+ 4 files changed, 50 insertions(+), 50 deletions(-)
+
+commit 0c3f6df62e9e6763026bef7cda015481d08aa104
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Sep 7 00:03:25 2016 +0200
+
+    Remove EXTRA_DIST use
+    
+    We don't have $(pkgconfig_DATA) anymore, so clearly we
+    don't want to distribute it; as for $(doc_DATA), we can get
+    it distributed automatically by simply changing it to
+    $(dist_doc_DATA), which allows us to get rid of EXTRA_DIST.
+
+ Makefile.am | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+commit 28e5856e25f96841d985d51f37b69918b99924dc
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Sep 6 23:56:20 2016 +0200
+
+    Improve AM_GEN rules
+    
+    Get rid of useless extra shell invocations, make sure the rules
+    fail on error, and remove some quoting as well.
+    
+    The quoting would be nice to keep around, but since the
+    gobject-introspection rules already break horribly if eg. any
+    whitespace is present in $(srcdir), might as well go with it.
+
+ Makefile.am        | 21 ++++++++++-----------
+ cattle/Makefile.am | 28 +++++++++++++++-------------
+ 2 files changed, 25 insertions(+), 24 deletions(-)
+
+commit 5cd14df6a88fe8328dec754ad6d6907a52604586
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Mon Sep 5 23:56:56 2016 +0200
+
+    Have gtk-doc look in $(top_builddir)
+    
+    Some files are generated at build time, and gtk-doc should
+    not only take them into account but run again when they change.
+    
+    This fixes building the docs out-of-tree.
+
+ docs/reference/Makefile.am | 15 ++++++++++++---
+ 1 file changed, 12 insertions(+), 3 deletions(-)
+
+commit 4745231f2e5d87980c7b53d345ba5a5ad712d199
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Sep 6 23:24:42 2016 +0200
+
+    Don't distribute cattle-version.h
+    
+    Shuffle things around a bit so that generated headers and
+    sources are clearly marked as such and handled differently
+    than regular headers and sources.
+
+ cattle/Makefile.am | 35 ++++++++++++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 11 deletions(-)
+
+commit 2d3faa4457254a77a6f9d558ae4682967ef6a707
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Sep 6 00:45:55 2016 +0200
+
+    Don't distribute cattle-1.0.pc
+
+ Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 753ab42e0ff385f716e7082021e5b5350e197abf
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Sep 6 00:29:10 2016 +0200
+
+    Don't distribute cattle-enums.{h,c}
+    
+    We want to rebuild these every single time, so that builds made
+    from a git clone and those made from a release tarball behave
+    the same.
+
+ cattle/Makefile.am | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 6fda62fdddf346f4476c890ddb74f5a4e01a12bd
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Mon Sep 5 23:47:49 2016 +0200
+
+    Merge INCLUDES into AM_CPPFLAGS
+    
+    INCLUDES is the deprecated version of AM_CPPFLAGS, get rid
+    of it.
+
+ cattle/Makefile.am   | 5 +----
+ examples/Makefile.am | 5 +----
+ tests/Makefile.am    | 5 +----
+ 3 files changed, 3 insertions(+), 12 deletions(-)
+
+commit 49e4817dfcb02e79effe450d93f6b7205bdd3f7c
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Mon Sep 5 00:24:31 2016 +0200
+
+    Rename *.md -> *.markdown
+
+ AUTHORS.md => AUTHORS.markdown | 0
+ INSTALL.md => INSTALL.markdown | 0
+ Makefile.am                    | 8 ++++----
+ NEWS.md => NEWS.markdown       | 0
+ README.md => README.markdown   | 0
+ TODO.md => TODO.markdown       | 0
+ 6 files changed, 4 insertions(+), 4 deletions(-)
+
+commit ea46a72a6470b7db97100dbc37e3582152faed50
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Mon Sep 5 00:18:31 2016 +0200
+
+    Reorder listings
+
+ Makefile.am          |  6 +++---
+ cattle/Makefile.am   | 30 +++++++++++++++---------------
+ examples/Makefile.am | 30 +++++++++++++++++++-----------
+ tests/Makefile.am    | 12 ++++++------
+ 4 files changed, 43 insertions(+), 35 deletions(-)
+
+commit 8768fca90b4234fb8bad1a1ca8f200f0f1235590
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Mon Sep 5 00:22:14 2016 +0200
+
+    Improve gtester invocation
+
+ tests/Makefile.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit fec0f0194f6d19c5225c8fc492ed77338b6b2956
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 4 23:46:46 2016 +0200
+
+    Improve ChangeLog generation
+    
+    Don't do anything unless we're building from a git checkout,
+    and consider any failure in generating a ChangeLog severe enough
+    that the entire build has to be stopped.
+
+ Makefile.am | 32 ++++++++++++--------------------
+ 1 file changed, 12 insertions(+), 20 deletions(-)
+
+commit 569174aff8d5461e58f8886628bd2741da2e2e96
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 4 23:17:01 2016 +0200
+
+    Use --color=never when generating ChangeLog
+    
+    We want to make sure the ChangeLog contains plain text only;
+    passing --color=never to git log ensures no funny escape
+    sequences will end up in the resulting file.
+
+ Makefile.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 9c6774ade6eebd541d39c56df7cca575455ffb7d
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 4 23:05:35 2016 +0200
+
+    Update ignore patterns
+
+ .gitignore                | 1 +
+ cattle/.gitignore         | 2 ++
+ docs/reference/.gitignore | 2 ++
+ 3 files changed, 5 insertions(+)
+
+commit 980a9130df1b9cdafbc0c87079e1a1f52f203b1e
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 4 23:05:49 2016 +0200
+
+    Disable maintainer mode
+
+ configure.ac | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 7c40ca6c00fc87cb59e66e08ac59c81e3d716f12
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sun Sep 4 22:55:10 2016 +0200
+
+    Use correct types
+
+ cattle/cattle-interpreter.c |  4 ++--
+ tests/buffer.c              |  2 +-
+ tests/interpreter.c         | 20 ++++++++++----------
+ tests/program.c             | 10 +++++-----
+ tests/references.c          |  4 ++--
+ 5 files changed, 20 insertions(+), 20 deletions(-)
+
+commit 3e6f44b2baaa663924ab48df23ea538d4386cec4
+Author: Baptiste Fontaine <batifon@yahoo.fr>
+Date:   Fri Feb 27 00:04:48 2015 +0100
+
+    Fix compilation with Clang
+
+ cattle/cattle-buffer.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
 commit 2c5d05a30e00140e3cddc4267f5d194899ebd2da
 Author: Andrea Bolognani <eof@kiyuko.org>
 Date:   Tue Oct 21 21:58:17 2014 +0200
@@ -187,17 +549,15 @@ Date:   Sun Oct 19 15:39:09 2014 +0200
 
     Update documentation.
 
- AUTHORS    |  10 ----
- AUTHORS.md |   4 ++
- INSTALL    |  15 ------
- INSTALL.md |  14 ++++++
- NEWS       | 108 -------------------------------------------
- NEWS.md    | 152 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- README     |  54 ----------------------
- README.md  |  63 +++++++++++++++++++++++++
- TODO       |  20 --------
- TODO.md    |  24 ++++++++++
- 10 files changed, 257 insertions(+), 207 deletions(-)
+ AUTHORS             |  10 ----
+ AUTHORS.md          |   4 ++
+ INSTALL             |  15 ------
+ INSTALL.md          |  14 +++++
+ NEWS                | 108 -------------------------------------
+ NEWS.md             | 152 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ README => README.md |  19 +++++--
+ TODO => TODO.md     |  10 ++--
+ 8 files changed, 191 insertions(+), 141 deletions(-)
 
 commit 94419961b4a97da3455b1d3aec2846066d12a0fa
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -615,13 +975,13 @@ Date:   Thu Oct 9 23:42:22 2014 +0200
 
     Define and use CATTLE_EOF.
 
- cattle/Makefile.am            |  2 ++
- cattle/cattle-configuration.c | 18 ++++++++----------
- cattle/cattle-constants.c     | 36 ++++++++++++++++++++++++++++++++++++
- cattle/cattle-constants.h     | 36 ++++++++++++++++++++++++++++++++++++
- cattle/cattle-interpreter.c   | 14 +++++++-------
- cattle/cattle.h               |  1 +
- 6 files changed, 90 insertions(+), 17 deletions(-)
+ cattle/Makefile.am                      |  2 ++
+ cattle/cattle-configuration.c           | 18 ++++++++----------
+ cattle/{cattle.h => cattle-constants.c} | 28 ++++++++++++++--------------
+ cattle/{cattle.h => cattle-constants.h} | 24 ++++++++++++------------
+ cattle/cattle-interpreter.c             | 14 +++++++-------
+ cattle/cattle.h                         |  1 +
+ 6 files changed, 44 insertions(+), 43 deletions(-)
 
 commit 55eb96e764258c597bd114855ad876a1aca95082
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -657,15 +1017,12 @@ Date:   Thu Feb 9 19:44:31 2012 +0100
 
     Add API version to DOC_MODULE.
 
- docs/reference/.gitignore               |  23 +++--
- docs/reference/Makefile.am              |   2 +-
- docs/reference/cattle-1.0-docs.xml      |  55 +++++++++++
- docs/reference/cattle-1.0-overrides.txt |   0
- docs/reference/cattle-1.0-sections.txt  | 162 ++++++++++++++++++++++++++++++++
- docs/reference/cattle-docs.xml          |  55 -----------
- docs/reference/cattle-overrides.txt     |   0
- docs/reference/cattle-sections.txt      | 162 --------------------------------
- 8 files changed, 229 insertions(+), 230 deletions(-)
+ docs/reference/.gitignore                          | 23 +++++++++++-----------
+ docs/reference/Makefile.am                         |  2 +-
+ .../{cattle-docs.xml => cattle-1.0-docs.xml}       |  0
+ ...ttle-overrides.txt => cattle-1.0-overrides.txt} |  0
+ ...cattle-sections.txt => cattle-1.0-sections.txt} |  0
+ 5 files changed, 12 insertions(+), 13 deletions(-)
 
 commit 62ef7cb6cff27d1fc5ec790ee926a16761f5fceb
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -736,13 +1093,11 @@ Date:   Sun Mar 27 19:01:37 2011 +0200
 
     Move contents file to avoid distcheck errors.
 
- docs/reference/Makefile.am              |   4 +-
- docs/reference/cattle-docs.xml          |   4 +-
- docs/reference/contents/io-handling.xml | 320 --------------------------------
- docs/reference/contents/overview.xml    |  28 ---
- docs/reference/io-handling.xml          | 320 ++++++++++++++++++++++++++++++++
- docs/reference/overview.xml             |  28 +++
- 6 files changed, 352 insertions(+), 352 deletions(-)
+ docs/reference/Makefile.am                    | 4 ++--
+ docs/reference/cattle-docs.xml                | 4 ++--
+ docs/reference/{contents => }/io-handling.xml | 0
+ docs/reference/{contents => }/overview.xml    | 0
+ 4 files changed, 4 insertions(+), 4 deletions(-)
 
 commit 405823c46d3f3cc109afac095133e57dcc74ccdd
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1019,12 +1374,11 @@ Date:   Fri Feb 18 10:55:45 2011 +0100
     At least now make fails when building the API reference
     out-of-tree, instead of silently replacing cattle-docs.xml.
 
- configure.ac                      |  2 +-
- docs/reference/Makefile.am        |  7 +++--
- docs/reference/cattle-docs.xml    | 58 +++++++++++++++++++++++++++++++++++++++
- docs/reference/cattle-docs.xml.in | 57 --------------------------------------
- docs/reference/version.xml.in     |  1 +
- 5 files changed, 65 insertions(+), 60 deletions(-)
+ configure.ac                                           | 2 +-
+ docs/reference/Makefile.am                             | 7 +++++--
+ docs/reference/{cattle-docs.xml.in => cattle-docs.xml} | 5 +++--
+ docs/reference/version.xml.in                          | 1 +
+ 4 files changed, 10 insertions(+), 5 deletions(-)
 
 commit 90905857a6a327835fffc04e6d7473fb16549d03
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1211,12 +1565,11 @@ Date:   Mon Feb 14 22:52:29 2011 +0100
 
     Unbreak gtk-doc in out-of-tree builds.
 
- configure.ac                      |  2 +-
- docs/reference/Makefile.am        | 13 ++++-----
- docs/reference/cattle-docs.sgml   | 60 ---------------------------------------
- docs/reference/cattle-docs.xml.in | 60 +++++++++++++++++++++++++++++++++++++++
- docs/reference/version.xml.in     |  1 -
- 5 files changed, 67 insertions(+), 69 deletions(-)
+ configure.ac                                            |  2 +-
+ docs/reference/Makefile.am                              | 13 ++++++-------
+ docs/reference/{cattle-docs.sgml => cattle-docs.xml.in} |  2 +-
+ docs/reference/version.xml.in                           |  1 -
+ 4 files changed, 8 insertions(+), 10 deletions(-)
 
 commit 36891b44778deaae145ba02ebb22f237acb59bd0
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1253,11 +1606,10 @@ Date:   Tue Feb 8 23:04:16 2011 +0100
 
     Make .pc file versioned.
 
- Makefile.am      |  2 +-
- cattle-1.0.pc.in | 12 ++++++++++++
- cattle.pc.in     | 12 ------------
- configure.ac     |  2 +-
- 4 files changed, 14 insertions(+), 14 deletions(-)
+ Makefile.am                      | 2 +-
+ cattle.pc.in => cattle-1.0.pc.in | 4 ++--
+ configure.ac                     | 2 +-
+ 3 files changed, 4 insertions(+), 4 deletions(-)
 
 commit 92b5ab870273876ec622a241ed663691b2d6790d
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1361,20 +1713,20 @@ Date:   Sun Dec 5 15:33:47 2010 +0100
     and at runtime, it makes sense to have a single enumeration
     containing all error codes.
 
- NEWS                               |  6 ++++
- cattle/Makefile.am                 |  2 ++
- cattle/cattle-error.c              | 59 ++++++++++++++++++++++++++++++++++++
- cattle/cattle-error.h              | 46 ++++++++++++++++++++++++++++
- cattle/cattle-interpreter.c        | 61 +++++++++++++-------------------------
- cattle/cattle-interpreter.h        |  8 -----
- cattle/cattle-program.c            | 38 +++++-------------------
- cattle/cattle-program.h            |  9 ------
- cattle/cattle.h                    |  1 +
- docs/reference/cattle-docs.sgml    |  2 ++
- docs/reference/cattle-sections.txt | 42 ++++++++++++++------------
- tests/interpreter.c                | 12 ++++----
- tests/program.c                    |  4 +--
- 13 files changed, 175 insertions(+), 115 deletions(-)
+ NEWS                                |  6 ++++
+ cattle/Makefile.am                  |  2 ++
+ cattle/cattle-error.c               | 59 +++++++++++++++++++++++++++++++++++
+ cattle/{cattle.h => cattle-error.h} | 33 +++++++++++++-------
+ cattle/cattle-interpreter.c         | 61 +++++++++++++------------------------
+ cattle/cattle-interpreter.h         |  8 -----
+ cattle/cattle-program.c             | 38 +++++------------------
+ cattle/cattle-program.h             |  9 ------
+ cattle/cattle.h                     |  1 +
+ docs/reference/cattle-docs.sgml     |  2 ++
+ docs/reference/cattle-sections.txt  | 42 +++++++++++++------------
+ tests/interpreter.c                 | 12 ++++----
+ tests/program.c                     |  4 +--
+ 13 files changed, 151 insertions(+), 126 deletions(-)
 
 commit 1b6482275eb431f8d40f8ee37295283eb8968dae
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1451,12 +1803,11 @@ Date:   Fri Dec 3 17:47:41 2010 +0100
 
     Rename examples/interpreter to examples/run.
 
- README                 |  2 +-
- examples/.gitignore    |  2 +-
- examples/Makefile.am   | 14 ++++----
- examples/interpreter.c | 91 --------------------------------------------------
- examples/run.c         | 91 ++++++++++++++++++++++++++++++++++++++++++++++++++
- 5 files changed, 100 insertions(+), 100 deletions(-)
+ README                            |  2 +-
+ examples/.gitignore               |  2 +-
+ examples/Makefile.am              | 14 +++++++-------
+ examples/{interpreter.c => run.c} |  2 +-
+ 4 files changed, 10 insertions(+), 10 deletions(-)
 
 commit cf83a77a3b493ad56bce28771e8e0fb4c098c4ec
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -1730,17 +2081,13 @@ Date:   Sat Nov 13 12:39:31 2010 +0100
 
     Rename test programs.
 
- tests/.gitignore          |   8 +-
- tests/Makefile.am         |  56 +++++------
- tests/interpreter-tests.c | 250 ----------------------------------------------
- tests/interpreter.c       | 250 ++++++++++++++++++++++++++++++++++++++++++++++
- tests/program-tests.c     | 129 ------------------------
- tests/program.c           | 129 ++++++++++++++++++++++++
- tests/references-tests.c  | 114 ---------------------
- tests/references.c        | 114 +++++++++++++++++++++
- tests/tape-tests.c        | 160 -----------------------------
- tests/tape.c              | 160 +++++++++++++++++++++++++++++
- 10 files changed, 685 insertions(+), 685 deletions(-)
+ tests/.gitignore                             |  8 ++--
+ tests/Makefile.am                            | 56 ++++++++++++++--------------
+ tests/{interpreter-tests.c => interpreter.c} |  2 +-
+ tests/{program-tests.c => program.c}         |  2 +-
+ tests/{references-tests.c => references.c}   |  2 +-
+ tests/{tape-tests.c => tape.c}               |  2 +-
+ 6 files changed, 36 insertions(+), 36 deletions(-)
 
 commit 1327caeb5254ada055accf3052059f7885f69af1
 Author: Andrea Bolognani <eof@kiyuko.org>
@@ -2368,9 +2715,8 @@ Date:   Mon Feb 16 09:17:12 2009 +0100
     0.9.3, and increased GLib required version to 2.16 (needed
     for GTest).
 
- configure.ac | 89 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
- configure.in | 89 ------------------------------------------------------------
- 2 files changed, 89 insertions(+), 89 deletions(-)
+ configure.in => configure.ac | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
 commit 78c9cd918d13c97b8828bcf95f5f25fd911d387e
 Author: Andrea Bolognani <eof@kiyuko.org>

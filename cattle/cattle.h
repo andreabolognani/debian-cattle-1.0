@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,7 @@
 #include <cattle/cattle-program.h>
 #include <cattle/cattle-configuration.h>
 #include <cattle/cattle-interpreter.h>
+#include <cattle/cattle-enums.h>
 
 #undef __CATTLE_H_INSIDE__
 

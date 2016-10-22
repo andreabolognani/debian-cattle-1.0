@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
 <book xmlns="http://www.devhelp.net/book" title="Cattle Reference Manual" link="index.html" author="" name="cattle-1.0" version="2" language="c">
   <chapters>
     <sub name="Overview" link="ch01.html"/>
@@ -23,11 +22,11 @@
     <sub name="Annotation Glossary" link="annotation-glossary.html"/>
   </chapters>
   <functions>
+    <keyword type="macro" name="CATTLE_CHECK_VERSION()" link="cattle-1.0-Version-Information.html#CATTLE-CHECK-VERSION:CAPS"/>
+    <keyword type="function" name="cattle_check_version ()" link="cattle-1.0-Version-Information.html#cattle-check-version"/>
     <keyword type="macro" name="CATTLE_MAJOR_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MAJOR-VERSION:CAPS"/>
     <keyword type="macro" name="CATTLE_MINOR_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MINOR-VERSION:CAPS"/>
     <keyword type="macro" name="CATTLE_MICRO_VERSION" link="cattle-1.0-Version-Information.html#CATTLE-MICRO-VERSION:CAPS"/>
-    <keyword type="macro" name="CATTLE_CHECK_VERSION()" link="cattle-1.0-Version-Information.html#CATTLE-CHECK-VERSION:CAPS"/>
-    <keyword type="function" name="cattle_check_version ()" link="cattle-1.0-Version-Information.html#cattle-check-version"/>
     <keyword type="variable" name="cattle_major_version" link="cattle-1.0-Version-Information.html#cattle-major-version"/>
     <keyword type="variable" name="cattle_minor_version" link="cattle-1.0-Version-Information.html#cattle-minor-version"/>
     <keyword type="variable" name="cattle_micro_version" link="cattle-1.0-Version-Information.html#cattle-micro-version"/>
@@ -111,10 +110,21 @@
     <keyword type="property" name="The “configuration” property" link="CattleInterpreter.html#CattleInterpreter--configuration"/>
     <keyword type="property" name="The “program” property" link="CattleInterpreter.html#CattleInterpreter--program"/>
     <keyword type="property" name="The “tape” property" link="CattleInterpreter.html#CattleInterpreter--tape"/>
-    <keyword type="" name="I/O Basics" link="io-handling.html#id-1.5.2.3"/>
-    <keyword type="" name="Error reporting" link="io-handling.html#id-1.5.2.4"/>
-    <keyword type="" name="Output handler" link="io-handling.html#id-1.5.2.5"/>
-    <keyword type="" name="Input handler" link="io-handling.html#id-1.5.2.6"/>
-    <keyword type="" name="Debug" link="io-handling.html#id-1.5.2.7"/>
+    <keyword type="constant" name="CATTLE_ERROR_IO" link="cattle-1.0-Error-Types.html#CATTLE-ERROR-IO:CAPS"/>
+    <keyword type="constant" name="CATTLE_ERROR_UNBALANCED_BRACKETS" link="cattle-1.0-Error-Types.html#CATTLE-ERROR-UNBALANCED-BRACKETS:CAPS"/>
+    <keyword type="constant" name="CATTLE_ERROR_INPUT_OUT_OF_RANGE" link="cattle-1.0-Error-Types.html#CATTLE-ERROR-INPUT-OUT-OF-RANGE:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_NONE" link="CattleInstruction.html#CATTLE-INSTRUCTION-NONE:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_MOVE_LEFT" link="CattleInstruction.html#CATTLE-INSTRUCTION-MOVE-LEFT:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_MOVE_RIGHT" link="CattleInstruction.html#CATTLE-INSTRUCTION-MOVE-RIGHT:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_INCREASE" link="CattleInstruction.html#CATTLE-INSTRUCTION-INCREASE:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_DECREASE" link="CattleInstruction.html#CATTLE-INSTRUCTION-DECREASE:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_LOOP_BEGIN" link="CattleInstruction.html#CATTLE-INSTRUCTION-LOOP-BEGIN:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_LOOP_END" link="CattleInstruction.html#CATTLE-INSTRUCTION-LOOP-END:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_READ" link="CattleInstruction.html#CATTLE-INSTRUCTION-READ:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_PRINT" link="CattleInstruction.html#CATTLE-INSTRUCTION-PRINT:CAPS"/>
+    <keyword type="constant" name="CATTLE_INSTRUCTION_DEBUG" link="CattleInstruction.html#CATTLE-INSTRUCTION-DEBUG:CAPS"/>
+    <keyword type="constant" name="CATTLE_END_OF_INPUT_ACTION_STORE_ZERO" link="CattleConfiguration.html#CATTLE-END-OF-INPUT-ACTION-STORE-ZERO:CAPS"/>
+    <keyword type="constant" name="CATTLE_END_OF_INPUT_ACTION_STORE_EOF" link="CattleConfiguration.html#CATTLE-END-OF-INPUT-ACTION-STORE-EOF:CAPS"/>
+    <keyword type="constant" name="CATTLE_END_OF_INPUT_ACTION_DO_NOTHING" link="CattleConfiguration.html#CATTLE-END-OF-INPUT-ACTION-DO-NOTHING:CAPS"/>
   </functions>
 </book>
