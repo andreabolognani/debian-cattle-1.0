@@ -1,27 +1,15 @@
 Description: Tweak build system
- Example programs are useless as far as Debian packages go; since we're
- refreshing the build system anyway, might as well shave a couple of calls
- to GCC in order to speed up compilation a little.
- .
  The ChangeLog must not be regenerated because otherwise building the
  package from a clone of the package repository would overwrite the one
  shipped in the tarball.
 Forwarded: not-needed
 Author: Andrea Bolognani <eof@kiyuko.org>
-Last-Update: 2016-10-06
+Last-Update: 2016-10-22
 Index: cattle-1.0.git/Makefile.am
 ===================================================================
 --- cattle-1.0.git.orig/Makefile.am
 +++ cattle-1.0.git/Makefile.am
-@@ -3,7 +3,6 @@ NULL =
- SUBDIRS = \
- 	cattle \
- 	docs \
--	examples \
- 	tests \
- 	$(NULL)
- 
-@@ -24,23 +23,8 @@ dist_doc_DATA = \
+@@ -24,23 +24,8 @@ dist_doc_DATA = \
  	$(NULL)
  
  CLEANFILES = \
@@ -45,15 +33,3 @@ Index: cattle-1.0.git/Makefile.am
  DISTCHECK_CONFIGURE_FLAGS = \
  	--enable-introspection=yes \
  	--enable-gtk-doc \
-Index: cattle-1.0.git/configure.ac
-===================================================================
---- cattle-1.0.git.orig/configure.ac
-+++ cattle-1.0.git/configure.ac
-@@ -91,7 +91,6 @@ AC_CONFIG_FILES([Makefile
-                  docs/Makefile
-                  docs/reference/Makefile
-                  docs/reference/version.xml
--                 examples/Makefile
-                  tests/Makefile])
- 
- AC_OUTPUT
