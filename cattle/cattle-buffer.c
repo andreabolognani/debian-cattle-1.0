@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -238,11 +238,11 @@ cattle_buffer_get_value (CattleBuffer *self,
 {
 	CattleBufferPrivate *priv;
 
-	g_return_if_fail (CATTLE_IS_BUFFER (self));
+	g_return_val_if_fail (CATTLE_IS_BUFFER (self), 0);
 
 	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
-	g_return_if_fail (position < priv->size);
+	g_return_val_if_fail (!priv->disposed, 0);
+	g_return_val_if_fail (position < priv->size, 0);
 
 	return priv->data[position];
 }

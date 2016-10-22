@@ -1,86 +1,114 @@
 NULL =
 
-INCLUDES = \
+AM_CPPFLAGS = \
+	$(GLIB_CFLAGS) \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
-	$(NULL)
-
-AM_CPPFLAGS = \
-	-DG_LOG_DOMAIN=\"Cattle\" \
 	-DCATTLE_COMPILATION \
 	-DG_DISABLE_DEPRECATED \
 	-DG_DISABLE_SINGLE_INCLUDES \
-	$(GLIB_CFLAGS) \
+	-DG_LOG_DOMAIN=\"Cattle\" \
 	$(NULL)
 
 AM_LDFLAGS = \
-	-version-info $(CATTLE_CURRENT):$(CATTLE_REVISION):$(CATTLE_AGE) \
 	$(GLIB_LIBS) \
+	-version-info $(CATTLE_CURRENT):$(CATTLE_REVISION):$(CATTLE_AGE) \
 	$(NULL)
 
 cattle_headers = \
-	cattle-error.h \
-	cattle-constants.h \
-	cattle-buffer.h \
-	cattle-tape.h \
-	cattle-instruction.h \
-	cattle-program.h \
-	cattle-configuration.h \
-	cattle-interpreter.h \
 	cattle.h \
+	cattle-buffer.h \
+	cattle-configuration.h \
+	cattle-constants.h \
+	cattle-error.h \
+	cattle-instruction.h \
+	cattle-interpreter.h \
+	cattle-program.h \
+	cattle-tape.h \
+	$(NULL)
+
+cattle_sources = \
+	cattle-buffer.c \
+	cattle-configuration.c \
+	cattle-constants.c \
+	cattle-error.c \
+	cattle-instruction.c \
+	cattle-interpreter.c \
+	cattle-program.c \
+	cattle-tape.c \
+	cattle-version.c \
+	$(NULL)
+
+mkenums_generated_headers = \
+	cattle-enums.h \
+	$(NULL)
+
+mkenums_generated_sources = \
+	cattle-enums.c \
+	$(NULL)
+
+cattle_generated_headers = \
+	$(mkenums_generated_headers) \
+	cattle-version.h \
+	$(NULL)
+
+cattle_generated_sources = \
+	$(mkenums_generated_sources) \
 	$(NULL)
 
 cattleincludedir = $(includedir)/cattle-1.0/cattle
 cattleinclude_HEADERS = \
 	$(cattle_headers) \
-	cattle-version.h \
+	$(NULL)
+
+nodist_cattleinclude_HEADERS = \
+	$(cattle_generated_headers) \
 	$(NULL)
 
 lib_LTLIBRARIES = \
 	libcattle-1.0.la \
 	$(NULL)
 
-cattle_sources = \
-	cattle-version.c \
-	cattle-constants.c \
-	cattle-error.c \
-	cattle-buffer.c \
-	cattle-tape.c \
-	cattle-instruction.c \
-	cattle-program.c \
-	cattle-configuration.c \
-	cattle-interpreter.c \
-	$(NULL)
-
 libcattle_1_0_la_SOURCES = \
-	$(cattle_sources) \
 	$(cattle_headers) \
-	cattle-version.h \
-	$(BUILT_SOURCES) \
+	$(cattle_sources) \
 	$(NULL)
 
-GENMARSHAL_GENERATED = \
-	$(NULL)
-
-MKENUMS_GENERATED = \
-	cattle-enums.h \
-	cattle-enums.c \
+nodist_libcattle_1_0_la_SOURCES = \
+	$(cattle_generated_headers) \
+	$(cattle_generated_sources) \
 	$(NULL)
 
 BUILT_SOURCES = \
-	$(GENMARSHAL_GENERATED) \
-	$(MKENUMS_GENERATED) \
+	$(cattle_generated_headers) \
+	$(cattle_generated_sources) \
 	$(NULL)
 
 CLEANFILES = \
-	$(GENMARSHAL_GENERATED) \
-	$(MKENUMS_GENERATED) \
+	$(mkenums_generated_headers) \
+	$(mkenums_generated_sources) \
 	$(NULL)
 
 EXTRA_DIST = \
-	cattle-enums.h.tmpl \
 	cattle-enums.c.tmpl \
+	cattle-enums.h.tmpl \
 	$(NULL)
+
+cattle-enums.h: $(cattle_headers) cattle-version.h
+	$(AM_V_GEN) \
+	$(GLIB_MKENUMS) \
+	  --template $(srcdir)/cattle-enums.h.tmpl $^ \
+	>$@.tmp \
+	&& mv -f $@.tmp $@ \
+	|| ( $(RM) -f $@.tmp; false )
+
+cattle-enums.c: $(cattle_headers) cattle-version.h
+	$(AM_V_GEN) \
+	$(GLIB_MKENUMS) \
+	  --template $(srcdir)/cattle-enums.c.tmpl $^ \
+	>$@.tmp \
+	&& mv -f $@.tmp $@ \
+	|| ( $(RM) -f $@.tmp; false )
 
 -include $(INTROSPECTION_MAKEFILE)
 INTROSPECTION_GIRS =
@@ -96,9 +124,10 @@ INTROSPECTION_COMPILER_ARGS = \
 
 if HAVE_INTROSPECTION
 introspection_sources = \
-	$(cattle_sources) \
+	$(cattle_generated_headers) \
+	$(cattle_generated_sources) \
 	$(cattle_headers) \
-	cattle-version.h \
+	$(cattle_sources) \
 	$(NULL)
 
 Cattle-1.0.gir: libcattle-1.0.la
@@ -117,17 +146,3 @@ typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 
 CLEANFILES += $(gir_DATA) $(typelib_DATA)
 endif
-
-cattle-enums.h: $(cattle_headers)
-	$(AM_V_GEN)( cd $(srcdir) &&                     \
-	  $(GLIB_MKENUMS) --template cattle-enums.h.tmpl \
-	  $(cattle_headers) ) > cattle-enums.h.tmp       \
-	&& mv cattle-enums.h.tmp cattle-enums.h          \
-	|| rm -f cattle-enums.h.tmp
-
-cattle-enums.c: $(cattle_headers)
-	$(AM_V_GEN)( cd $(srcdir) &&                     \
-	  $(GLIB_MKENUMS) --template cattle-enums.c.tmpl \
-	  $(cattle_headers) ) > cattle-enums.c.tmp       \
-	&& mv cattle-enums.c.tmp cattle-enums.c          \
-	|| rm -f cattle-enums.c.tmp

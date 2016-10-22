@@ -1,12 +1,9 @@
 NULL =
 
-INCLUDES = \
-	-I$(top_srcdir) \
-	-I$(top_builddir) \
-	$(NULL)
-
 AM_CPPFLAGS = \
 	$(GLIB_CFLAGS) \
+	-I$(top_srcdir) \
+	-I$(top_builddir) \
 	$(NULL)
 
 AM_LDFLAGS = \
@@ -19,18 +16,14 @@ LDADD = \
 
 noinst_PROGRAMS = \
 	buffer \
-	tape \
-	program \
 	interpreter \
+	program \
 	references \
+	tape \
 	$(NULL)
 
 buffer_SOURCES = \
 	buffer.c \
-	$(NULL)
-
-tape_SOURCES = \
-	tape.c \
 	$(NULL)
 
 interpreter_SOURCES = \
@@ -45,11 +38,12 @@ references_SOURCES = \
 	references.c \
 	$(NULL)
 
+tape_SOURCES = \
+	tape.c \
+	$(NULL)
+
 GTESTER = gtester
 
-test:
-	@${GTESTER} --version 2>/dev/null 1>&2 ; \
-	test "$$?" != 0 || ${GTESTER} --verbose ${noinst_PROGRAMS}
-
-.PHONY: test
-check-local: test
+check-local:
+	@$(GTESTER) --version >/dev/null 2>&1 && \
+	 $(GTESTER) --verbose $(noinst_PROGRAMS)

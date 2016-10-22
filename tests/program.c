@@ -1,5 +1,5 @@
-/* program -- Tests related to program loading
- * Copyright (C) 2008-2014  Andrea Bolognani <eof@kiyuko.org>
+/* program - Tests related to program loading
+ * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -42,7 +42,7 @@ test_program_load_unbalanced_brackets (void)
 	program = cattle_program_new ();
 
 	buffer = cattle_buffer_new (2);
-	cattle_buffer_set_contents (buffer, "[");
+	cattle_buffer_set_contents (buffer, (gint8 *) "[");
 
 	error = NULL;
 	success = cattle_program_load (program, buffer, &error);
@@ -129,7 +129,7 @@ test_program_load_without_input (void)
 	program = cattle_program_new ();
 
 	buffer = cattle_buffer_new (9);
-	cattle_buffer_set_contents (buffer, "+++>-<[-]");
+	cattle_buffer_set_contents (buffer, (gint8 *) "+++>-<[-]");
 
 	error = NULL;
 	success = cattle_program_load (program, buffer, &error);
@@ -177,7 +177,7 @@ test_program_load_with_input (void)
 	program = cattle_program_new ();
 
 	buffer = cattle_buffer_new (17);
-	cattle_buffer_set_contents (buffer, ",[+.,]!some input");
+	cattle_buffer_set_contents (buffer, (gint8 *) ",[+.,]!some input");
 
 	error = NULL;
 	success = cattle_program_load (program, buffer, &error);
@@ -195,7 +195,7 @@ test_program_load_with_input (void)
 	 * for comparison's purposes */
 	g_object_unref (buffer);
 	buffer = cattle_buffer_new (10);
-	cattle_buffer_set_contents (buffer, "some input");
+	cattle_buffer_set_contents (buffer, (gint8 *) "some input");
 
 	/* Match the parsed input with the expected one */
 	for (i = 0; i < 10; i++)
@@ -235,7 +235,7 @@ test_program_load_double_loop (void)
 	program = cattle_program_new ();
 
 	buffer = cattle_buffer_new (4);
-	cattle_buffer_set_contents (buffer, "[[]]");
+	cattle_buffer_set_contents (buffer, (gint8 *) "[[]]");
 
 	error = NULL;
 	success = cattle_program_load (program, buffer, &error);
