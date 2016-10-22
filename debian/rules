@@ -12,18 +12,16 @@ include /usr/share/dpkg/buildflags.mk
 # The build system is completely regenerated to ensure the tools used to
 # build the binary package are the ones shipped with Debian.
 override_dh_auto_configure:
-	@( \
-		gtkdocize --flavour no-tmpl; \
-		libtoolize -f; \
-		aclocal; \
-		autoheader -f; \
-		autoconf -f; \
-		automake -f -a --foreign; \
-		dh_auto_configure -- \
-		                  --disable-silent-rules \
-		                  --enable-introspection=yes \
-		                  --enable-gtk-doc; \
-	)
+	gtkdocize --flavour no-tmpl
+	libtoolize -f
+	aclocal
+	autoheader -f
+	autoconf -f
+	automake -f -a --foreign
+	dh_auto_configure -- \
+	                  --disable-silent-rules \
+	                  --enable-introspection=yes \
+	                  --enable-gtk-doc
 
 # Rebuild the patches series by looking at the contents of the
 # debian/patches directory.
