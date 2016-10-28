@@ -1,10 +1,18 @@
 cattle-1.0 (1.2.1-1) unstable; urgency=low
 
   * New upstream release
-  * Update Standards-Version to 3.9.8
-    - No changes needed
 
- -- Andrea Bolognani <eof@kiyuko.org>  Fri, 28 Oct 2016 22:51:13 +0200
+  * Updated patches
+    - D01-tweak-build-system.diff
+      - Don't skip examples during build
+
+  * Other
+    - Enable +bindnow hardening option
+    - Use HTTPS wherever possible
+    - Update Standards-Version to 3.9.8
+      - No changes needed
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Sat, 29 Oct 2016 00:09:30 +0200
 
 cattle-1.0 (1.2.0-1) unstable; urgency=low
 
