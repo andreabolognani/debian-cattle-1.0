@@ -1,10 +1,10 @@
-cattle-1.0 (1.2.1-1) unstable; urgency=medium
+cattle-1.0 (1.2.1-1) unstable; urgency=low
 
   * New upstream release
   * Update Standards-Version to 3.9.8
     - No changes needed
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sun, 16 Oct 2016 18:31:54 +0200
+ -- Andrea Bolognani <eof@kiyuko.org>  Fri, 28 Oct 2016 22:51:13 +0200
 
 cattle-1.0 (1.2.0-1) unstable; urgency=low
 
