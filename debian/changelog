@@ -6,13 +6,17 @@ cattle-1.0 (1.2.1-1) unstable; urgency=low
     - D01-tweak-build-system.diff
       - Don't skip examples during build
 
+  * debhelper
+    - Switch to compat level 10
+      - Parallel builds are now supported
+
   * Other
     - Enable +bindnow hardening option
     - Use HTTPS wherever possible
     - Update Standards-Version to 3.9.8
       - No changes needed
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sat, 29 Oct 2016 00:09:30 +0200
+ -- Andrea Bolognani <eof@kiyuko.org>  Sat, 29 Oct 2016 11:05:23 +0200
 
 cattle-1.0 (1.2.0-1) unstable; urgency=low
 
