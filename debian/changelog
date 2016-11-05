@@ -1,3 +1,9 @@
+cattle-1.0 (1.2.1-2) unstable; urgency=low
+
+  * Fix building twice in a row
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 06 Nov 2016 23:28:12 +0100
+
 cattle-1.0 (1.2.1-1) unstable; urgency=low
 
   * New upstream release
