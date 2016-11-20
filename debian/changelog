@@ -2,7 +2,11 @@ cattle-1.0 (1.2.1-2) unstable; urgency=low
 
   * Fix building twice in a row
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sun, 06 Nov 2016 23:28:12 +0100
+  * Multi-Arch
+    - Mark libcattle-1.0-dev as Multi-Arch: same
+    - Mark libcattle-1.0-doc as Multi-Arch: foreign
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 20 Nov 2016 22:47:26 +0100
 
 cattle-1.0 (1.2.1-1) unstable; urgency=low
 
