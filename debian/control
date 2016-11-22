@@ -3,7 +3,6 @@ Section: libs
 Priority: optional
 Maintainer: Andrea Bolognani <eof@kiyuko.org>
 Build-Depends: debhelper (>= 10),
-               dh-exec,
                gtk-doc-tools,
                autoconf,
                automake,
