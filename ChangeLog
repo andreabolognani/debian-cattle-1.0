@@ -1,3 +1,185 @@
+commit a61b186a3809e32d9d460b43c5de7f8090fba7e0
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Jan 11 23:50:42 2017 +0100
+
+    === Cattle 1.2.2 ===
+
+commit 5e782fdce587f83d1b8e9daeea077f5f19713efb
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Jan 10 23:58:37 2017 +0100
+
+    Bump version number
+
+ configure.ac | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 1fbb9b751df987f0d81e1b50b92675a3c86bbbd9
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Jan 10 23:58:00 2017 +0100
+
+    Update copyright years
+
+ cattle/cattle-buffer.c        | 2 +-
+ cattle/cattle-buffer.h        | 2 +-
+ cattle/cattle-configuration.c | 2 +-
+ cattle/cattle-configuration.h | 2 +-
+ cattle/cattle-constants.c     | 2 +-
+ cattle/cattle-constants.h     | 2 +-
+ cattle/cattle-error.c         | 2 +-
+ cattle/cattle-error.h         | 2 +-
+ cattle/cattle-instruction.c   | 2 +-
+ cattle/cattle-instruction.h   | 2 +-
+ cattle/cattle-interpreter.c   | 2 +-
+ cattle/cattle-interpreter.h   | 2 +-
+ cattle/cattle-program.c       | 2 +-
+ cattle/cattle-program.h       | 2 +-
+ cattle/cattle-tape.c          | 2 +-
+ cattle/cattle-tape.h          | 2 +-
+ cattle/cattle-version.c       | 2 +-
+ cattle/cattle-version.h.in    | 2 +-
+ cattle/cattle.h               | 2 +-
+ examples/common.c             | 2 +-
+ examples/common.h             | 2 +-
+ examples/indent.c             | 2 +-
+ examples/minimize.c           | 2 +-
+ examples/run.c                | 2 +-
+ tests/buffer.c                | 2 +-
+ tests/interpreter.c           | 2 +-
+ tests/program.c               | 2 +-
+ tests/references.c            | 2 +-
+ tests/tape.c                  | 2 +-
+ 29 files changed, 29 insertions(+), 29 deletions(-)
+
+commit ed970a39b965b6885db5b9cb54d5751cf491f44c
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Wed Jan 11 23:46:25 2017 +0100
+
+    Add release dates to NEWS file
+
+ NEWS.markdown | 40 ++++++++++++++++++++--------------------
+ 1 file changed, 20 insertions(+), 20 deletions(-)
+
+commit 3a7802e7a11f2a04f4d55e0578082f4a24d8e6b0
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Jan 10 22:40:33 2017 +0100
+
+    Update NEWS.markdown
+
+ NEWS.markdown | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+commit dd5c81d80f2e07f597706c456d07e9abd836dc42
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sat Dec 31 13:12:05 2016 +0100
+
+    Enable compilation warnings
+    
+    Always compile with -Wall -Wextra to prevent code quality
+    issues from slipping through the cracks during development.
+
+ cattle/Makefile.am   | 4 ++++
+ configure.ac         | 8 ++++++++
+ examples/Makefile.am | 4 ++++
+ tests/Makefile.am    | 4 ++++
+ 4 files changed, 20 insertions(+)
+
+commit 46d075a3bf603b3a1f9b524b8f32d7bbd9861af6
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Sat Dec 31 12:00:27 2016 +0100
+
+    Don't use G_DISABLE_SINGLE_INCLUDES
+    
+    Support for this compilation flag has been removed in modern
+    GLib versions.
+
+ cattle/Makefile.am | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 30fcf5cbddd889cdb43807e088f1ee9c5d10ad88
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Fri Dec 30 19:45:59 2016 +0100
+
+    Fix type mismatch
+
+ tests/program.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+commit f9873cb59eebec2136614ba5a6c36d9819e9e35b
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Fri Dec 30 19:33:53 2016 +0100
+
+    Fix indentation issues
+
+ cattle/cattle-interpreter.c | 16 ++++++++--------
+ 1 file changed, 8 insertions(+), 8 deletions(-)
+
+commit e87ec06094ddc30fde263349883bcaf72cf88422
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Fri Dec 30 19:26:37 2016 +0100
+
+    Use correct type for input_offset
+    
+    input_offset needs to be able to represent an arbitrary
+    offset inside a CattleBuffer, so it should be gulong rather
+    than gint.
+
+ cattle/cattle-interpreter.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit b5a16e2c6451cd21aec00a329c7d28810648c2ce
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Fri Dec 30 19:20:30 2016 +0100
+
+    Silence compiler warnings
+    
+    Remove unused variables and functions, mark unused
+    arguments with G_GNUC_UNUSED and initialize variables
+    that gcc thinks might end up being used uninitialized.
+
+ cattle/cattle-interpreter.c | 10 ++---
+ cattle/cattle-tape.c        |  4 +-
+ tests/interpreter.c         | 93 ++++++++++++++++++---------------------------
+ tests/tape.c                |  2 -
+ 4 files changed, 44 insertions(+), 65 deletions(-)
+
+commit 967580541e9af6411ab9f0fc9b6274b1142b068a
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Thu Dec 1 17:33:20 2016 +0100
+
+    Distribute INSTALL.markdown
+
+ Makefile.am | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+commit 8af9f0d6c60ff4c96e8ee5766aecae8e49caf522
+Author: Andrea Bolognani <eof@kiyuko.org>
+Date:   Tue Oct 4 00:22:57 2016 +0200
+
+    Add Resources section to README
+    
+    It's been pointed out that GitHub considers every tag in a
+    repository to be a "release", and automatically lists it in
+    a specific section on the project's page.
+    
+    Additionaly, for each such "release", it provide links that
+    can be used to download the contents of the repository at the
+    time the tag was created.
+    
+    However, those contents are neither enough to build Cattle
+    directly (generated files have, rightfully, never been checked
+    into Git) nor to initialize the build system properly, which
+    makes the archives created this way all but useless.
+    
+    Include a new section in the README that explains where to get
+    proper release archives, plus other information about
+    obtaining Cattle.
+    
+    At the same time get rid of the Contacts section, which was
+    never very useful.
+
+ README.markdown | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
+
 commit 338a34f7abc35334afd378f305c6e1fb0d0abd7d
 Author: Andrea Bolognani <eof@kiyuko.org>
 Date:   Sun Sep 11 21:55:46 2016 +0200

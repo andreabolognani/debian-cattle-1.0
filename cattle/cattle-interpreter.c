@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -77,7 +77,7 @@ struct _CattleInterpreterPrivate
 
 	gboolean             had_input;
 	CattleBuffer        *input;
-	gint                 input_offset;
+	gulong               input_offset;
 	gboolean             end_of_input_reached;
 };
 
@@ -289,6 +289,7 @@ run (CattleInterpreter  *self,
 			case CATTLE_INSTRUCTION_READ:
 
 				quantity = cattle_instruction_get_quantity (current);
+				temp = 0;
 
 				for (i = 0; i < quantity; i++)
 				{
@@ -310,7 +311,7 @@ run (CattleInterpreter  *self,
 							/* Current input buffer not consumed.
 							 * Get a value from the buffer and move forward */
 							temp = cattle_buffer_get_value (priv->input,
-											priv->input_offset);
+							                                priv->input_offset);
 							priv->input_offset++;
 						}
 						else
@@ -331,8 +332,8 @@ run (CattleInterpreter  *self,
 								 * input buffer */
 								inner_error = NULL;
 								success = (*input_handler) (self,
-											    priv->input_handler_data,
-											    &inner_error);
+								                            priv->input_handler_data,
+								                            &inner_error);
 								success &= (inner_error == NULL);
 
 								/* Handle input errors */
@@ -345,14 +346,14 @@ run (CattleInterpreter  *self,
 									if (inner_error == NULL)
 									{
 										g_set_error_literal (error,
-												     CATTLE_ERROR,
-												     CATTLE_ERROR_IO,
-												     "Unknown I/O error");
+										                     CATTLE_ERROR,
+										                     CATTLE_ERROR_IO,
+										                     "Unknown I/O error");
 									}
 									else
 									{
 										g_propagate_error (error,
-												   inner_error);
+										                   inner_error);
 									}
 
 									g_object_unref (current);
@@ -367,7 +368,7 @@ run (CattleInterpreter  *self,
 								{
 									/* Some input was retrieved */
 									temp = cattle_buffer_get_value (priv->input,
-													priv->input_offset);
+									                                priv->input_offset);
 									priv->input_offset++;
 								}
 								else
@@ -559,7 +560,6 @@ cattle_interpreter_run (CattleInterpreter  *self,
 {
 	CattleInterpreterPrivate *priv;
 	CattleProgram            *program;
-	CattleInstruction        *instruction;
 	gboolean                  success;
 
 	g_return_val_if_fail (CATTLE_IS_INTERPRETER (self), FALSE);
@@ -925,7 +925,7 @@ cattle_interpreter_set_debug_handler (CattleInterpreter  *self,
 
 static gboolean
 default_input_handler (CattleInterpreter  *self,
-                       gpointer            data,
+                       gpointer            data G_GNUC_UNUSED,
                        GError            **error)
 {
 	CattleBuffer *input;
@@ -957,9 +957,9 @@ default_input_handler (CattleInterpreter  *self,
 }
 
 static gboolean
-default_output_handler (CattleInterpreter  *self,
+default_output_handler (CattleInterpreter  *self G_GNUC_UNUSED,
                         gint8               output,
-                        gpointer            data,
+                        gpointer            data G_GNUC_UNUSED,
                         GError            **error)
 {
 	gint8 buffer[1];
@@ -980,7 +980,7 @@ default_output_handler (CattleInterpreter  *self,
 
 static gboolean
 default_debug_handler (CattleInterpreter  *self,
-                       gpointer            data,
+                       gpointer            data G_GNUC_UNUSED,
                        GError            **error)
 {
 	CattleTape *tape;

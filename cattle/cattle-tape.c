@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -114,7 +114,7 @@ cattle_tape_init (CattleTape *self)
 
 static void
 chunk_unref (gpointer chunk,
-             gpointer data)
+             gpointer data G_GNUC_UNUSED)
 {
 	g_object_unref (G_OBJECT (chunk));
 }
@@ -139,7 +139,7 @@ cattle_tape_dispose (GObject *object)
 
 static void
 bookmark_free (gpointer bookmark,
-               gpointer data)
+               gpointer data G_GNUC_UNUSED)
 {
 	g_free (bookmark);
 }
