@@ -9,7 +9,7 @@ Index: cattle-1.0.git/Makefile.am
 ===================================================================
 --- cattle-1.0.git.orig/Makefile.am
 +++ cattle-1.0.git/Makefile.am
-@@ -24,23 +24,8 @@ dist_doc_DATA = \
+@@ -28,23 +28,8 @@ EXTRA_DIST = \
  	$(NULL)
  
  CLEANFILES = \
