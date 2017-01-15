@@ -316,6 +316,7 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
+WARN_CFLAGS = @WARN_CFLAGS@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
 abs_top_builddir = @abs_top_builddir@
@@ -376,8 +377,11 @@ AM_CPPFLAGS = \
 	-I$(top_builddir) \
 	-DCATTLE_COMPILATION \
 	-DG_DISABLE_DEPRECATED \
-	-DG_DISABLE_SINGLE_INCLUDES \
 	-DG_LOG_DOMAIN=\"Cattle\" \
+	$(NULL)
+
+AM_CFLAGS = \
+	$(WARN_CFLAGS) \
 	$(NULL)
 
 AM_LDFLAGS = \

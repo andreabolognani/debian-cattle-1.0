@@ -1,5 +1,5 @@
 /* tape - Check the tape reports the correct size limits
- * Copyright (C) 2008-2016  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -341,7 +341,6 @@ test_tape_positive_wrap (void)
 {
 	CattleTape *tape;
 	gint range = G_MAXINT8 - G_MININT8 + 1;
-	gint i;
 
 	tape = cattle_tape_new ();
 
@@ -372,7 +371,6 @@ test_tape_negative_wrap (void)
 {
 	CattleTape *tape;
 	gint range = G_MAXINT8 - G_MININT8 + 1;
-	gint i;
 
 	tape = cattle_tape_new ();
 
