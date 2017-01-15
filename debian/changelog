@@ -1,4 +1,6 @@
-cattle-1.0 (1.2.1-2) unstable; urgency=low
+cattle-1.0 (1.2.2-1) unstable; urgency=low
+
+  * New upstream release
 
   * Fix building twice in a row
 
@@ -10,7 +12,7 @@ cattle-1.0 (1.2.1-2) unstable; urgency=low
     - Drop Build-Depends on dh-exec
     - Introduce safeguards against unnoticed SONAME bumps
 
- -- Andrea Bolognani <eof@kiyuko.org>  Tue, 22 Nov 2016 23:40:46 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 15 Jan 2017 16:17:06 +0100
 
 cattle-1.0 (1.2.1-1) unstable; urgency=low
 
