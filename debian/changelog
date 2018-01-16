@@ -1,3 +1,10 @@
+cattle-1.0 (1.2.2-2) unstable; urgency=low
+
+  * Security
+    - Use https:// for upstream URLs
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Tue, 16 Jan 2018 23:01:05 +0100
+
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
   * New upstream release
