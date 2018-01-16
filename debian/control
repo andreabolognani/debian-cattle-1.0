@@ -39,9 +39,9 @@ Multi-Arch: same
 Depends: libcattle-1.0-0 (= ${binary:Version}),
          gir1.2-cattle-1.0 (= ${binary:Version}),
          libglib2.0-dev,
-         pkg-config,
          ${misc:Depends}
-Suggests: libcattle-1.0-doc (>= ${binary:Version})
+Recommends: pkg-config
+Suggests: libcattle-1.0-doc (>= ${binary:Version}),
 Description: Brainfuck language toolkit (development files)
  Cattle is a GObject-based library that allows one to inspect
  Brainfuck programs in various ways, and to easily embed a
