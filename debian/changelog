@@ -1,9 +1,12 @@
 cattle-1.0 (1.2.2-2) unstable; urgency=low
 
+  * debhelper
+    - Enable gir addon
+
   * Security
     - Use https:// for upstream URLs
 
- -- Andrea Bolognani <eof@kiyuko.org>  Tue, 16 Jan 2018 23:01:05 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Tue, 16 Jan 2018 23:03:22 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
