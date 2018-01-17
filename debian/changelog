@@ -11,9 +11,10 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
 
   * Other
     - Update Standards-Version to 4.0.0
+      - Support nodoc in $DEB_BUILD_OPTIONS
       - Use Format: https://... in Debian copyright file
 
- -- Andrea Bolognani <eof@kiyuko.org>  Wed, 17 Jan 2018 23:43:34 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 21 Jan 2018 15:51:37 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 

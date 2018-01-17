@@ -3,6 +3,9 @@
 DEB_BUILD_MAINT_OPTIONS=hardening=+bindnow
 DPKG_EXPORT_BUILDFLAGS=1
 include /usr/share/dpkg/buildflags.mk
+ifeq (,$(filter nodoc,$(DEB_BUILD_OPTIONS)))
+	doc_options = --enable-gtk-doc=yes
+endif
 
 %:
 	dh $@ --with=gir
@@ -28,7 +31,21 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 	                  --disable-silent-rules \
 	                  --enable-introspection=yes \
-	                  --enable-gtk-doc
+	                  $(doc_options)
+
+# Install files into packages.
+#
+# We need to take partial control here to decide whether to ship API
+# documentation inside the -doc package based on whether the nodoc build
+# option is being used. All other binary packages have a corresponding
+# debian/*.install file and will be taken care of by calling dh_install
+# without arguments.
+override_dh_install:
+	dh_install
+ifneq (,$(doc_options))
+	dh_install --package=libcattle-1.0-doc \
+	           usr/share/gtk-doc/html/cattle-1.0
+endif
 
 # Rebuild the patches series by looking at the contents of the
 # debian/patches directory.
