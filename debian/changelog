@@ -11,8 +11,9 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
 
   * Other
     - Update Standards-Version to 4.0.0
+      - Use Format: https://... in Debian copyright file
 
- -- Andrea Bolognani <eof@kiyuko.org>  Wed, 17 Jan 2018 23:40:42 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Wed, 17 Jan 2018 23:43:34 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
