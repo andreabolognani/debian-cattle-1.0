@@ -44,7 +44,7 @@ override_dh_install:
 	dh_install
 ifneq (,$(doc_options))
 	dh_install --package=libcattle-1.0-doc \
-	           usr/share/gtk-doc/html/cattle-1.0
+	           usr/share/gtk-doc/html/cattle-1.0/
 endif
 
 # Install changelogs.

@@ -1,2 +1,2 @@
-usr/lib/*/libcattle-1.0.so.0
-usr/lib/*/libcattle-1.0.so.0.*
+usr/lib/*/*.so.0
+usr/lib/*/*.so.0.*

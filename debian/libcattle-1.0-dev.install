@@ -1,4 +1,4 @@
-usr/include/cattle-1.0/cattle/*.h
-usr/share/gir-1.0/Cattle-1.0.gir
+usr/include/cattle-1.0/
 usr/lib/*/*.so
-usr/lib/*/pkgconfig/*.pc
+usr/lib/*/pkgconfig/
+usr/share/gir-1.0/
