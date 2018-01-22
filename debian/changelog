@@ -4,6 +4,7 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
     - Downgrade pkg-config from Depends: to Recommends: for -dev
 
   * debhelper
+    - Switch to compat level 11
     - Enable gir addon
 
   * Security
@@ -14,7 +15,7 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
       - Support nodoc in $DEB_BUILD_OPTIONS
       - Use Format: https://... in Debian copyright file
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sun, 21 Jan 2018 17:32:19 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Mon, 22 Jan 2018 23:22:14 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
