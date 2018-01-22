@@ -15,8 +15,9 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
       - Support nodoc in $DEB_BUILD_OPTIONS
       - Use Format: https://... in Debian copyright file
     - Permit Rules-Requires-Root: no
+    - Point Vcs-*: to salsa.debian.org
 
- -- Andrea Bolognani <eof@kiyuko.org>  Mon, 22 Jan 2018 23:45:35 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Mon, 22 Jan 2018 23:52:22 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
