@@ -1,0 +1,2 @@
+Tests: smoke
+Depends: libcattle-1.0-0, beef

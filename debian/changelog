@@ -3,6 +3,9 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
   * Changes to package relationships
     - Downgrade pkg-config from Depends: to Recommends: for -dev
 
+  * autopkgtest
+    - Add smoke test
+
   * debhelper
     - Switch to compat level 11
     - Enable gir addon
@@ -17,7 +20,7 @@ cattle-1.0 (1.2.2-2) unstable; urgency=low
     - Permit Rules-Requires-Root: no
     - Point Vcs-*: to salsa.debian.org
 
- -- Andrea Bolognani <eof@kiyuko.org>  Mon, 22 Jan 2018 23:52:22 +0100
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 28 Jan 2018 18:44:15 +0100
 
 cattle-1.0 (1.2.2-1) unstable; urgency=low
 
