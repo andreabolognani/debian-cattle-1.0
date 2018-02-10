@@ -1,35 +1,18 @@
 Description: Tweak build system
- The ChangeLog must not be regenerated because otherwise building the
- package from a clone of the package repository would overwrite the one
- shipped in the tarball.
+ We need to make sure the ChangeLog is not deleted, because
+ otherwise building twice in a row would fail.
 Forwarded: not-needed
 Author: Andrea Bolognani <eof@kiyuko.org>
-Last-Update: 2016-10-22
+Last-Update: 2018-02-10
 Index: cattle-1.0.git/Makefile.am
 ===================================================================
 --- cattle-1.0.git.orig/Makefile.am
 +++ cattle-1.0.git/Makefile.am
-@@ -28,23 +28,8 @@ EXTRA_DIST = \
+@@ -28,7 +28,6 @@ EXTRA_DIST = \
  	$(NULL)
  
  CLEANFILES = \
 -	ChangeLog \
  	$(NULL)
  
--ChangeLog:
--	$(AM_V_GEN) \
--	if test -d "$(top_srcdir)/.git"; \
--	then \
--	  GIT_DIR="$(top_srcdir)/.git" \
--	  $(top_srcdir)/missing \
--	    --run git log --color=never --stat \
--	  >$@.tmp \
--	  && mv -f $@.tmp $@ \
--	  || ( $(RM) -f $@.tmp; false ) \
--	fi
--
--.PHONY: ChangeLog
--
- DISTCHECK_CONFIGURE_FLAGS = \
- 	--enable-introspection=yes \
- 	--enable-gtk-doc \
+ ChangeLog:
