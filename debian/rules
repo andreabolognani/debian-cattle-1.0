@@ -26,7 +26,6 @@ override_dh_autoreconf:
 # pass a couple of parameters ourselves
 override_dh_auto_configure:
 	dh_auto_configure -- \
-	                  --disable-silent-rules \
 	                  --enable-introspection=yes \
 	                  --enable-gtk-doc=yes
 
