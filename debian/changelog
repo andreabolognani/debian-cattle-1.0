@@ -1,11 +1,10 @@
 cattle-1.0 (1.2.2-3) unstable; urgency=low
 
-  * Other
-    - Update Standards-Version to 4.1.4
-      - No changes needed
-    - Adapt watch file to new download URLs
+  * Update Standards-Version to 4.1.4
+    - No changes needed
+  * Adapt watch file to new download URLs
 
- -- Andrea Bolognani <eof@kiyuko.org>  Sun, 01 Jul 2018 15:46:38 +0200
+ -- Andrea Bolognani <eof@kiyuko.org>  Sun, 01 Jul 2018 17:05:08 +0200
 
 cattle-1.0 (1.2.2-2) unstable; urgency=low
 
