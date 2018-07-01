@@ -1,7 +1,4 @@
 version=4
-opts=\
-filenamemangle=s/^.*\/@ANY_VERSION@\/.*$/cattle-$1.tar.gz/,\
-pgpsigurlmangle=s/^(.*)\/source$/$1\/signature/ \
-\
+opts=pgpmode=auto \
 https://kiyuko.org/software/cattle/releases \
-^/software/cattle/releases/@ANY_VERSION@/source$
+  ^.*/cattle-@ANY_VERSION@\.tar\.gz$
