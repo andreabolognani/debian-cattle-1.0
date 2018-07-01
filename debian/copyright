@@ -1,7 +1,7 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Cattle
 Upstream-Contact: Andrea Bolognani <eof@kiyuko.org>
-Source: https://kiyuko.org/software/cattle
+Source: https://kiyuko.org/software/cattle/releases
 
 Files: *
 Copyright: 2008-2017, Andrea Bolognani <eof@kiyuko.org>
