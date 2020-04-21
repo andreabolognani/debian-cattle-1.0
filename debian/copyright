@@ -4,11 +4,11 @@ Upstream-Contact: Andrea Bolognani <eof@kiyuko.org>
 Source: https://kiyuko.org/software/cattle/releases
 
 Files: *
-Copyright: 2008-2017, Andrea Bolognani <eof@kiyuko.org>
+Copyright: 2008-2020, Andrea Bolognani <eof@kiyuko.org>
 License: GPL-2+
 
 Files: debian/*
-Copyright: 2012-2018, Andrea Bolognani <eof@kiyuko.org>
+Copyright: 2012-2020, Andrea Bolognani <eof@kiyuko.org>
 License: GPL-2+
 
 License: GPL-2+
