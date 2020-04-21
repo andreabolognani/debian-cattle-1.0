@@ -16,13 +16,20 @@ BUILDDIR = $(CURDIR)/debian/build
 #
 # The build system is completely regenerated to ensure the tools used to
 # build the binary package are the ones shipped with Debian.
+#
+# We need to intialize gtk-doc explicitly because autoreconf doesn't do
+# that for us.
 override_dh_autoreconf:
-	gtkdocize --flavour no-tmpl
-	libtoolize -f
-	aclocal
-	autoheader -f
-	autoconf -f
-	automake -f -a --foreign
+	gtkdocize
+	dh_autoreconf
+
+# Clean up the build system.
+#
+# Most files are handled for us automatically, but once again we have
+# to take care of gtk-doc ourselves.
+override_dh_autoreconf_clean:
+	rm -f gtk-doc.*
+	dh_autoreconf_clean
 
 # Call configure
 #
