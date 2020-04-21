@@ -35,12 +35,21 @@ override_dh_auto_configure:
 	                  --enable-gtk-doc=yes
 
 # Prepare files.
+#
+# The upstream build system mostly does the right thing, but we still
+# want to move some files around to make things easier for debhelper
+# tools that are called later.
 override_dh_auto_install:
 	dh_auto_install --destdir $(DESTDIR)
+	mv $(DESTDIR)/usr/share/doc/cattle-1.0/NEWS.rst \
+	   $(DESTDIR)/usr/share/doc/cattle-1.0/NEWS
 
-# Install changelogs.
+# Install documentation.
 #
-# Upstream's NEWS.markdown is much more useful to end users than
-# upstream's ChangeLog, so install that as changelog instead.
-override_dh_installchangelogs:
-	dh_installchangelogs NEWS.markdown
+# debhelper's automatic detection results in the release notes for
+# the -doc package ending up in a directory named after the -dev
+# package, which is clearly not what we want, so we have to be a bit
+# more hands-on here.
+override_dh_installdocs:
+	dh_installdocs -plibcattle-1.0-doc --doc-main-package libcattle-1.0-doc
+	dh_installdocs -Nlibcattle-1.0-doc
