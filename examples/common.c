@@ -1,5 +1,5 @@
 /* common - Useful, general purpose routines
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -13,10 +13,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #include <gio/gio.h>
@@ -26,58 +25,53 @@ CattleBuffer*
 read_file_contents (const gchar  *path,
                     GError      **error)
 {
-	CattleBuffer *buffer;
-	GFile        *file;
-	GError       *inner_error;
-	gchar        *contents;
-	gint8        *start;
-	gsize         length;
-	gboolean      success;
+    CattleBuffer      *buffer;
+    g_autoptr (GFile)  file = NULL;
+    g_autofree gchar  *contents = NULL;
+    GError            *inner_error;
+    gint8             *start;
+    gsize              length;
+    gboolean           success;
 
-	g_return_val_if_fail (path != NULL, NULL);
-	g_return_val_if_fail (error == NULL || *error == NULL, NULL);
+    g_return_val_if_fail (path != NULL, NULL);
+    g_return_val_if_fail (error == NULL || *error == NULL, NULL);
 
-	file = g_file_new_for_commandline_arg (path);
+    file = g_file_new_for_commandline_arg (path);
 
-	inner_error = NULL;
-	success = g_file_load_contents (file,
-	                                NULL,
-	                                &contents,
-	                                &length,
-	                                NULL,
-	                                &inner_error);
+    inner_error = NULL;
+    success = g_file_load_contents (file,
+                                    NULL,
+                                    &contents,
+                                    &length,
+                                    NULL,
+                                    &inner_error);
 
-	if (!success)
-	{
-		g_propagate_error (error,
-		                   inner_error);
+    if (!success)
+    {
+        g_propagate_error (error,
+                           inner_error);
 
-		g_object_unref (file);
+        return NULL;
+    }
 
-		return NULL;
-	}
+    start = (gint8 *) contents;
 
-	start = (gint8 *) contents;
+    /* Skip the sha-bang line if present */
+    if (length >= 2 && contents[0] == '#' && contents[1] == '!')
+    {
+        while (length > 0 && start[0] != '\n')
+        {
+            start++;
+            length--;
+        }
+    }
 
-	/* Skip the sha-bang line if present */
-	if (length >= 2 && contents[0] == '#' && contents[1] == '!')
-	{
-		while (length > 0 && start[0] != '\n')
-		{
-			start++;
-			length--;
-		}
-	}
+    buffer = cattle_buffer_new (length);
 
-	buffer = cattle_buffer_new (length);
+    if (length > 0)
+    {
+        cattle_buffer_set_contents (buffer, start);
+    }
 
-	if (length > 0)
-	{
-		cattle_buffer_set_contents (buffer, start);
-	}
-
-	g_free (contents);
-	g_object_unref (file);
-
-	return buffer;
+    return buffer;
 }

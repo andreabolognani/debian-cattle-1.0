@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #if !defined (__CATTLE_H_INSIDE__) && !defined (CATTLE_COMPILATION)
@@ -39,9 +38,9 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-	CATTLE_END_OF_INPUT_ACTION_STORE_ZERO,
-	CATTLE_END_OF_INPUT_ACTION_STORE_EOF,
-	CATTLE_END_OF_INPUT_ACTION_DO_NOTHING
+    CATTLE_END_OF_INPUT_ACTION_STORE_ZERO,
+    CATTLE_END_OF_INPUT_ACTION_STORE_EOF,
+    CATTLE_END_OF_INPUT_ACTION_DO_NOTHING
 } CattleEndOfInputAction;
 
 typedef struct _CattleConfiguration        CattleConfiguration;
@@ -50,13 +49,13 @@ typedef struct _CattleConfigurationPrivate CattleConfigurationPrivate;
 
 struct _CattleConfiguration
 {
-	GObject parent;
-	CattleConfigurationPrivate *priv;
+    GObject parent;
+    CattleConfigurationPrivate *priv;
 };
 
 struct _CattleConfigurationClass
 {
-	GObjectClass parent;
+    GObjectClass parent;
 };
 
 CattleConfiguration*    cattle_configuration_new                     (void);
@@ -68,6 +67,8 @@ void                    cattle_configuration_set_debug_is_enabled    (CattleConf
 gboolean                cattle_configuration_get_debug_is_enabled    (CattleConfiguration    *configuration);
 
 GType                   cattle_configuration_get_type                (void) G_GNUC_CONST;
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CattleConfiguration, g_object_unref)
 
 G_END_DECLS
 

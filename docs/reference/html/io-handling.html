@@ -8,7 +8,7 @@
 <link rel="up" href="ch04.html" title="Miscellaneous Topics">
 <link rel="prev" href="ch04.html" title="Miscellaneous Topics">
 <link rel="next" href="api-index-full.html" title="API Index">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -25,63 +25,63 @@
 <td valign="top">
 <h2><span class="refentrytitle">I/O Handling</span></h2>
 <p>I/O Handling — 
-			Explanation of the way Cattle performs I/O
-		</p>
+            Explanation of the way Cattle performs I/O
+        </p>
 </td>
 <td class="gallery_image" valign="top" align="right"></td>
 </tr></table></div>
 <div class="refsect2">
 <a name="id-1.5.2.3"></a><h3>I/O Basics</h3>
 <p>
-			Cattle uses an I/O mechanism which allows for a huge degree
-			of flexibility while remaining relatively simple.
-		</p>
+            Cattle uses an I/O mechanism which allows for a huge degree
+            of flexibility while remaining relatively simple.
+        </p>
 <p>
-			The I/O mechanism is based on callbacks: every time a
-			<a class="link" href="CattleInterpreter.html" title="CattleInterpreter">CattleInterpreter</a>
-			executes a Brainfuck instruction which requires some sort of
-			I/O, it invokes a user provided handler, and expects it to
-			perform the I/O operation.
-		</p>
+            The I/O mechanism is based on callbacks: every time a
+            <a class="link" href="CattleInterpreter.html" title="CattleInterpreter">CattleInterpreter</a>
+            executes a Brainfuck instruction which requires some sort of
+            I/O, it invokes a user provided handler, and expects it to
+            perform the I/O operation.
+        </p>
 <p>
-			Default I/O handlers are built into Cattle, so usually there
-			is no need to define a custom handler.
-		</p>
+            Default I/O handlers are built into Cattle, so usually there
+            is no need to define a custom handler.
+        </p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="id-1.5.2.4"></a><h3>Error reporting</h3>
 <p>
-			Since I/O is not guaranteed to always be succesful, handlers
-			are provided a mean to report errors to the caller.
-		</p>
+            Since I/O is not guaranteed to always be succesful, handlers
+            are provided a mean to report errors to the caller.
+        </p>
 <p>
-			All handlers are passed a <a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#GError">GError</a>
-			as last argument: if a handler fails, it is required to return
-			<a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a> and to fill the
-			error with detailed information.
-		</p>
+            All handlers are passed a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError">GError</a>
+            as last argument: if a handler fails, it is required to return
+            <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS">FALSE</a> and to fill the
+            error with detailed information.
+        </p>
 <p>
-			If the hanler returns <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a>, but
-			the error is set, the operation is not considered succesful;
-			this is because handlers written in languages other than C might
-			not be able to both return a value and fill the error at the
-			same time.
-		</p>
+            If the handler returns <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS">TRUE</a>, but
+            the error is set, the operation is not considered succesful;
+            this is because handlers written in languages other than C might
+            not be able to both return a value and fill the error at the
+            same time.
+        </p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="id-1.5.2.5"></a><h3>Output handler</h3>
 <p>
-			Implementing an output handler is pretty straightforward: the
-			handler is passed a single <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gint8">gint8</a>
-			and has to display it to the user in some way.
-		</p>
+            Implementing an output handler is pretty straightforward: the
+            handler is passed a single <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint8">gint8</a>
+            and has to display it to the user in some way.
+        </p>
 <p>
-			As an example, here is an handler which shows the output of
-			a Brainfuck program on a
-			GtkTextView:
-		</p>
+            As an example, here is an handler which shows the output of
+            a Brainfuck program on a
+            <a href="/usr/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct">GtkTextView</a>:
+        </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -117,47 +117,47 @@
 29
 30
 31</pre></td>
-        <td class="listing_code"><pre class="programlisting">gboolean
-<span class="function">output_handler</span> <span class="gtkdoc opt">(</span>CattleInterpreter  <span class="gtkdoc opt">*</span>interpreter<span class="gtkdoc opt">,</span>
-                gint8               output<span class="gtkdoc opt">,</span>
-                gpointer            data<span class="gtkdoc opt">,</span>
-                GError            <span class="gtkdoc opt">**</span>error<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-	GtkTextView   <span class="gtkdoc opt">*</span>view<span class="gtkdoc opt">;</span>
-	GtkTextBuffer <span class="gtkdoc opt">*</span>buffer<span class="gtkdoc opt">;</span>
-	GtkTextIter    iter<span class="gtkdoc opt">;</span>
-	gchar          text<span class="gtkdoc opt">[</span><span class="number">2</span><span class="gtkdoc opt">];</span>
+        <td class="listing_code"><pre class="programlisting"><span class="n">gboolean</span>
+<span class="nf">output_handler</span> <span class="p">(</span><span class="n">CattleInterpreter</span>  <span class="o">*</span><span class="n">interpreter</span><span class="p">,</span>
+                <span class="n">gint8</span>               <span class="n">output</span><span class="p">,</span>
+                <span class="n">gpointer</span>            <span class="n">data</span><span class="p">,</span>
+                <span class="n">GError</span>            <span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">GtkTextView</span>   <span class="o">*</span><span class="n">view</span><span class="p">;</span>
+    <span class="n">GtkTextBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
+    <span class="n">GtkTextIter</span>    <span class="n">iter</span><span class="p">;</span>
+    <span class="n">gchar</span>          <span class="n">text</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
 
-	view <span class="gtkdoc opt">=</span> <span class="function">GTK_TEXT_VIEW</span> <span class="gtkdoc opt">(</span>data<span class="gtkdoc opt">);</span>
+    <span class="n">view</span> <span class="o">=</span> <span class="n">GTK_TEXT_VIEW</span> <span class="p">(</span><span class="n">data</span><span class="p">);</span>
 
-	<span class="comment">/* Get the buffer used by the GtkTextView */</span>
-	buffer <span class="gtkdoc opt">=</span> <span class="function">gtk_text_view_get_buffer</span> <span class="gtkdoc opt">(</span>view<span class="gtkdoc opt">);</span>
-	<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-ref">g_object_ref</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">);</span>
+    <span class="cm">/* Get the buffer used by the GtkTextView */</span>
+    <span class="n">buffer</span> <span class="o">=</span> <span class="n">gtk_text_view_get_buffer</span> <span class="p">(</span><span class="n">view</span><span class="p">);</span>
+    <span class="n">g_object_ref</span> <span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-	<span class="comment">/* Get a reference to the end of the buffer */</span>
-	<span class="function">gtk_text_buffer_get_end_iter</span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">, &amp;</span>iter<span class="gtkdoc opt">);</span>
+    <span class="cm">/* Get a reference to the end of the buffer */</span>
+    <span class="n">gtk_text_buffer_get_end_iter</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iter</span><span class="p">);</span>
 
-	<span class="comment">/* Create a string */</span>
-	text<span class="gtkdoc opt">[</span><span class="number">0</span><span class="gtkdoc opt">] = (</span>gchat<span class="gtkdoc opt">)</span> output<span class="gtkdoc opt">;</span>
-	text<span class="gtkdoc opt">[</span><span class="number">1</span><span class="gtkdoc opt">] =</span> <span class="string">'\0'</span><span class="gtkdoc opt">;</span>
+    <span class="cm">/* Create a string */</span>
+    <span class="n">text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">gchat</span><span class="p">)</span> <span class="n">output</span><span class="p">;</span>
+    <span class="n">text</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
 
-	<span class="comment">/* Insert the char at the end of the buffer */</span>
-	<span class="function">gtk_text_buffer_insert</span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">, &amp;</span>iter<span class="gtkdoc opt">,</span> text<span class="gtkdoc opt">,</span> <span class="number">1</span><span class="gtkdoc opt">);</span>
+    <span class="cm">/* Insert the char at the end of the buffer */</span>
+    <span class="n">gtk_text_buffer_insert</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">iter</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 
-	<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">);</span>
+    <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-	<span class="keyword">return</span> TRUE<span class="gtkdoc opt">;</span>
-<span class="gtkdoc opt">}</span></pre></td>
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span></pre></td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <p>
-			The code assumes a GtkTextView
-			has been provided when the signal handler has been assigned to
-			the interpreter, like in the following code:
-		</p>
+            The code assumes a <a href="/usr/share/gtk-doc/html/gtk3/GtkTextView.html#GtkTextView-struct">GtkTextView</a>
+            has been provided when the signal handler has been assigned to
+            the interpreter, like in the following code:
+        </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -171,33 +171,33 @@
 7
 8
 9</pre></td>
-        <td class="listing_code"><pre class="programlisting">CattleInterpreter <span class="gtkdoc opt">*</span>interpreter<span class="gtkdoc opt">;</span>
-GtkWidget         <span class="gtkdoc opt">*</span>view<span class="gtkdoc opt">;</span>
+        <td class="listing_code"><pre class="programlisting"><span class="n">CattleInterpreter</span> <span class="o">*</span><span class="n">interpreter</span><span class="p">;</span>
+<span class="n">GtkWidget</span>         <span class="o">*</span><span class="n">view</span><span class="p">;</span>
 
-interpreter <span class="gtkdoc opt">=</span> <span class="function"><a href="CattleInterpreter.html#cattle-interpreter-new">cattle_interpreter_new</a></span> <span class="gtkdoc opt">();</span>
-view <span class="gtkdoc opt">=</span> <span class="function">gtk_text_view_new</span> <span class="gtkdoc opt">();</span>
+<span class="n">interpreter</span> <span class="o">=</span> <span class="n">cattle_interpreter_new</span> <span class="p">();</span>
+<span class="n">view</span> <span class="o">=</span> <span class="n">gtk_text_view_new</span> <span class="p">();</span>
 
-<span class="function"><a href="CattleInterpreter.html#cattle-interpreter-set-output-handler">cattle_interpreter_set_output_handler</a></span> <span class="gtkdoc opt">(</span>interpreter<span class="gtkdoc opt">,</span>
-                                       output_handler<span class="gtkdoc opt">,</span>
-                                       <span class="gtkdoc opt">(</span>gpointer<span class="gtkdoc opt">)</span> view<span class="gtkdoc opt">);</span></pre></td>
+<span class="n">cattle_interpreter_set_output_handler</span> <span class="p">(</span><span class="n">interpreter</span><span class="p">,</span>
+                                       <span class="n">output_handler</span><span class="p">,</span>
+                                       <span class="p">(</span><span class="n">gpointer</span><span class="p">)</span> <span class="n">view</span><span class="p">);</span></pre></td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <p>
-			Depending on the case, it may make sense for the application
-			to buffer an entire line of output, or even the whole output,
-			before sending it to its intended destination.
-		</p>
+            Depending on the case, it may make sense for the application
+            to buffer an entire line of output, or even the whole output,
+            before sending it to its intended destination.
+        </p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="id-1.5.2.6"></a><h3>Input handler</h3>
 <p>
-			Here is an input handler which uses readline to fetch input
-			from the user:
-		</p>
+            Here is an input handler which uses readline to fetch input
+            from the user:
+        </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -254,97 +254,97 @@ view <span class="gtkdoc opt">=</span> <span class="function">gtk_text_view_new<
 50
 51
 52</pre></td>
-        <td class="listing_code"><pre class="programlisting">gboolean
-<span class="function">input_handler</span> <span class="gtkdoc opt">(</span>CattleInterpreter  <span class="gtkdoc opt">*</span>interpreter<span class="gtkdoc opt">,</span>
-               gpointer            data<span class="gtkdoc opt">,</span>
-               GError            <span class="gtkdoc opt">**</span>error<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-	CattleBuffer <span class="gtkdoc opt">*</span>buffer<span class="gtkdoc opt">;</span>
-	gchar        <span class="gtkdoc opt">*</span>input<span class="gtkdoc opt">;</span>
-	gulong        size<span class="gtkdoc opt">;</span>
+        <td class="listing_code"><pre class="programlisting"><span class="n">gboolean</span>
+<span class="nf">input_handler</span> <span class="p">(</span><span class="n">CattleInterpreter</span>  <span class="o">*</span><span class="n">interpreter</span><span class="p">,</span>
+               <span class="n">gpointer</span>            <span class="n">data</span><span class="p">,</span>
+               <span class="n">GError</span>            <span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CattleBuffer</span> <span class="o">*</span><span class="n">buffer</span><span class="p">;</span>
+    <span class="n">gchar</span>        <span class="o">*</span><span class="n">input</span><span class="p">;</span>
+    <span class="n">gulong</span>        <span class="n">size</span><span class="p">;</span>
 
-	<span class="comment">/* Read an input line using readline (no prompt) */</span>
-	input <span class="gtkdoc opt">=</span> <span class="function">readline</span> <span class="gtkdoc opt">(</span>NULL<span class="gtkdoc opt">);</span>
+    <span class="cm">/* Read an input line using readline (no prompt) */</span>
+    <span class="n">input</span> <span class="o">=</span> <span class="n">readline</span> <span class="p">(</span><span class="nb">NULL</span><span class="p">);</span>
 
-	<span class="keyword">if</span> <span class="gtkdoc opt">(</span>input <span class="gtkdoc opt">!=</span> NULL<span class="gtkdoc opt">)</span>
-	<span class="gtkdoc opt">{</span>
-		<span class="comment">/* A line of input has been read successfully, but it</span>
-<span class="comment">		 * needs to be copied into a CattleBuffer before</span>
-<span class="comment">		 * feeding it to the interpreter. */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">input</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="cm">/* A line of input has been read successfully, but it</span>
+<span class="cm">         * needs to be copied into a CattleBuffer before</span>
+<span class="cm">         * feeding it to the interpreter. */</span>
 
-		<span class="comment">/* Calculate the size of the CattleBuffer. readline</span>
-<span class="comment">		 * returns a null-terminated string with the trailing</span>
-<span class="comment">		 * newline stripped; a CattleBuffer doesn't need to be</span>
-<span class="comment">		 * null-terminated, but stripping the newline would mean</span>
-<span class="comment">		 * losing part of the input. We can just create a</span>
-<span class="comment">		 * CattleBuffer as big as the string, and replace the</span>
-<span class="comment">		 * trailing null byte with a newline. */</span>
-		size <span class="gtkdoc opt">=</span> <span class="function">strlen</span> <span class="gtkdoc opt">(</span>input<span class="gtkdoc opt">) +</span> <span class="number">1</span><span class="gtkdoc opt">;</span>
+        <span class="cm">/* Calculate the size of the CattleBuffer. readline</span>
+<span class="cm">         * returns a null-terminated string with the trailing</span>
+<span class="cm">         * newline stripped; a CattleBuffer doesn&#39;t need to be</span>
+<span class="cm">         * null-terminated, but stripping the newline would mean</span>
+<span class="cm">         * losing part of the input. We can just create a</span>
+<span class="cm">         * CattleBuffer as big as the string, and replace the</span>
+<span class="cm">         * trailing null byte with a newline. */</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="n">strlen</span> <span class="p">(</span><span class="n">input</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 
-		buffer <span class="gtkdoc opt">=</span> <span class="function"><a href="CattleBuffer.html#cattle-buffer-new">cattle_buffer_new</a></span> <span class="gtkdoc opt">(</span>size<span class="gtkdoc opt">);</span>
-		<span class="function"><a href="CattleBuffer.html#cattle-buffer-set-contents">cattle_buffer_set_contents</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">,</span> input<span class="gtkdoc opt">);</span>
-		<span class="function"><a href="CattleBuffer.html#cattle-buffer-set-value">cattle_buffer_set_value</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">,</span> size <span class="gtkdoc opt">-</span> <span class="number">1</span><span class="gtkdoc opt">,</span> <span class="string">'</span><span class="gtkdoc esc">\n</span><span class="string">'</span><span class="gtkdoc opt">);</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">cattle_buffer_new</span> <span class="p">(</span><span class="n">size</span><span class="p">);</span>
+        <span class="n">cattle_buffer_set_contents</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
+        <span class="n">cattle_buffer_set_value</span> <span class="p">(</span><span class="n">buffer</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="sc">&#39;\n&#39;</span><span class="p">);</span>
 
-		<span class="comment">/* The CattleBuffer now contains a copy of the input, so</span>
-<span class="comment">		 * the string returned by readline can be safely freed */</span>
-		<span class="function">free</span> <span class="gtkdoc opt">(</span>input<span class="gtkdoc opt">);</span>
+        <span class="cm">/* The CattleBuffer now contains a copy of the input, so</span>
+<span class="cm">         * the string returned by readline can be safely freed */</span>
+        <span class="n">free</span> <span class="p">(</span><span class="n">input</span><span class="p">);</span>
 
-		<span class="function"><a href="CattleInterpreter.html#cattle-interpreter-feed">cattle_interpreter_feed</a></span> <span class="gtkdoc opt">(</span>interpreter<span class="gtkdoc opt">,</span> buffer<span class="gtkdoc opt">);</span>
-	<span class="gtkdoc opt">}</span>
-	<span class="keyword">else</span>
-	<span class="gtkdoc opt">{</span>
-		<span class="comment">/* readline returns NULL when the end of input has</span>
-<span class="comment">		 * been reached; to let the interpreter know no more</span>
-<span class="comment">		 * input is available, feed it an empty buffer */</span>
+        <span class="n">cattle_interpreter_feed</span> <span class="p">(</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="cm">/* readline returns NULL when the end of input has</span>
+<span class="cm">         * been reached; to let the interpreter know no more</span>
+<span class="cm">         * input is available, feed it an empty buffer */</span>
 
-		buffer <span class="gtkdoc opt">=</span> <span class="function"><a href="CattleBuffer.html#cattle-buffer-new">cattle_buffer_new</a></span> <span class="gtkdoc opt">(</span><span class="number">0</span><span class="gtkdoc opt">);</span>
+        <span class="n">buffer</span> <span class="o">=</span> <span class="n">cattle_buffer_new</span> <span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 
-		<span class="function"><a href="CattleInterpreter.html#cattle-interpreter-feed">cattle_interpreter_feed</a></span> <span class="gtkdoc opt">(</span>interpreter<span class="gtkdoc opt">,</span> buffer<span class="gtkdoc opt">);</span>
-	<span class="gtkdoc opt">}</span>
+        <span class="n">cattle_interpreter_feed</span> <span class="p">(</span><span class="n">interpreter</span><span class="p">,</span> <span class="n">buffer</span><span class="p">);</span>
+    <span class="p">}</span>
 
-	<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>buffer<span class="gtkdoc opt">);</span>
+    <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">buffer</span><span class="p">);</span>
 
-	<span class="keyword">return</span> TRUE<span class="gtkdoc opt">;</span>
-<span class="gtkdoc opt">}</span></pre></td>
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span></pre></td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <p>
-			Input works on a per-line basis: the handler must retrieve
-			a full line of input, including the trailing newline character,
-			and feed it to the interpreter.
-		</p>
+            Input works on a per-line basis: the handler must retrieve
+            a full line of input, including the trailing newline character,
+            and feed it to the interpreter.
+        </p>
 <p>
-			If it is not possible to retrieve the whole line in a single
-			step, a part of it can be passed to the interpreter.
-		</p>
+            If it is not possible to retrieve the whole line in a single
+            step, a part of it can be passed to the interpreter.
+        </p>
 <p>
-			When the whole input has been consumed, the handler must feed
-			the interpreter an empty
-			<a class="link" href="CattleBuffer.html" title="CattleBuffer">CattleBuffer</a> to let it
-			know no more input is available.
-		</p>
+            When the whole input has been consumed, the handler must feed
+            the interpreter an empty
+            <a class="link" href="CattleBuffer.html" title="CattleBuffer">CattleBuffer</a> to let it
+            know no more input is available.
+        </p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="id-1.5.2.7"></a><h3>Debug</h3>
 <p>
-			The debug handler is called whenever a <code class="code">#</code>
-			instruction is executed; the interpreter can be configured
-			to ignore this instruction, since it's not (strictly
-			speaking) part of the Brainfuck language.
-		</p>
+            The debug handler is called whenever a <code class="code">#</code>
+            instruction is executed; the interpreter can be configured
+            to ignore this instruction, since it's not (strictly
+            speaking) part of the Brainfuck language.
+        </p>
 <p>
-			The handler must display useful debugging information to
-			the developer; usually, this means dumping the contents of
-			the memory tape.
-		</p>
+            The handler must display useful debugging information to
+            the developer; usually, this means dumping the contents of
+            the memory tape.
+        </p>
 <p>
-			The following handler appends the contents of the tape to
-			a log file:
-		</p>
+            The following handler appends the contents of the tape to
+            a log file:
+        </p>
 <div class="informalexample">
   <table class="listing_frame" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -414,88 +414,88 @@ view <span class="gtkdoc opt">=</span> <span class="function">gtk_text_view_new<
 63
 64
 65</pre></td>
-        <td class="listing_code"><pre class="programlisting">gboolean
-<span class="function">debug_handler</span> <span class="gtkdoc opt">(</span>CattleInterpreter  <span class="gtkdoc opt">*</span>interpreter<span class="gtkdoc opt">,</span>
-               gpointer            data<span class="gtkdoc opt">,</span>
-               GError            <span class="gtkdoc opt">**</span>error<span class="gtkdoc opt">)</span>
-<span class="gtkdoc opt">{</span>
-	CattleTape <span class="gtkdoc opt">*</span>tape<span class="gtkdoc opt">;</span>
-	gint8       value<span class="gtkdoc opt">;</span>
-	<span class="gtkdoc kwb">FILE</span><span class="gtkdoc opt">*</span>       fp<span class="gtkdoc opt">;</span>
+        <td class="listing_code"><pre class="programlisting"><span class="n">gboolean</span>
+<span class="nf">debug_handler</span> <span class="p">(</span><span class="n">CattleInterpreter</span>  <span class="o">*</span><span class="n">interpreter</span><span class="p">,</span>
+               <span class="n">gpointer</span>            <span class="n">data</span><span class="p">,</span>
+               <span class="n">GError</span>            <span class="o">**</span><span class="n">error</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="n">CattleTape</span> <span class="o">*</span><span class="n">tape</span><span class="p">;</span>
+    <span class="n">gint8</span>       <span class="n">value</span><span class="p">;</span>
+    <span class="kt">FILE</span><span class="o">*</span>       <span class="n">fp</span><span class="p">;</span>
 
-	tape <span class="gtkdoc opt">=</span> <span class="function"><a href="CattleInterpreter.html#cattle-interpreter-get-tape">cattle_interpreter_get_tape</a></span> <span class="gtkdoc opt">(</span>interpreter<span class="gtkdoc opt">);</span>
+    <span class="n">tape</span> <span class="o">=</span> <span class="n">cattle_interpreter_get_tape</span> <span class="p">(</span><span class="n">interpreter</span><span class="p">);</span>
 
-	<span class="comment">/* Save the current tape position */</span>
-	<span class="function"><a href="CattleTape.html#cattle-tape-push-bookmark">cattle_tape_push_bookmark</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
+    <span class="cm">/* Save the current tape position */</span>
+    <span class="n">cattle_tape_push_bookmark</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
 
-	fp <span class="gtkdoc opt">=</span> <span class="function">fopen</span> <span class="gtkdoc opt">(</span>LOG_FILE<span class="gtkdoc opt">,</span> <span class="string">&quot;a&quot;</span><span class="gtkdoc opt">);</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">fopen</span> <span class="p">(</span><span class="n">LOG_FILE</span><span class="p">,</span> <span class="s">&quot;a&quot;</span><span class="p">);</span>
 
-	<span class="keyword">if</span> <span class="gtkdoc opt">(</span>fp <span class="gtkdoc opt">==</span> NULL<span class="gtkdoc opt">) {</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
 
-		<span class="comment">/* Set the error, release resources and return */</span>
-		<span class="function"><a href="https://developer.gnome.org/glib/unstable/glib-Error-Reporting.html#g-set-error-literal">g_set_error_literal</a></span> <span class="gtkdoc opt">(</span>error<span class="gtkdoc opt">,</span>
-		                     CATTLE_INTERPRETER_ERROR<span class="gtkdoc opt">,</span>
-		                     CATTLE_INTERPRETER_ERROR_IO<span class="gtkdoc opt">,</span>
-		                     <span class="function">strerror</span> <span class="gtkdoc opt">(</span>errno<span class="gtkdoc opt">));</span>
-		<span class="function"><a href="CattleTape.html#cattle-tape-pop-bookmark">cattle_tape_pop_bookmark</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
-		<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
+        <span class="cm">/* Set the error, release resources and return */</span>
+        <span class="n">g_set_error_literal</span> <span class="p">(</span><span class="n">error</span><span class="p">,</span>
+                             <span class="n">CATTLE_INTERPRETER_ERROR</span><span class="p">,</span>
+                             <span class="n">CATTLE_INTERPRETER_ERROR_IO</span><span class="p">,</span>
+                             <span class="n">strerror</span> <span class="p">(</span><span class="n">errno</span><span class="p">));</span>
+        <span class="n">cattle_tape_pop_bookmark</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
+        <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
 
-		<span class="keyword">return</span> FALSE<span class="gtkdoc opt">;</span>
-	<span class="gtkdoc opt">}</span>
+        <span class="k">return</span> <span class="n">FALSE</span><span class="p">;</span>
+    <span class="p">}</span>
 
-	<span class="comment">/* Rewind to the beginning of the tape */</span>
-	<span class="keyword">while</span> <span class="gtkdoc opt">(!</span><span class="function"><a href="CattleTape.html#cattle-tape-is-at-beginning">cattle_tape_is_at_beginning</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">)) {</span>
+    <span class="cm">/* Rewind to the beginning of the tape */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">cattle_tape_is_at_beginning</span> <span class="p">(</span><span class="n">tape</span><span class="p">))</span> <span class="p">{</span>
 
-		<span class="function"><a href="CattleTape.html#cattle-tape-move-left">cattle_tape_move_left</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
-	<span class="gtkdoc opt">}</span>
+        <span class="n">cattle_tape_move_left</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
+    <span class="p">}</span>
 
-	<span class="function">fprintf</span> <span class="gtkdoc opt">(</span>fp<span class="gtkdoc opt">,</span> <span class="string">&quot;[ &quot;</span><span class="gtkdoc opt">);</span>
+    <span class="n">fprintf</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;[ &quot;</span><span class="p">);</span>
 
-	<span class="comment">/* Repeat until the end of the tape is reached */</span>
-	<span class="keyword">while</span> <span class="gtkdoc opt">(!</span><span class="function"><a href="CattleTape.html#cattle-tape-is-at-end">cattle_tape_is_at_end</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">)) {</span>
+    <span class="cm">/* Repeat until the end of the tape is reached */</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">cattle_tape_is_at_end</span> <span class="p">(</span><span class="n">tape</span><span class="p">))</span> <span class="p">{</span>
 
-		<span class="comment">/* Get the current value */</span>
-		value <span class="gtkdoc opt">=</span> <span class="function"><a href="CattleTape.html#cattle-tape-get-current-value">cattle_tape_get_current_value</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
+        <span class="cm">/* Get the current value */</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">cattle_tape_get_current_value</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
 
-		<span class="comment">/* Show printable values directly and non-printable</span>
-<span class="comment">		 * values as their decimal ASCII value */</span>
-		<span class="keyword">if</span> <span class="gtkdoc opt">(</span>value <span class="gtkdoc opt">&gt;=</span> <span class="number">33</span> <span class="gtkdoc opt">&amp;&amp;</span> value <span class="gtkdoc opt">&lt;=</span> <span class="number">126</span><span class="gtkdoc opt">) {</span>
-			<span class="function">fprintf</span> <span class="gtkdoc opt">(</span>fp<span class="gtkdoc opt">,</span> <span class="string">&quot;%c &quot;</span><span class="gtkdoc opt">,</span> value<span class="gtkdoc opt">);</span>
-		<span class="gtkdoc opt">}</span>
-		<span class="keyword">else</span> <span class="gtkdoc opt">{</span>
-			<span class="function">fprintf</span> <span class="gtkdoc opt">(</span>fp<span class="gtkdoc opt">,</span> <span class="string">&quot;</span><span class="gtkdoc esc">\\</span><span class="string">%d &quot;</span><span class="gtkdoc opt">, (</span>gint<span class="gtkdoc opt">)</span> value<span class="gtkdoc opt">);</span>
-		<span class="gtkdoc opt">}</span>
+        <span class="cm">/* Show printable values directly and non-printable</span>
+<span class="cm">         * values as their decimal ASCII value */</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">33</span> <span class="o">&amp;&amp;</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="mi">126</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">fprintf</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;%c &quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="n">fprintf</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;</span><span class="se">\\</span><span class="s">%d &quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">gint</span><span class="p">)</span> <span class="n">value</span><span class="p">);</span>
+        <span class="p">}</span>
 
-		<span class="function"><a href="CattleTape.html#cattle-tape-move-right">cattle_tape_move_right</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
-	<span class="gtkdoc opt">}</span>
+        <span class="n">cattle_tape_move_right</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
+    <span class="p">}</span>
 
-	<span class="function">fprintf</span> <span class="gtkdoc opt">(</span>fp<span class="gtkdoc opt">,</span> <span class="string">&quot;]</span><span class="gtkdoc esc">\n</span><span class="string">&quot;</span><span class="gtkdoc opt">);</span>
-	<span class="function">fclose</span> <span class="gtkdoc opt">(</span>fp<span class="gtkdoc opt">);</span>
+    <span class="n">fprintf</span> <span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&quot;]</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+    <span class="n">fclose</span> <span class="p">(</span><span class="n">fp</span><span class="p">);</span>
 
-	<span class="comment">/* Restore the original tape position */</span>
-	<span class="function"><a href="CattleTape.html#cattle-tape-pop-bookmark">cattle_tape_pop_bookmark</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
+    <span class="cm">/* Restore the original tape position */</span>
+    <span class="n">cattle_tape_pop_bookmark</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
 
-	<span class="function"><a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#g-object-unref">g_object_unref</a></span> <span class="gtkdoc opt">(</span>tape<span class="gtkdoc opt">);</span>
+    <span class="n">g_object_unref</span> <span class="p">(</span><span class="n">tape</span><span class="p">);</span>
 
-	<span class="keyword">return</span> TRUE<span class="gtkdoc opt">;</span>
-<span class="gtkdoc opt">}</span></pre></td>
+    <span class="k">return</span> <span class="n">TRUE</span><span class="p">;</span>
+<span class="p">}</span></pre></td>
       </tr>
     </tbody>
   </table>
 </div>
 
 <p>
-			After the handler has run, the tape must be in the same exact
-			state it was before the signal emission, including the
-			position. The best way to ensure it is to use
-			<a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="cattle_tape_push_bookmark ()">cattle_tape_push_bookmark()</a>
-			at the beginning of the handler and
-			<a class="link" href="CattleTape.html#cattle-tape-pop-bookmark" title="cattle_tape_pop_bookmark ()">cattle_tape_pop_bookmark()</a>
-			at the end.
-		</p>
+            After the handler has run, the tape must be in the same exact
+            state it was before the signal emission, including the
+            position. The best way to ensure it is to use
+            <a class="link" href="CattleTape.html#cattle-tape-push-bookmark" title="cattle_tape_push_bookmark ()">cattle_tape_push_bookmark()</a>
+            at the beginning of the handler and
+            <a class="link" href="CattleTape.html#cattle-tape-pop-bookmark" title="cattle_tape_pop_bookmark ()">cattle_tape_pop_bookmark()</a>
+            at the end.
+        </p>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

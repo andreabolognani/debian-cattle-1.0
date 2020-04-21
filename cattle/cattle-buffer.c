@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #include "cattle-buffer.h"
@@ -27,95 +26,94 @@
  * A #CattleBuffer represents a memory buffer.
  */
 
-G_DEFINE_TYPE (CattleBuffer, cattle_buffer, G_TYPE_OBJECT)
-
 /**
  * CattleBuffer:
  *
  * Opaque data structure representing a memory buffer. It should never
- * be accessed directly; use the methods below instead.
+ * be accessed directly.
  */
-
-#define CATTLE_BUFFER_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), CATTLE_TYPE_BUFFER, CattleBufferPrivate))
 
 struct _CattleBufferPrivate
 {
-	gboolean  disposed;
+    gboolean  disposed;
 
-	gint8    *data;
-	gulong    size;
+    gint8    *data;
+    gulong    size;
 };
+
+G_DEFINE_TYPE_WITH_CODE (CattleBuffer, cattle_buffer, G_TYPE_OBJECT,
+                         G_ADD_PRIVATE (CattleBuffer))
 
 /* Properties */
 enum {
-	PROP_0,
-	PROP_SIZE
+    PROP_0,
+    PROP_SIZE
 };
 
 static void
 cattle_buffer_init (CattleBuffer *self)
 {
-	CattleBufferPrivate *priv;
+    CattleBufferPrivate *priv;
 
-	priv = CATTLE_BUFFER_GET_PRIVATE (self);
+    priv = cattle_buffer_get_instance_private (self);
 
-	priv->data = NULL;
-	priv->size = 1;
+    priv->data = NULL;
+    priv->size = 1;
 
-	priv->disposed = FALSE;
+    priv->disposed = FALSE;
 
-	self->priv = priv;
+    self->priv = priv;
 }
 
 static void
 cattle_buffer_constructed (GObject *object)
 {
-	CattleBuffer        *self;
-	CattleBufferPrivate *priv;
+    CattleBuffer        *self;
+    CattleBufferPrivate *priv;
 
-	self = CATTLE_BUFFER (object);
-	priv = self->priv;
+    self = CATTLE_BUFFER (object);
+    priv = self->priv;
 
-	G_OBJECT_CLASS (cattle_buffer_parent_class)->constructed (object);
+    G_OBJECT_CLASS (cattle_buffer_parent_class)->constructed (object);
 
-	if (priv->size > 0)
-	{
-		priv->data = (gint8 *) g_slice_alloc0 (priv->size);
-	}
+    if (priv->size > 0)
+    {
+        priv->data = (gint8 *) g_slice_alloc0 (priv->size);
+    }
 }
 
 static void
 cattle_buffer_dispose (GObject *object)
 {
-	CattleBuffer        *self;
-	CattleBufferPrivate *priv;
+    CattleBuffer        *self;
+    CattleBufferPrivate *priv;
 
-	self = CATTLE_BUFFER (object);
-	priv = self->priv;
+    self = CATTLE_BUFFER (object);
+    priv = self->priv;
 
-	g_return_if_fail (!priv->disposed);
+    g_return_if_fail (!priv->disposed);
 
-	priv->disposed = TRUE;
+    priv->disposed = TRUE;
 
-	G_OBJECT_CLASS (cattle_buffer_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cattle_buffer_parent_class)->dispose (object);
 }
 
 static void
 cattle_buffer_finalize (GObject *object)
 {
-	CattleBuffer        *self;
-	CattleBufferPrivate *priv;
+    CattleBuffer        *self;
+    CattleBufferPrivate *priv;
 
-	self = CATTLE_BUFFER (object);
-	priv = self->priv;
+    self = CATTLE_BUFFER (object);
+    priv = self->priv;
 
-	/* Free allocated data */
-	if (priv->data != NULL)
-	{
-		g_slice_free1 (priv->size, priv->data);
-	}
+    /* Free allocated data */
+    if (priv->data != NULL)
+    {
+        g_slice_free1 (priv->size, priv->data);
+    }
 
-	G_OBJECT_CLASS (cattle_buffer_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cattle_buffer_parent_class)->finalize (object);
 }
 
 /**
@@ -129,10 +127,10 @@ cattle_buffer_finalize (GObject *object)
 CattleBuffer*
 cattle_buffer_new (gulong size)
 {
-	return g_object_new (CATTLE_TYPE_BUFFER,
-	                     "size",
-	                     size,
-	                     NULL);
+    return g_object_new (CATTLE_TYPE_BUFFER,
+                         "size",
+                         size,
+                         NULL);
 }
 
 /**
@@ -148,15 +146,15 @@ void
 cattle_buffer_set_contents (CattleBuffer *self,
                             gint8        *contents)
 {
-	CattleBufferPrivate *priv;
+    CattleBufferPrivate *priv;
 
-	g_return_if_fail (CATTLE_IS_BUFFER (self));
-	g_return_if_fail (contents != NULL);
+    g_return_if_fail (CATTLE_IS_BUFFER (self));
+    g_return_if_fail (contents != NULL);
 
-	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
+    priv = self->priv;
+    g_return_if_fail (!priv->disposed);
 
-	cattle_buffer_set_contents_full (self, contents, priv->size);
+    cattle_buffer_set_contents_full (self, contents, priv->size);
 }
 
 /**
@@ -175,22 +173,22 @@ cattle_buffer_set_contents_full (CattleBuffer *self,
                                  gint8        *contents,
                                  gulong        size)
 {
-	CattleBufferPrivate *priv;
-	gulong               i;
+    CattleBufferPrivate *priv;
+    gulong               i;
 
-	g_return_if_fail (CATTLE_IS_BUFFER (self));
-	g_return_if_fail (contents != NULL);
+    g_return_if_fail (CATTLE_IS_BUFFER (self));
+    g_return_if_fail (contents != NULL);
 
-	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
+    priv = self->priv;
+    g_return_if_fail (!priv->disposed);
 
-	g_return_if_fail (size <= priv->size);
+    g_return_if_fail (size <= priv->size);
 
-	/* Copy the data one byte at a time */
-	for (i = 0; i < size; i++)
-	{
-		priv->data[i] = contents[i];
-	}
+    /* Copy the data one byte at a time */
+    for (i = 0; i < size; i++)
+    {
+        priv->data[i] = contents[i];
+    }
 }
 
 /**
@@ -209,15 +207,15 @@ cattle_buffer_set_value (CattleBuffer *self,
                          gulong        position,
                          gint8         value)
 {
-	CattleBufferPrivate *priv;
+    CattleBufferPrivate *priv;
 
-	g_return_if_fail (CATTLE_IS_BUFFER (self));
+    g_return_if_fail (CATTLE_IS_BUFFER (self));
 
-	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
-	g_return_if_fail (position < priv->size);
+    priv = self->priv;
+    g_return_if_fail (!priv->disposed);
+    g_return_if_fail (position < priv->size);
 
-	priv->data[position] = value;
+    priv->data[position] = value;
 }
 
 /**
@@ -236,15 +234,15 @@ gint8
 cattle_buffer_get_value (CattleBuffer *self,
                          gulong        position)
 {
-	CattleBufferPrivate *priv;
+    CattleBufferPrivate *priv;
 
-	g_return_val_if_fail (CATTLE_IS_BUFFER (self), 0);
+    g_return_val_if_fail (CATTLE_IS_BUFFER (self), 0);
 
-	priv = self->priv;
-	g_return_val_if_fail (!priv->disposed, 0);
-	g_return_val_if_fail (position < priv->size, 0);
+    priv = self->priv;
+    g_return_val_if_fail (!priv->disposed, 0);
+    g_return_val_if_fail (position < priv->size, 0);
 
-	return priv->data[position];
+    return priv->data[position];
 }
 
 /**
@@ -258,14 +256,14 @@ cattle_buffer_get_value (CattleBuffer *self,
 gulong
 cattle_buffer_get_size (CattleBuffer *self)
 {
-	CattleBufferPrivate *priv;
+    CattleBufferPrivate *priv;
 
-	g_return_val_if_fail (CATTLE_IS_BUFFER (self), 0);
+    g_return_val_if_fail (CATTLE_IS_BUFFER (self), 0);
 
-	priv = self->priv;
-	g_return_val_if_fail (!priv->disposed, 0);
+    priv = self->priv;
+    g_return_val_if_fail (!priv->disposed, 0);
 
-	return priv->size;
+    return priv->size;
 }
 
 static void
@@ -274,32 +272,32 @@ cattle_buffer_set_property (GObject      *object,
                             const GValue *value,
                             GParamSpec   *pspec)
 {
-	CattleBuffer        *self;
-	CattleBufferPrivate *priv;
-	gulong               v_ulong;
+    CattleBuffer        *self;
+    CattleBufferPrivate *priv;
+    gulong               v_ulong;
 
-	self = CATTLE_BUFFER (object);
-	priv = self->priv;
+    self = CATTLE_BUFFER (object);
+    priv = self->priv;
 
-	g_return_if_fail (!priv->disposed);
+    g_return_if_fail (!priv->disposed);
 
-	switch (property_id)
-	{
-		case PROP_SIZE:
+    switch (property_id)
+    {
+        case PROP_SIZE:
 
-			v_ulong = g_value_get_ulong (value);
-			priv->size = v_ulong;
+            v_ulong = g_value_get_ulong (value);
+            priv->size = v_ulong;
 
-			break;
+            break;
 
-		default:
+        default:
 
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-			                                   property_id,
-			                                   pspec);
+            G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                               property_id,
+                                               pspec);
 
-			break;
-	}
+            break;
+    }
 }
 
 static void
@@ -308,60 +306,57 @@ cattle_buffer_get_property (GObject    *object,
                             GValue     *value,
                             GParamSpec *pspec)
 {
-	CattleBuffer *self;
-	gulong        v_ulong;
+    CattleBuffer *self;
+    gulong        v_ulong;
 
-	self = CATTLE_BUFFER (object);
+    self = CATTLE_BUFFER (object);
 
-	switch (property_id)
-	{
-		case PROP_SIZE:
+    switch (property_id)
+    {
+        case PROP_SIZE:
 
-			v_ulong = cattle_buffer_get_size (self);
-			g_value_set_ulong (value, v_ulong);
+            v_ulong = cattle_buffer_get_size (self);
+            g_value_set_ulong (value, v_ulong);
 
-			break;
+            break;
 
-		default:
+        default:
 
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-			                                   property_id,
-			                                   pspec);
+            G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                               property_id,
+                                               pspec);
 
-			break;
-	}
+            break;
+    }
 }
 
 static void
 cattle_buffer_class_init (CattleBufferClass *self)
 {
-	GObjectClass *object_class;
-	GParamSpec   *pspec;
+    GObjectClass *object_class;
+    GParamSpec   *pspec;
 
-	object_class = G_OBJECT_CLASS (self);
+    object_class = G_OBJECT_CLASS (self);
 
-	object_class->set_property = cattle_buffer_set_property;
-	object_class->get_property = cattle_buffer_get_property;
-	object_class->constructed = cattle_buffer_constructed;
-	object_class->dispose = cattle_buffer_dispose;
-	object_class->finalize = cattle_buffer_finalize;
+    object_class->set_property = cattle_buffer_set_property;
+    object_class->get_property = cattle_buffer_get_property;
+    object_class->constructed = cattle_buffer_constructed;
+    object_class->dispose = cattle_buffer_dispose;
+    object_class->finalize = cattle_buffer_finalize;
 
-	/**
-	 * CattleBuffer:size:
-	 *
-	 * Size of the memory buffer.
-	 */
-	pspec = g_param_spec_ulong ("size",
-	                            "Size of the memory buffer",
-	                            "Get size of the memory buffer",
-	                            0,
-	                            G_MAXULONG,
-	                            0,
-	                            G_PARAM_READWRITE|G_PARAM_CONSTRUCT_ONLY);
-	g_object_class_install_property (object_class,
-	                                 PROP_SIZE,
-	                                 pspec);
-
-	g_type_class_add_private (object_class,
-	                          sizeof (CattleBufferPrivate));
+    /**
+     * CattleBuffer:size:
+     *
+     * Size of the memory buffer.
+     */
+    pspec = g_param_spec_ulong ("size",
+                                "Size of the memory buffer",
+                                "Get size of the memory buffer",
+                                0,
+                                G_MAXULONG,
+                                0,
+                                G_PARAM_READWRITE|G_PARAM_CONSTRUCT_ONLY);
+    g_object_class_install_property (object_class,
+                                     PROP_SIZE,
+                                     pspec);
 }

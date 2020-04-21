@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #include "cattle-enums.h"
@@ -28,8 +27,6 @@
  * A #CattleConfiguration contains the configuration for a
  * #CattleInterpreter.
  */
-
-G_DEFINE_TYPE (CattleConfiguration, cattle_configuration, G_TYPE_OBJECT)
 
 /**
  * CattleEndOfInputAction:
@@ -46,62 +43,63 @@ G_DEFINE_TYPE (CattleConfiguration, cattle_configuration, G_TYPE_OBJECT)
  * CattleConfiguration:
  *
  * Opaque data structure representing a configuration. It should never
- * be accessed directly; use the methods below instead.
+ * be accessed directly.
  */
-
-#define CATTLE_CONFIGURATION_GET_PRIVATE(object) (G_TYPE_INSTANCE_GET_PRIVATE ((object), CATTLE_TYPE_CONFIGURATION, CattleConfigurationPrivate))
 
 struct _CattleConfigurationPrivate
 {
-	gboolean               disposed;
+    gboolean               disposed;
 
-	CattleEndOfInputAction end_of_input_action;
-	gboolean               debug_is_enabled;
+    CattleEndOfInputAction end_of_input_action;
+    gboolean               debug_is_enabled;
 };
+
+G_DEFINE_TYPE_WITH_CODE (CattleConfiguration, cattle_configuration, G_TYPE_OBJECT,
+                         G_ADD_PRIVATE (CattleConfiguration))
 
 /* Properties */
 enum
 {
-	PROP_0,
-	PROP_END_OF_INPUT_ACTION,
-	PROP_DEBUG_IS_ENABLED
+    PROP_0,
+    PROP_END_OF_INPUT_ACTION,
+    PROP_DEBUG_IS_ENABLED
 };
 
 static void
 cattle_configuration_init (CattleConfiguration *self)
 {
-	CattleConfigurationPrivate *priv;
+    CattleConfigurationPrivate *priv;
 
-	priv = CATTLE_CONFIGURATION_GET_PRIVATE (self);
+    priv = cattle_configuration_get_instance_private (self);
 
-	priv->end_of_input_action = CATTLE_END_OF_INPUT_ACTION_STORE_ZERO;
-	priv->debug_is_enabled = FALSE;
+    priv->end_of_input_action = CATTLE_END_OF_INPUT_ACTION_STORE_ZERO;
+    priv->debug_is_enabled = FALSE;
 
-	priv->disposed = FALSE;
+    priv->disposed = FALSE;
 
-	self->priv = priv;
+    self->priv = priv;
 }
 
 static void
 cattle_configuration_dispose (GObject *object)
 {
-	CattleConfiguration        *self;
-	CattleConfigurationPrivate *priv;
+    CattleConfiguration        *self;
+    CattleConfigurationPrivate *priv;
 
-	self = CATTLE_CONFIGURATION (object);
-	priv = self->priv;
+    self = CATTLE_CONFIGURATION (object);
+    priv = self->priv;
 
-	g_return_if_fail (!priv->disposed);
+    g_return_if_fail (!priv->disposed);
 
-	priv->disposed = TRUE;
+    priv->disposed = TRUE;
 
-	G_OBJECT_CLASS (cattle_configuration_parent_class)->dispose (object);
+    G_OBJECT_CLASS (cattle_configuration_parent_class)->dispose (object);
 }
 
 static void
 cattle_configuration_finalize (GObject *object)
 {
-	G_OBJECT_CLASS (cattle_configuration_parent_class)->finalize (object);
+    G_OBJECT_CLASS (cattle_configuration_parent_class)->finalize (object);
 }
 
 /**
@@ -118,7 +116,7 @@ cattle_configuration_finalize (GObject *object)
 CattleConfiguration*
 cattle_configuration_new (void)
 {
-	return g_object_new (CATTLE_TYPE_CONFIGURATION, NULL);
+    return g_object_new (CATTLE_TYPE_CONFIGURATION, NULL);
 }
 
 /**
@@ -134,23 +132,23 @@ void
 cattle_configuration_set_end_of_input_action (CattleConfiguration    *self,
                                               CattleEndOfInputAction  action)
 {
-	CattleConfigurationPrivate *priv;
-	gpointer                    enum_class;
-	GEnumValue                 *enum_value;
+    CattleConfigurationPrivate *priv;
+    gpointer                    enum_class;
+    GEnumValue                 *enum_value;
 
-	g_return_if_fail (CATTLE_IS_CONFIGURATION (self));
+    g_return_if_fail (CATTLE_IS_CONFIGURATION (self));
 
-	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
+    priv = self->priv;
+    g_return_if_fail (!priv->disposed);
 
-	/* Get the enum class for actions, and lookup the value.
-	 * If it is not present, the action is not valid */
-	enum_class = g_type_class_ref (CATTLE_TYPE_END_OF_INPUT_ACTION);
-	enum_value = g_enum_get_value (enum_class, action);
-	g_type_class_unref (enum_class);
-	g_return_if_fail (enum_value != NULL);
+    /* Get the enum class for actions, and lookup the value.
+     * If it is not present, the action is not valid */
+    enum_class = g_type_class_ref (CATTLE_TYPE_END_OF_INPUT_ACTION);
+    enum_value = g_enum_get_value (enum_class, action);
+    g_type_class_unref (enum_class);
+    g_return_if_fail (enum_value != NULL);
 
-	priv->end_of_input_action = action;
+    priv->end_of_input_action = action;
 }
 
 /**
@@ -165,14 +163,14 @@ cattle_configuration_set_end_of_input_action (CattleConfiguration    *self,
 CattleEndOfInputAction
 cattle_configuration_get_end_of_input_action (CattleConfiguration *self)
 {
-	CattleConfigurationPrivate *priv;
+    CattleConfigurationPrivate *priv;
 
-	g_return_val_if_fail (CATTLE_IS_CONFIGURATION (self), CATTLE_END_OF_INPUT_ACTION_STORE_ZERO);
+    g_return_val_if_fail (CATTLE_IS_CONFIGURATION (self), CATTLE_END_OF_INPUT_ACTION_STORE_ZERO);
 
-	priv = self->priv;
-	g_return_val_if_fail (!priv->disposed, CATTLE_END_OF_INPUT_ACTION_STORE_ZERO);
+    priv = self->priv;
+    g_return_val_if_fail (!priv->disposed, CATTLE_END_OF_INPUT_ACTION_STORE_ZERO);
 
-	return priv->end_of_input_action;
+    return priv->end_of_input_action;
 }
 
 /**
@@ -189,14 +187,14 @@ void
 cattle_configuration_set_debug_is_enabled (CattleConfiguration *self,
                                            gboolean             enabled)
 {
-	CattleConfigurationPrivate *priv;
+    CattleConfigurationPrivate *priv;
 
-	g_return_if_fail (CATTLE_IS_CONFIGURATION (self));
+    g_return_if_fail (CATTLE_IS_CONFIGURATION (self));
 
-	priv = self->priv;
-	g_return_if_fail (!priv->disposed);
+    priv = self->priv;
+    g_return_if_fail (!priv->disposed);
 
-	priv->debug_is_enabled = enabled;
+    priv->debug_is_enabled = enabled;
 }
 
 /**
@@ -211,14 +209,14 @@ cattle_configuration_set_debug_is_enabled (CattleConfiguration *self,
 gboolean
 cattle_configuration_get_debug_is_enabled (CattleConfiguration *self)
 {
-	CattleConfigurationPrivate *priv;
+    CattleConfigurationPrivate *priv;
 
-	g_return_val_if_fail (CATTLE_IS_CONFIGURATION (self), FALSE);
+    g_return_val_if_fail (CATTLE_IS_CONFIGURATION (self), FALSE);
 
-	priv = self->priv;
-	g_return_val_if_fail (!priv->disposed, FALSE);
+    priv = self->priv;
+    g_return_val_if_fail (!priv->disposed, FALSE);
 
-	return priv->debug_is_enabled;
+    return priv->debug_is_enabled;
 }
 
 static void
@@ -227,38 +225,38 @@ cattle_configuration_set_property (GObject      *object,
                                    const GValue *value,
                                    GParamSpec   *pspec)
 {
-	CattleConfiguration *self;
-	gint                 v_enum;
-	gboolean             v_bool;
+    CattleConfiguration *self;
+    gint                 v_enum;
+    gboolean             v_bool;
 
-	self = CATTLE_CONFIGURATION (object);
+    self = CATTLE_CONFIGURATION (object);
 
-	switch (property_id)
-	{
-		case PROP_END_OF_INPUT_ACTION:
+    switch (property_id)
+    {
+        case PROP_END_OF_INPUT_ACTION:
 
-			v_enum = g_value_get_enum (value);
-			cattle_configuration_set_end_of_input_action (self,
-			                                              v_enum);
+            v_enum = g_value_get_enum (value);
+            cattle_configuration_set_end_of_input_action (self,
+                                                          v_enum);
 
-			break;
+            break;
 
-		case PROP_DEBUG_IS_ENABLED:
+        case PROP_DEBUG_IS_ENABLED:
 
-			v_bool = g_value_get_boolean (value);
-			cattle_configuration_set_debug_is_enabled (self,
-			                                           v_bool);
+            v_bool = g_value_get_boolean (value);
+            cattle_configuration_set_debug_is_enabled (self,
+                                                       v_bool);
 
-			break;
+            break;
 
-		default:
+        default:
 
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-			                                   property_id,
-			                                   pspec);
+            G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                               property_id,
+                                               pspec);
 
-			break;
-	}
+            break;
+    }
 }
 
 static void
@@ -267,85 +265,82 @@ cattle_configuration_get_property (GObject    *object,
                                    GValue     *value,
                                    GParamSpec *pspec)
 {
-	CattleConfiguration *self;
-	gint                 v_enum;
-	gboolean             v_bool;
+    CattleConfiguration *self;
+    gint                 v_enum;
+    gboolean             v_bool;
 
-	self = CATTLE_CONFIGURATION (object);
+    self = CATTLE_CONFIGURATION (object);
 
-	switch (property_id)
-	{
-		case PROP_END_OF_INPUT_ACTION:
+    switch (property_id)
+    {
+        case PROP_END_OF_INPUT_ACTION:
 
-			v_enum = cattle_configuration_get_end_of_input_action (self);
-			g_value_set_enum (value, v_enum);
+            v_enum = cattle_configuration_get_end_of_input_action (self);
+            g_value_set_enum (value, v_enum);
 
-			break;
+            break;
 
-		case PROP_DEBUG_IS_ENABLED:
+        case PROP_DEBUG_IS_ENABLED:
 
-			v_bool = cattle_configuration_get_debug_is_enabled (self);
-			g_value_set_boolean (value, v_bool);
+            v_bool = cattle_configuration_get_debug_is_enabled (self);
+            g_value_set_boolean (value, v_bool);
 
-			break;
+            break;
 
-		default:
+        default:
 
-			G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
-			                                   property_id,
-			                                   pspec);
+            G_OBJECT_WARN_INVALID_PROPERTY_ID (object,
+                                               property_id,
+                                               pspec);
 
-			break;
-	}
+            break;
+    }
 }
 
 static void
 cattle_configuration_class_init (CattleConfigurationClass *self)
 {
-	GObjectClass *object_class;
-	GParamSpec   *pspec;
+    GObjectClass *object_class;
+    GParamSpec   *pspec;
 
-	object_class = G_OBJECT_CLASS (self);
+    object_class = G_OBJECT_CLASS (self);
 
-	object_class->set_property = cattle_configuration_set_property;
-	object_class->get_property = cattle_configuration_get_property;
-	object_class->dispose = cattle_configuration_dispose;
-	object_class->finalize = cattle_configuration_finalize;
+    object_class->set_property = cattle_configuration_set_property;
+    object_class->get_property = cattle_configuration_get_property;
+    object_class->dispose = cattle_configuration_dispose;
+    object_class->finalize = cattle_configuration_finalize;
 
-	/**
-	 * CattleConfiguration:end-of-input-action:
-	 *
-	 * Action to be performed when the end of input is reached.
-	 *
-	 * Changes to this property are not notified.
-	 */
-	pspec = g_param_spec_enum ("end-of-input-action",
-	                           "Action to be performed on end of input",
-	                           "Get/set end of input action",
-	                           CATTLE_TYPE_END_OF_INPUT_ACTION,
-	                           CATTLE_END_OF_INPUT_ACTION_STORE_ZERO,
-	                           G_PARAM_READWRITE);
-	g_object_class_install_property (object_class,
-	                                 PROP_END_OF_INPUT_ACTION,
-	                                 pspec);
+    /**
+     * CattleConfiguration:end-of-input-action:
+     *
+     * Action to be performed when the end of input is reached.
+     *
+     * Changes to this property are not notified.
+     */
+    pspec = g_param_spec_enum ("end-of-input-action",
+                               "Action to be performed on end of input",
+                               "Get/set end of input action",
+                               CATTLE_TYPE_END_OF_INPUT_ACTION,
+                               CATTLE_END_OF_INPUT_ACTION_STORE_ZERO,
+                               G_PARAM_READWRITE);
+    g_object_class_install_property (object_class,
+                                     PROP_END_OF_INPUT_ACTION,
+                                     pspec);
 
-	/**
-	 * CattleConfiguration:debug-is-enabled:
-	 *
-	 * If %FALSE, instructions whose value is
-	 * %CATTLE_INSTRUCTION_DEBUG are not executed by the interpreter.
-	 *
-	 * Changes to this property are not notified.
-	 */
-	pspec = g_param_spec_boolean ("debug-is-enabled",
-	                              "Whether or not debugging is enabled",
-	                              "Get/set debug support",
-	                              FALSE,
-	                              G_PARAM_READWRITE);
-	g_object_class_install_property (object_class,
-	                                 PROP_DEBUG_IS_ENABLED,
-	                                 pspec);
-
-	g_type_class_add_private (object_class,
-	                          sizeof (CattleConfigurationPrivate));
+    /**
+     * CattleConfiguration:debug-is-enabled:
+     *
+     * If %FALSE, instructions whose value is
+     * %CATTLE_INSTRUCTION_DEBUG are not executed by the interpreter.
+     *
+     * Changes to this property are not notified.
+     */
+    pspec = g_param_spec_boolean ("debug-is-enabled",
+                                  "Whether or not debugging is enabled",
+                                  "Get/set debug support",
+                                  FALSE,
+                                  G_PARAM_READWRITE);
+    g_object_class_install_property (object_class,
+                                     PROP_DEBUG_IS_ENABLED,
+                                     pspec);
 }
