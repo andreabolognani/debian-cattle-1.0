@@ -1,4 +1,4 @@
 version=4
 opts=pgpmode=auto \
 https://kiyuko.org/software/cattle/releases \
-  ^.*/cattle-@ANY_VERSION@\.tar\.gz$
+  ^.*/cattle-@ANY_VERSION@@ARCHIVE_EXT@$
