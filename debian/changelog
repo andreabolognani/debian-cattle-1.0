@@ -1,3 +1,9 @@
+cattle-1.0 (1.4.0-1) UNRELEASED; urgency=medium
+
+  * New upstream release
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Tue, 21 Apr 2020 21:55:19 +0200
+
 cattle-1.0 (1.2.2-3) unstable; urgency=low
 
   * Update Standards-Version to 4.1.4
