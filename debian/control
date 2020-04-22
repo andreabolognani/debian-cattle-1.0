@@ -13,7 +13,7 @@ Build-Depends: debhelper-compat (= 12),
                libglib2.0-dev,
                gir1.2-glib-2.0
 Build-Depends-Indep: libglib2.0-doc
-Standards-Version: 4.1.4
+Standards-Version: 4.5.0
 Rules-Requires-Root: no
 Homepage: https://kiyuko.org/software/cattle
 Vcs-Git: https://salsa.debian.org/debian/cattle-1.0.git
