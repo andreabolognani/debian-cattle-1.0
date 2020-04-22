@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #if !defined (__CATTLE_H_INSIDE__) && !defined (CATTLE_COMPILATION)
@@ -45,13 +44,13 @@ typedef struct _CattleProgramPrivate CattleProgramPrivate;
 
 struct _CattleProgram
 {
-	GObject parent;
-	CattleProgramPrivate *priv;
+    GObject parent;
+    CattleProgramPrivate *priv;
 };
 
 struct _CattleProgramClass
 {
-	GObjectClass parent;
+    GObjectClass parent;
 };
 
 CattleProgram*     cattle_program_new              (void);
@@ -66,6 +65,8 @@ void               cattle_program_set_input        (CattleProgram      *program,
 CattleBuffer*      cattle_program_get_input        (CattleProgram      *program);
 
 GType              cattle_program_get_type         (void) G_GNUC_CONST;
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CattleProgram, g_object_unref)
 
 G_END_DECLS
 

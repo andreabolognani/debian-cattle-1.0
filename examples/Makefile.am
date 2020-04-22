@@ -1,8 +1,8 @@
 NULL =
 
 AM_CPPFLAGS = \
+	-DG_DISABLE_DEPRECATED \
 	$(GLIB_CFLAGS) \
-	$(GIO_CFLAGS) \
 	-I$(top_srcdir) \
 	-I$(top_builddir) \
 	$(NULL)
@@ -13,7 +13,6 @@ AM_CFLAGS = \
 
 AM_LDFLAGS = \
 	$(GLIB_LIBS) \
-	$(GIO_LIBS) \
 	$(NULL)
 
 LDADD = \

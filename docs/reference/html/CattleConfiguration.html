@@ -8,7 +8,7 @@
 <link rel="up" href="ch03.html" title="Objects">
 <link rel="prev" href="CattleProgram.html" title="CattleProgram">
 <link rel="next" href="CattleInterpreter.html" title="CattleInterpreter">
-<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.32 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -37,8 +37,8 @@
 <a name="CattleConfiguration.functions"></a><h2>Functions</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="functions_return">
-<col class="functions_name">
+<col width="150px" class="functions_proto_type">
+<col class="functions_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -75,7 +75,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="CattleConfiguration.html#cattle-configuration-get-debug-is-enabled" title="cattle_configuration_get_debug_is_enabled ()">cattle_configuration_get_debug_is_enabled</a> <span class="c_punctuation">()</span>
@@ -94,7 +94,7 @@
 </colgroup>
 <tbody>
 <tr>
-<td class="property_type"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
+<td class="property_type"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></td>
 <td class="property_name"><a class="link" href="CattleConfiguration.html#CattleConfiguration--debug-is-enabled" title="The “debug-is-enabled” property">debug-is-enabled</a></td>
 <td class="property_flags">Read / Write</td>
 </tr>
@@ -110,8 +110,8 @@
 <a name="CattleConfiguration.other"></a><h2>Types and Values</h2>
 <div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
-<col width="150px" class="name">
-<col class="description">
+<col width="150px" class="other_proto_type">
+<col class="other_proto_name">
 </colgroup>
 <tbody>
 <tr>
@@ -127,9 +127,9 @@
 </div>
 <div class="refsect1">
 <a name="CattleConfiguration.object-hierarchy"></a><h2>Object Hierarchy</h2>
-<pre class="screen">    <a href="https://developer.gnome.org/gobject/unstable/gobject-Enumeration-and-Flag-Types.html">GEnum</a>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-Enumeration-and-Flag-Types.html">GEnum</a>
     <span class="lineart">╰──</span> CattleEndOfInputAction
-    <a href="https://developer.gnome.org/gobject/unstable/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
     <span class="lineart">╰──</span> CattleConfiguration
 </pre>
 </div>
@@ -155,7 +155,7 @@ interpreters, but modifying it while an interpreter is running can
 lead to unexpected and unpredictable results.</p>
 <div class="refsect3">
 <a name="cattle-configuration-new.returns"></a><h4>Returns</h4>
-<p> a new <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>. </p>
+<p>a new <a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a>. </p>
 <p><span class="annotation">[<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -225,7 +225,7 @@ See <a class="link" href="CattleConfiguration.html#cattle-configuration-set-end-
 <pre class="programlisting"><span class="returnvalue">void</span>
 cattle_configuration_set_debug_is_enabled
                                (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>,
-                                <em class="parameter"><code><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enabled</code></em>);</pre>
+                                <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> enabled</code></em>);</pre>
 <p>Set the status of the debugging support. It is disabled by default.</p>
 <p>If debugging is disabled, instructions whose value is
 <a class="link" href="CattleInstruction.html#CATTLE-INSTRUCTION-DEBUG:CAPS"><code class="literal">CATTLE_INSTRUCTION_DEBUG</code></a> will be ignored by the interpreter.</p>
@@ -245,7 +245,7 @@ cattle_configuration_set_debug_is_enabled
 </tr>
 <tr>
 <td class="parameter_name"><p>enabled</p></td>
-<td class="parameter_description"><p><a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to enable debug, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p></td>
+<td class="parameter_description"><p><a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> to enable debug, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
@@ -255,7 +255,7 @@ cattle_configuration_set_debug_is_enabled
 <hr>
 <div class="refsect2">
 <a name="cattle-configuration-get-debug-is-enabled"></a><h3>cattle_configuration_get_debug_is_enabled ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 cattle_configuration_get_debug_is_enabled
                                (<em class="parameter"><code><a class="link" href="CattleConfiguration.html" title="CattleConfiguration"><span class="type">CattleConfiguration</span></a> *configuration</code></em>);</pre>
 <p>Get the current status of the debugging support.
@@ -277,7 +277,7 @@ See <a class="link" href="CattleConfiguration.html#cattle-configuration-set-debu
 </div>
 <div class="refsect3">
 <a name="cattle-configuration-get-debug-is-enabled.returns"></a><h4>Returns</h4>
-<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if debugging is enabled, <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
+<p> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if debugging is enabled, <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a> otherwise</p>
 </div>
 </div>
 </div>
@@ -327,17 +327,18 @@ the default behaviour</p>
 <a name="CattleConfiguration-struct"></a><h3>struct CattleConfiguration</h3>
 <pre class="programlisting">struct CattleConfiguration;</pre>
 <p>Opaque data structure representing a configuration. It should never
-be accessed directly; use the methods below instead.</p>
+be accessed directly.</p>
 </div>
 </div>
 <div class="refsect1">
 <a name="CattleConfiguration.property-details"></a><h2>Property Details</h2>
 <div class="refsect2">
 <a name="CattleConfiguration--debug-is-enabled"></a><h3>The <code class="literal">“debug-is-enabled”</code> property</h3>
-<pre class="programlisting">  “debug-is-enabled”         <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
-<p>If <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, instructions whose value is
+<pre class="programlisting">  “debug-is-enabled”         <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a></pre>
+<p>If <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>, instructions whose value is
 <a class="link" href="CattleInstruction.html#CATTLE-INSTRUCTION-DEBUG:CAPS"><code class="literal">CATTLE_INSTRUCTION_DEBUG</code></a> are not executed by the interpreter.</p>
 <p>Changes to this property are not notified.</p>
+<p>Owner: CattleConfiguration</p>
 <p>Flags: Read / Write</p>
 <p>Default value: FALSE</p>
 </div>
@@ -347,12 +348,13 @@ be accessed directly; use the methods below instead.</p>
 <pre class="programlisting">  “end-of-input-action”      <a class="link" href="CattleConfiguration.html#CattleEndOfInputAction" title="enum CattleEndOfInputAction"><span class="type">CattleEndOfInputAction</span></a></pre>
 <p>Action to be performed when the end of input is reached.</p>
 <p>Changes to this property are not notified.</p>
+<p>Owner: CattleConfiguration</p>
 <p>Flags: Read / Write</p>
 <p>Default value: CATTLE_END_OF_INPUT_ACTION_STORE_ZERO</p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>Generated by GTK-Doc V1.25</div>
+<hr>Generated by GTK-Doc V1.32</div>
 </body>
 </html>

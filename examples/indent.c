@@ -1,5 +1,5 @@
 /* indent - Indent a Brainfuck program
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  * This file is part of Cattle
  *
  * This program is free software; you can redistribute it and/or modify
@@ -13,10 +13,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #include <glib.h>
@@ -27,168 +26,154 @@
 static void
 indent (CattleProgram *program)
 {
-	CattleInstruction      *first;
-	CattleInstruction      *current;
-	CattleInstruction      *next;
-	CattleInstructionValue  value;
-	CattleBuffer           *input;
-	GSList                 *stack;
-	gulong                  level;
-	gulong                  quantity;
-	gulong                  size;
-	gulong                  i;
+    CattleInstruction        *first;
+    CattleInstruction        *current;
+    CattleInstruction        *next;
+    CattleInstructionValue    value;
+    g_autoptr (CattleBuffer)  input = NULL;
+    g_autoptr (GSList)        stack = NULL;
+    gulong                    level;
+    gulong                    quantity;
+    gulong                    size;
+    gulong                    i;
 
-	/* Initialize instruction stack, start at indentation level 0 */
-	stack = NULL;
-	level = 0;
+    /* Start at indentation level 0 */
+    level = 0;
 
-	first = cattle_program_get_instructions (program);
-	g_object_ref (first);
-	current = first;
+    first = cattle_program_get_instructions (program);
+    g_object_ref (first);
+    current = first;
 
-	while (current != NULL)
-	{
-		value = cattle_instruction_get_value (current);
-		quantity = cattle_instruction_get_quantity (current);
+    while (current != NULL)
+    {
+        value = cattle_instruction_get_value (current);
+        quantity = cattle_instruction_get_quantity (current);
 
-		/* Decrease the indentation level at the end of a loop */
-		if (value == CATTLE_INSTRUCTION_LOOP_END)
-		{
-			level--;
-		}
-	
-		/* Print two spaces for each level of indentation */
-		for (i = 0; i < level; i++)
-		{
-			g_print ("  ");
-		}
+        /* Decrease the indentation level at the end of a loop */
+        if (value == CATTLE_INSTRUCTION_LOOP_END)
+        {
+            level--;
+        }
 
-		/* Print the correct number of instructions */
-		for (i = 0; i < quantity; i++)
-		{
-			g_print ("%c", value);
-		}
+        /* Print two spaces for each level of indentation */
+        for (i = 0; i < level; i++)
+        {
+            g_print ("  ");
+        }
 
-		/* End the line */
-		g_print ("\n");
+        /* Print the correct number of instructions */
+        for (i = 0; i < quantity; i++)
+        {
+            g_print ("%c", value);
+        }
 
-		/* Increase the indentation level at the beginning of a loop */
-		if (value == CATTLE_INSTRUCTION_LOOP_BEGIN)
-		{
-			level++;
-		}
+        /* End the line */
+        g_print ("\n");
 
-		switch (value)
-		{
-			case CATTLE_INSTRUCTION_LOOP_BEGIN:
+        /* Increase the indentation level at the beginning of a loop */
+        if (value == CATTLE_INSTRUCTION_LOOP_BEGIN)
+        {
+            level++;
+        }
 
-				/* Push the next instruction on top of the stack */
-				next = cattle_instruction_get_next (current);
-				stack = g_slist_prepend (stack, next);
+        switch (value)
+        {
+            case CATTLE_INSTRUCTION_LOOP_BEGIN:
 
-				/* Start indenting the loop */
-				next = cattle_instruction_get_loop (current);
-				g_object_unref (current);
-				current = next;
+                /* Push the next instruction on top of the stack */
+                next = cattle_instruction_get_next (current);
+                stack = g_slist_prepend (stack, next);
 
-				break;
+                /* Start indenting the loop */
+                next = cattle_instruction_get_loop (current);
+                g_object_unref (current);
+                current = next;
 
-			case CATTLE_INSTRUCTION_LOOP_END:
+                break;
 
-				g_assert (stack != NULL);
+            case CATTLE_INSTRUCTION_LOOP_END:
 
-				/* Pop the next instruction off the stack */
-				next = CATTLE_INSTRUCTION (stack->data);
-				stack = g_slist_delete_link (stack, stack);
-				g_object_unref (current);
-				current = next;
+                g_assert (stack != NULL);
 
-				break;
+                /* Pop the next instruction off the stack */
+                next = CATTLE_INSTRUCTION (stack->data);
+                stack = g_slist_delete_link (stack, stack);
+                g_object_unref (current);
+                current = next;
 
-			default:
+                break;
 
-				/* Go on with the next instruction */
-				next = cattle_instruction_get_next (current);
-				g_object_unref (current);
-				current = next;
+            default:
 
-				break;
-		}
-	}
+                /* Go on with the next instruction */
+                next = cattle_instruction_get_next (current);
+                g_object_unref (current);
+                current = next;
 
-	g_object_unref (first);
+                break;
+        }
+    }
 
-	input = cattle_program_get_input (program);
-	size = cattle_buffer_get_size (input);
+    g_object_unref (first);
 
-	/* Print input if available */
-	if (size > 0)
-	{
-		g_print ("!");
+    input = cattle_program_get_input (program);
+    size = cattle_buffer_get_size (input);
 
-		for (i = 0; i < size; i++)
-		{
-			value = cattle_buffer_get_value (input, i);
+    /* Print input if available */
+    if (size > 0)
+    {
+        g_print ("!");
 
-			g_print ("%c", value);
-		}
-	}
+        for (i = 0; i < size; i++)
+        {
+            value = cattle_buffer_get_value (input, i);
+
+            g_print ("%c", value);
+        }
+    }
 }
 
 gint
 main (gint    argc,
       gchar **argv)
 {
-	CattleProgram *program;
-	CattleBuffer  *buffer;
-	GError        *error;
+    g_autoptr (CattleProgram) program = NULL;
+    g_autoptr (CattleBuffer)  buffer = NULL;
+    g_autoptr (GError)        error = NULL;
 
-#if !GLIB_CHECK_VERSION(2, 36, 0)
-	g_type_init ();
-#endif
+    g_set_prgname ("indent");
 
-	g_set_prgname ("indent");
+    if (argc != 2)
+    {
+        g_warning ("Usage: %s FILENAME", argv[0]);
 
-	if (argc != 2)
-	{
-		g_warning ("Usage: %s FILENAME", argv[0]);
+        return 1;
+    }
 
-		return 1;
-	}
+    error = NULL;
+    buffer = read_file_contents (argv[1], &error);
 
-	error = NULL;
-	buffer = read_file_contents (argv[1], &error);
+    if (error != NULL)
+    {
+        g_warning ("%s: %s", argv[1], error->message);
 
-	if (error != NULL)
-	{
-		g_warning ("%s: %s", argv[1], error->message);
+        return 1;
+    }
 
-		g_error_free (error);
+    /* Create a new program */
+    program = cattle_program_new ();
 
-		return 1;
-	}
+    /* Load the program from file, aborting on error */
+    error = NULL;
+    if (!cattle_program_load (program, buffer, &error))
+    {
+        g_warning ("Load error: %s", error->message);
 
-	/* Create a new program */
-	program = cattle_program_new ();
+        return 1;
+    }
 
-	/* Load the program from file, aborting on error */
-	error = NULL;
-	if (!cattle_program_load (program, buffer, &error))
-	{
-		g_warning ("Load error: %s", error->message);
+    /* Indent the program */
+    indent (program);
 
-		g_error_free (error);
-		g_object_unref (buffer);
-		g_object_unref (program);
-
-		return 1;
-	}
-
-	/* Indent the program */
-	indent (program);
-
-	g_object_unref (buffer);
-	g_object_unref (program); 
-
-	return 0;
+    return 0;
 }

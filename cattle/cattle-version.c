@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #include "cattle-version.h"
@@ -103,20 +102,20 @@ cattle_check_version (guint required_major,
                       guint required_minor,
                       guint required_micro)
 {
-	if (cattle_major_version > required_major) {
-		return TRUE;
-	}
-	if (cattle_major_version == required_major &&
+    if (cattle_major_version > required_major) {
+        return TRUE;
+    }
+    if (cattle_major_version == required_major &&
         cattle_minor_version > required_minor)
-	{
-		return TRUE;
-	}
-	if (cattle_major_version == required_major &&
-	    cattle_minor_version == required_minor &&
-	    cattle_micro_version >= required_micro)
-	{
-		return TRUE;
-	}
+    {
+        return TRUE;
+    }
+    if (cattle_major_version == required_major &&
+        cattle_minor_version == required_minor &&
+        cattle_micro_version >= required_micro)
+    {
+        return TRUE;
+    }
 
-	return FALSE;
+    return FALSE;
 }

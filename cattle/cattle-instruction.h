@@ -1,5 +1,5 @@
 /* Cattle - Brainfuck language toolkit
- * Copyright (C) 2008-2017  Andrea Bolognani <eof@kiyuko.org>
+ * Copyright (C) 2008-2020  Andrea Bolognani <eof@kiyuko.org>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -12,10 +12,9 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
- * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+ * with this program.  If not, see <https://www.gnu.org/licenses/>.
  *
- * Homepage: http://kiyuko.org/software/cattle
+ * Homepage: https://kiyuko.org/software/cattle
  */
 
 #if !defined (__CATTLE_H_INSIDE__) && !defined (CATTLE_COMPILATION)
@@ -39,16 +38,16 @@ G_BEGIN_DECLS
 
 typedef enum
 {
-	CATTLE_INSTRUCTION_NONE       = 0x78, /*  x  */
-	CATTLE_INSTRUCTION_MOVE_LEFT  = 0x3C, /*  <  */
-	CATTLE_INSTRUCTION_MOVE_RIGHT = 0x3E, /*  >  */
-	CATTLE_INSTRUCTION_INCREASE   = 0x2B, /*  +  */
-	CATTLE_INSTRUCTION_DECREASE   = 0x2D, /*  -  */
-	CATTLE_INSTRUCTION_LOOP_BEGIN = 0x5B, /*  [  */
-	CATTLE_INSTRUCTION_LOOP_END   = 0x5D, /*  ]  */
-	CATTLE_INSTRUCTION_READ       = 0x2C, /*  ,  */
-	CATTLE_INSTRUCTION_PRINT      = 0x2E, /*  .  */
-	CATTLE_INSTRUCTION_DEBUG      = 0x23  /*  #  */
+    CATTLE_INSTRUCTION_NONE       = 0x78, /*  x  */
+    CATTLE_INSTRUCTION_MOVE_LEFT  = 0x3C, /*  <  */
+    CATTLE_INSTRUCTION_MOVE_RIGHT = 0x3E, /*  >  */
+    CATTLE_INSTRUCTION_INCREASE   = 0x2B, /*  +  */
+    CATTLE_INSTRUCTION_DECREASE   = 0x2D, /*  -  */
+    CATTLE_INSTRUCTION_LOOP_BEGIN = 0x5B, /*  [  */
+    CATTLE_INSTRUCTION_LOOP_END   = 0x5D, /*  ]  */
+    CATTLE_INSTRUCTION_READ       = 0x2C, /*  ,  */
+    CATTLE_INSTRUCTION_PRINT      = 0x2E, /*  .  */
+    CATTLE_INSTRUCTION_DEBUG      = 0x23  /*  #  */
 } CattleInstructionValue;
 
 typedef struct _CattleInstruction        CattleInstruction;
@@ -57,13 +56,13 @@ typedef struct _CattleInstructionPrivate CattleInstructionPrivate;
 
 struct _CattleInstruction
 {
-	GObject parent;
-	CattleInstructionPrivate *priv;
+    GObject parent;
+    CattleInstructionPrivate *priv;
 };
 
 struct _CattleInstructionClass
 {
-	GObjectClass parent;
+    GObjectClass parent;
 };
 
 CattleInstruction*      cattle_instruction_new         (void);
@@ -81,6 +80,8 @@ void                   cattle_instruction_set_loop     (CattleInstruction      *
 CattleInstruction*     cattle_instruction_get_loop     (CattleInstruction      *instruction);
 
 GType                  cattle_instruction_get_type     (void) G_GNUC_CONST;
+
+G_DEFINE_AUTOPTR_CLEANUP_FUNC (CattleInstruction, g_object_unref)
 
 G_END_DECLS
 
