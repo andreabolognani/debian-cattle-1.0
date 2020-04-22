@@ -1,4 +1,5 @@
 libcattle-1.0.so.0 libcattle-1.0-0 #MINVER#
+* Build-Depends-Package: libcattle-1.0-dev
  CATTLE_EOF@Base 1.2.0
  cattle_buffer_get_size@Base 1.2.0
  cattle_buffer_get_type@Base 1.2.0
