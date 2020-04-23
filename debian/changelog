@@ -1,8 +1,18 @@
-cattle-1.0 (1.4.0-1) UNRELEASED; urgency=medium
+cattle-1.0 (1.4.0-1) unstable; urgency=medium
 
   * New upstream release
 
- -- Andrea Bolognani <eof@kiyuko.org>  Tue, 21 Apr 2020 21:55:19 +0200
+  * Patches
+    + Drop D01-tweak-build-system.diff
+      - No longer needed
+
+  * debhelper
+    + Switch to compat level 12
+
+  * Other
+    + Update Standards-Version to 4.5.0
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Thu, 23 Apr 2020 22:32:13 +0200
 
 cattle-1.0 (1.2.2-3) unstable; urgency=low
 
