@@ -5,6 +5,8 @@ DPKG_EXPORT_BUILDFLAGS = 1
 
 include /usr/share/dpkg/buildflags.mk
 
+DESTDIR = $(CURDIR)/debian/tmp
+
 %:
 	dh $@ --with=gir
 
@@ -29,6 +31,10 @@ override_dh_auto_configure:
 	dh_auto_configure -- \
 	                  --enable-introspection=yes \
 	                  --enable-gtk-doc=yes
+
+# Prepare files.
+override_dh_auto_install:
+	dh_auto_install --destdir $(DESTDIR)
 
 # Install changelogs.
 #
