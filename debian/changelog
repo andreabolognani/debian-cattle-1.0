@@ -1,3 +1,13 @@
+cattle-1.0 (1.4.0-2) unstable; urgency=medium
+
+  * debhelper
+    + Switch to compat level 13
+
+  * Standards-Version
+    + Update to 4.6.2
+
+ -- Andrea Bolognani <eof@kiyuko.org>  Sat, 11 Feb 2023 17:46:56 +0100
+
 cattle-1.0 (1.4.0-1) unstable; urgency=medium
 
   * New upstream release
