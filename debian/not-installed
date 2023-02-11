@@ -1,6 +1,6 @@
-usr/lib/*/*.a
-usr/lib/*/*.la
-usr/share/doc/*/AUTHORS.rst
-usr/share/doc/*/COPYING
-usr/share/doc/*/README.rst
-usr/share/doc/*/TODO.rst
+usr/lib/${DEB_HOST_MULTIARCH}/libcattle-1.0.a
+usr/lib/${DEB_HOST_MULTIARCH}/libcattle-1.0.la
+usr/share/doc/cattle-1.0/AUTHORS.rst
+usr/share/doc/cattle-1.0/COPYING
+usr/share/doc/cattle-1.0/README.rst
+usr/share/doc/cattle-1.0/TODO.rst

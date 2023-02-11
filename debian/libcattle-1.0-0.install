@@ -1,2 +1,2 @@
-usr/lib/*/*.so.0
-usr/lib/*/*.so.0.*
+usr/lib/${DEB_HOST_MULTIARCH}/libcattle-1.0.so.0
+usr/lib/${DEB_HOST_MULTIARCH}/libcattle-1.0.so.0.*
